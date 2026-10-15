@@ -2,212 +2,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mural Escolar Oficial</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #172033;
-    }
-    header {
-      background: #12336b;
-      color: white;
-      padding: 22px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    header h1 { margin: 0; font-size: 25px; }
-    header p { margin: 6px 0 0; color: #dbeafe; }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 16px;
-      font-weight: bold;
-    }
-    .hero {
-      background: linear-gradient(120deg, #174b91, #0e7490);
-      color: white;
-      padding: 42px 7%;
-    }
-    .hero h2 { font-size: 32px; margin: 0 0 12px; }
-    .hero p { font-size: 17px; max-width: 650px; line-height: 1.6; }
-    main { max-width: 1200px; margin: auto; padding: 28px 20px; }
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    input, select {
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      font-size: 15px;
-      background: white;
-    }
-    input { min-width: 220px; flex: 1; }
-    .grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
-      gap: 22px;
-    }
-    .card {
-      background: white;
-      padding: 22px;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 3px 12px #0f172a0b;
-      border: 1px solid #e2e8f0;
-    }
-    .tag {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-    .urgent { background: #fee2e2; color: #b91c1c; }
-    .card h3 { margin: 12px 0 8px; }
-    .card p { line-height: 1.6; color: #475569; }
-    .date { font-size: 13px; color: #64748b; }
-    .link {
-      display: inline-block;
-      padding: 12px 15px;
-      border-radius: 9px;
-      background: #12336b;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #10264a;
-      color: white;
-      margin-top: 25px;
-    }
-    @media (max-width: 720px) {
-      .grid { grid-template-columns: 1fr; }
-      header { align-items: flex-start; }
-      nav a { margin: 0 12px 0 0; }
-      .hero h2 { font-size: 26px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mural Escolar Oficial</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+header{background:#102e64;color:white;padding:30px 18px;text-align:center}
+header h1{margin:0 0 8px}
+nav{background:white;padding:14px;text-align:center;box-shadow:0 2px 8px #0001}
+nav a{color:#174b91;text-decoration:none;font-weight:bold}
+main{max-width:900px;margin:25px auto;padding:0 16px}
+.intro{background:white;border-radius:14px;padding:20px;margin-bottom:20px}
+h2{color:#173b70}
+#busca{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;margin-bottom:15px}
+#filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+#filtros button{padding:9px 12px;border:0;border-radius:20px;background:#dbeafe;color:#173b70;cursor:pointer}
+#filtros button.ativo{background:#174b91;color:white}
+.aviso{background:white;padding:20px;border-radius:13px;margin-bottom:15px;border-left:5px solid #2459a9;box-shadow:0 3px 12px #0000000b}
+.aviso h3{margin:0 0 10px;color:#173b70}
+.tag{display:inline-block;background:#e0eaff;color:#173b70;padding:5px 9px;border-radius:20px;font-size:13px}
+.data{font-size:13px;color:#64748b}
+#mensagem{padding:18px;background:white;border-radius:12px}
+footer{text-align:center;padding:25px;color:#64748b;font-size:14px}
+</style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>🏫 Mural Escolar Oficial</h1>
-      <p>Informação e comunicação para toda a comunidade escolar</p>
-    </div>
-    <nav>
-      <a href="#avisos">Avisos</a>
-      <a href="#calendario">Calendário</a>
-    </nav>
-  </header>
+<header>
+<h1>📢 Mural Escolar Oficial</h1>
+<p>Informações, comunicados e novidades da escola</p>
+</header>
 
-  <section class="hero">
-    <h2>Fique por dentro das novidades!</h2>
-    <p>Consulte comunicados, datas importantes, eventos e orientações da escola em um só lugar.</p>
-    <a class="link" href="#avisos">Consultar avisos ↓</a>
-  </section>
+<nav><a href="#avisos">Avisos oficiais</a></nav>
 
-  <main>
-    <div class="top" id="avisos">
-      <div>
-        <h2>📢 Mural de avisos</h2>
-        <p>Comunicados importantes da escola.</p>
-      </div>
-      <input id="busca" type="search" placeholder="Buscar avisos..." aria-label="Buscar avisos">
-      <select id="categoria" aria-label="Filtrar por categoria">
-        <option value="">Todas as categorias</option>
-        <option>Direção</option>
-        <option>Provas</option>
-        <option>Eventos</option>
-        <option>Horários</option>
-        <option>Urgente</option>
-      </select>
-    </div>
+<main>
+<section class="intro">
+<h2>Fique por dentro!</h2>
+<p>Consulte aqui os comunicados publicados pela direção da escola.</p>
+<input id="busca" type="search" placeholder="Buscar um aviso...">
+<div id="filtros">
+<button class="ativo" data-categoria="Todos">Todos</button>
+<button data-categoria="Direção">Direção</button>
+<button data-categoria="Provas">Provas</button>
+<button data-categoria="Eventos">Eventos</button>
+<button data-categoria="Horários">Horários</button>
+<button data-categoria="Cardápio">Cardápio</button>
+<button data-categoria="Urgente">Urgente</button>
+</div>
+</section>
 
-    <div class="grid">
-      <section id="lista" aria-live="polite">
-        <article class="card" data-categoria="Urgente">
-          <span class="tag urgent">⚠️ AVISO DE EXEMPLO</span>
-          <h3>Bem-vindo ao Mural Escolar Oficial</h3>
-          <p>Este é um aviso demonstrativo. Os comunicados reais serão publicados pela equipe autorizada da escola.</p>
-          <div class="date">Exemplo — substitua por um comunicado oficial</div>
-        </article>
+<section id="avisos">
+<h2>Últimos avisos</h2>
+<div id="lista"><p id="mensagem">Carregando avisos oficiais...</p></div>
+</section>
+</main>
 
-        <article class="card" data-categoria="Eventos">
-          <span class="tag">Eventos</span>
-          <h3>Espaço para eventos escolares</h3>
-          <p>As datas de feiras, reuniões e competições serão divulgadas aqui após confirmação da escola.</p>
-          <div class="date">Aviso demonstrativo</div>
-        </article>
+<footer>Mural Escolar Oficial · Consulte os avisos da sua escola</footer>
 
-        <article class="card" data-categoria="Provas">
-          <span class="tag">Provas</span>
-          <h3>Calendário de avaliações</h3>
-          <p>Consulte aqui as datas de provas e trabalhos assim que forem publicadas oficialmente.</p>
-          <div class="date">Aviso demonstrativo</div>
-        </article>
-      </section>
+<script type="module">
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import {
+  getFirestore, collection, query, where, orderBy, getDocs
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
-      <aside>
-        <div class="card" id="calendario">
-          <h3>📅 Calendário escolar</h3>
-          <p>As próximas datas importantes aparecerão aqui quando forem confirmadas pela escola.</p>
-        </div>
-        <div class="card">
-          <h3>🔐 Área da direção</h3>
-          <p>Área reservada para a equipe autorizada publicar comunicados.</p>
-          <p><strong>Em desenvolvimento.</strong></p>
-        </div>
-        <div class="card">
-          <h3>ℹ️ Importante</h3>
-          <p>Confira a data de cada comunicado e confirme informações importantes com a secretaria da escola.</p>
-        </div>
-      </aside>
-    </div>
-  </main>
+const firebaseConfig = {
+  apiKey: "AIzaSyBe70DeHBd2OawVV4kXQqVQgjQql3FZSc4xY",
+  authDomain: "mural-escolar-oficial.firebaseapp.com",
+  projectId: "mural-escolar-oficial",
+  storageBucket: "mural-escolar-oficial.firebasestorage.app",
+  messagingSenderId: "706068384737",
+  appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
+  measurementId: "G-5V2L9FCN0M"
+};
 
-  <footer>
-    <strong>Mural Escolar Oficial</strong>
-    <p>Portal de comunicados escolares</p>
-  </footer>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const lista = document.getElementById("lista");
+const busca = document.getElementById("busca");
+let avisos = [];
+let categoriaAtual = "Todos";
 
-  <script>
-    const busca = document.getElementById("busca");
-    const categoria = document.getElementById("categoria");
-    const avisos = document.querySelectorAll("#lista .card");
+function mostrarAvisos(){
+  const termo = busca.value.trim().toLowerCase();
+  const filtrados = avisos.filter(a => {
+    const texto = `${a.titulo || ""} ${a.descricao || ""} ${a.categoria || ""}`.toLowerCase();
+    return (categoriaAtual === "Todos" || a.categoria === categoriaAtual)
+      && texto.includes(termo);
+  });
 
-    function filtrarAvisos() {
-      const termo = busca.value.toLowerCase().trim();
-      const cat = categoria.value;
+  lista.replaceChildren();
 
-      avisos.forEach(aviso => {
-        const texto = aviso.innerText.toLowerCase();
-        const correspondeTexto = texto.includes(termo);
-        const correspondeCategoria =
-          !cat || aviso.dataset.categoria === cat;
+  if (!filtrados.length) {
+    const p = document.createElement("p");
+    p.id = "mensagem";
+    p.textContent = avisos.length
+      ? "Nenhum aviso encontrado nessa busca."
+      : "Ainda não há avisos publicados.";
+    lista.append(p);
+    return;
+  }
 
-        aviso.hidden = !(correspondeTexto && correspondeCategoria);
-      });
-    }
+  filtrados.forEach(a => {
+    const artigo = document.createElement("article");
+    artigo.className = "aviso";
 
-    busca.addEventListener("input", filtrarAvisos);
-    categoria.addEventListener("change", filtrarAvisos);
-  </script>
+    const titulo = document.createElement("h3");
+    titulo.textContent = a.titulo || "Aviso escolar";
+
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = a.categoria || "Geral";
+
+    const descricao = document.createElement("p");
+    descricao.textContent = a.descricao || "";
+
+    const data = document.createElement("p");
+    data.className = "data";
+    data.textContent = "Data: " + (a.dataAviso || "Não informada");
+
+    artigo.append(titulo, tag, descricao, data);
+    lista.append(artigo);
+  });
+}
+
+document.getElementById("filtros").querySelectorAll("button").forEach(botao => {
+  botao.addEventListener("click", () => {
+    categoriaAtual = botao.dataset.categoria;
+    document.querySelectorAll("#filtros button").forEach(b => b.classList.remove("ativo"));
+    botao.classList.add("ativo");
+    mostrarAvisos();
+  });
+});
+
+busca.addEventListener("input", mostrarAvisos);
+
+async function carregarAvisos(){
+  try {
+    const q = query(
+      collection(db, "avisos"),
+      where("publicado", "==", true),
+      orderBy("dataAviso", "desc")
+    );
+    const resultado = await getDocs(q);
+    avisos = resultado.docs.map(d => d.data());
+    mostrarAvisos();
+  } catch (error) {
+    console.error(error);
+    lista.replaceChildren();
+    const p = document.createElement("p");
+    p.id = "mensagem";
+    p.textContent = "Não foi possível carregar os avisos. Tente novamente mais tarde.";
+    lista.append(p);
+  }
+}
+
+carregarAvisos();
+</script>
 </body>
 </html>
