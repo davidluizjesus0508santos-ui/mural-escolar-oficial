@@ -3,339 +3,239 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel Administrativo | Mural Escolar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administração | Mural Escolar Oficial</title>
 <style>
-:root {
-  --navy:#10264a; --blue:#2459a9; --light:#f3f6fb;
-  --white:#fff; --text:#18263b; --muted:#718096;
-  --border:#e3e9f2; --green:#16865c; --red:#c83245;
-}
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--light);color:var(--text)}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.layout{min-height:100vh;display:grid;grid-template-columns:250px minmax(0,1fr)}
-.sidebar{background:var(--navy);color:white;padding:25px 16px}
-.brand{display:flex;align-items:center;gap:12px;padding:0 8px 28px;border-bottom:1px solid #ffffff22}
-.logo{width:43px;height:43px;border-radius:13px;background:#ffffff18;display:grid;place-items:center;font-size:24px}
-.brand h2{font-size:16px;margin:0 0 5px}
-.brand small{color:#bdcce4}
-.nav-title{font-size:11px;color:#9fb3d3;letter-spacing:1.5px;margin:28px 10px 12px}
-.nav button{width:100%;text-align:left;border:0;background:transparent;color:#d5e0f2;padding:13px 12px;border-radius:10px;margin-bottom:5px}
-.nav button:hover,.nav button.active{background:#ffffff19;color:white}
-.nav button span{display:inline-block;width:28px}
-.side-bottom{margin-top:45px;padding:14px;border:1px solid #ffffff20;border-radius:12px;font-size:13px;color:#d5e0f2;line-height:1.5}
-main{min-width:0}
-.topbar{height:78px;background:white;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;gap:12px}
-.topbar small{color:var(--muted)}
-.admin-pill{background:#e8efff;color:#234e93;padding:10px 13px;border-radius:30px;font-size:13px;font-weight:bold}
-.content{max-width:1500px;margin:auto;padding:30px}
-.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:25px}
-h1{font-size:28px;margin:0 0 8px}
-h2{font-size:19px;margin:0 0 8px}
-p{line-height:1.55}
-.muted{color:var(--muted);margin:0}
-.btn{border:0;border-radius:9px;padding:12px 16px;font-weight:bold}
-.primary{background:var(--blue);color:white}
-.secondary{background:#e8efff;color:#234e93}
-.danger{background:#fff0f1;color:var(--red)}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:24px}
-.card{background:white;border:1px solid var(--border);border-radius:15px;padding:21px;box-shadow:0 3px 12px #18365b06}
-.stat-label{font-size:13px;color:var(--muted)}
-.stat-value{font-size:30px;font-weight:800;margin:13px 0 5px}
-.stat-icon{font-size:22px;float:right;background:#edf3ff;padding:9px;border-radius:10px}
-.columns{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr);gap:20px}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
-.notice{padding:16px 0;border-bottom:1px solid var(--border)}
-.notice:last-child{border-bottom:0}
-.notice-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.tag{display:inline-block;font-size:11px;font-weight:bold;padding:5px 8px;border-radius:30px;background:#e8efff;color:#234e93}
-.tag.urgent{background:#fff0f1;color:var(--red)}
-.tag.draft{background:#fff5db;color:#956500}
-.notice h3{font-size:15px;margin:10px 0 5px}
-.notice p{font-size:13px;color:var(--muted);margin:0 0 10px;white-space:pre-wrap;overflow-wrap:anywhere}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.small-btn{padding:7px 10px;font-size:12px;border-radius:7px;border:1px solid var(--border);background:white}
-.activity{font-size:13px;color:var(--muted);line-height:1.8}
-.view{display:none}
-.view.active{display:block}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{margin-bottom:16px}
-.field label{display:block;font-size:13px;font-weight:bold;margin-bottom:7px}
-.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #ccd6e5;border-radius:9px;background:white}
-.field textarea{min-height:140px;resize:vertical}
-.full{grid-column:1/-1}
-.check{display:flex;align-items:center;gap:9px;font-size:14px}
-.check input{width:auto}
-.preview{padding:16px;background:#f6f8fc;border:1px dashed #cbd5e1;border-radius:10px}
-.empty{color:var(--muted);padding:20px 0}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
-#message{display:none;padding:12px 15px;border-radius:9px;margin-bottom:18px;background:#e5f7ee;color:#126642}
-#message.show{display:block}
-#loginNotice{background:#fff6df;color:#805b00;border-radius:10px;padding:13px;font-size:13px;line-height:1.5;margin-top:18px}
-.menu-toggle{display:none}
-@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.columns{grid-template-columns:1fr}}
-@media(max-width:700px){
- .layout{grid-template-columns:1fr}
- .sidebar{padding:15px}
- .brand{padding-bottom:15px}
- .nav-title{margin-top:16px}
- .nav{display:grid;grid-template-columns:1fr 1fr;gap:4px}
- .nav button{margin:0;padding:11px 8px;font-size:13px}
- .side-bottom{display:none}
- .topbar{height:auto;padding:17px 20px}
- .content{padding:20px 14px}
- h1{font-size:24px}
- .stats{gap:10px}
- .card{padding:16px}
- .form-grid{grid-template-columns:1fr}
- .full{grid-column:auto}
- .admin-pill{font-size:11px}
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+header{background:#102e64;color:white;padding:22px;text-align:center}
+main{max-width:750px;margin:30px auto;padding:20px}
+.card{background:white;padding:24px;border-radius:16px;box-shadow:0 5px 20px #0001;margin-bottom:20px}
+h2{margin-top:0}
+label{display:block;margin-top:15px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #cbd5e1;border-radius:8px;font:inherit}
+textarea{min-height:120px;resize:vertical}
+button{border:0;border-radius:8px;padding:12px 18px;background:#2459a9;color:white;font-weight:bold;cursor:pointer;margin-top:16px}
+button:hover{background:#183f80}
+#status{white-space:pre-wrap;margin-top:15px}
+.aviso{border:1px solid #dbe5f2;padding:15px;border-radius:10px;margin-top:12px}
+.pequeno{color:#64748b;font-size:14px}
 </style>
 </head>
 <body>
-<div class="layout">
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="logo">🏫</div>
-      <div><h2>Mural Escolar</h2><small>Painel administrativo</small></div>
-    </div>
-    <div class="nav-title">GESTÃO ESCOLAR</div>
-    <nav class="nav">
-      <button class="active" data-view="dashboard"><span>▦</span> Visão geral</button>
-      <button data-view="avisos"><span>📢</span> Comunicados</button>
-      <button data-view="novo"><span>✚</span> Novo aviso</button>
-      <button data-view="cardapio"><span>🍎</span> Cardápio</button>
-      <button data-view="calendario"><span>📅</span> Calendário</button>
-    </nav>
-    <div class="side-bottom">
-      <strong>🔒 Área administrativa</strong><br>
-      Esta interface é uma versão inicial. O acesso seguro será ativado na próxima etapa.
-    </div>
-  </aside>
+<header>
+<h1>Mural Escolar Oficial</h1>
+<p>Painel administrativo da direção</p>
+</header>
 
-  <main>
-    <header class="topbar">
-      <div><strong>Central de gestão</strong><br><small>Mural Escolar Oficial</small></div>
-      <span class="admin-pill">🛠️ MODO DE DEMONSTRAÇÃO</span>
-    </header>
+<main>
+<section class="card" id="login">
+<h2>Entrar na administração</h2>
+<form id="loginForm">
+<label for="email">E-mail da direção</label>
+<input id="email" type="email" autocomplete="username" required>
 
-    <div class="content">
-      <div id="message" role="status"></div>
+<label for="senha">Senha</label>
+<input id="senha" type="password" autocomplete="current-password" required>
 
-      <section id="dashboard" class="view active">
-        <div class="page-head">
-          <div><h1>Bom trabalho! 👋</h1><p class="muted">Gerencie os comunicados e informações da escola.</p></div>
-          <button class="btn primary" data-go="novo">＋ Criar comunicado</button>
-        </div>
-        <div class="stats">
-          <div class="card"><span class="stat-icon">📢</span><div class="stat-label">Avisos cadastrados</div><div class="stat-value" id="total">0</div><small class="muted">Neste navegador</small></div>
-          <div class="card"><span class="stat-icon">🚨</span><div class="stat-label">Urgentes</div><div class="stat-value" id="urgentTotal">0</div><small class="muted">Marcados como urgentes</small></div>
-          <div class="card"><span class="stat-icon">🍎</span><div class="stat-label">Cardápio</div><div class="stat-value" id="menuStatus">—</div><small class="muted">Estado local de demonstração</small></div>
-          <div class="card"><span class="stat-icon">📅</span><div class="stat-label">Eventos</div><div class="stat-value" id="eventTotal">0</div><small class="muted">Datas cadastradas</small></div>
-        </div>
-        <div class="columns">
-          <div class="card">
-            <div class="section-head"><div><h2>Publicações recentes</h2><p class="muted">Avisos cadastrados nesta demonstração</p></div><button class="btn secondary" data-go="avisos">Ver todos</button></div>
-            <div id="recent"></div>
-          </div>
-          <div class="card">
-            <h2>Atalhos rápidos</h2><p class="muted">Acesse as principais funções.</p>
-            <button class="btn secondary" style="width:100%;margin:12px 0 0" data-go="novo">＋ Publicar comunicado</button>
-            <button class="btn secondary" style="width:100%;margin-top:10px" data-go="cardapio">🍎 Atualizar cardápio</button>
-            <button class="btn secondary" style="width:100%;margin-top:10px" data-go="calendario">📅 Adicionar evento</button>
-            <div id="loginNotice">⚠️ <strong>Importante:</strong> ainda não há login nem sincronização. Os dados ficam apenas neste navegador até conectarmos o Firebase.</div>
-          </div>
-        </div>
-      </section>
+<button type="submit">Entrar</button>
+</form>
+<p id="loginStatus" role="status"></p>
+</section>
 
-      <section id="avisos" class="view">
-        <div class="page-head"><div><h1>Comunicados</h1><p class="muted">Consulte e gerencie os avisos de demonstração.</p></div><button class="btn primary" data-go="novo">＋ Novo aviso</button></div>
-        <div class="card">
-          <div class="field"><label for="filter">Filtrar comunicados</label><input id="filter" placeholder="Buscar por título, texto ou categoria..."></div>
-          <div id="allNotices"></div>
-        </div>
-      </section>
+<section class="card" id="painel" hidden>
+<h2>Publicar aviso</h2>
+<p class="pequeno">Os avisos publicados poderão aparecer no mural dos alunos.</p>
 
-      <section id="novo" class="view">
-        <div class="page-head"><div><h1 id="formTitle">Criar comunicado</h1><p class="muted">Preencha as informações do aviso escolar.</p></div></div>
-        <div class="card">
-          <form id="noticeForm">
-            <input type="hidden" id="editId">
-            <div class="form-grid">
-              <div class="field full"><label for="title">Título do comunicado *</label><input id="title" required maxlength="150" placeholder="Ex.: Reunião de responsáveis"></div>
-              <div class="field"><label for="category">Categoria *</label><select id="category"><option>Direção</option><option>Provas</option><option>Eventos</option><option>Horários</option><option>Documentos</option><option>Transporte</option><option>Cardápio</option><option>Outros</option></select></div>
-              <div class="field"><label for="date">Data relacionada</label><input id="date" type="date"></div>
-              <div class="field full"><label for="description">Texto do comunicado *</label><textarea id="description" required maxlength="5000" placeholder="Escreva as informações que a comunidade escolar precisa saber..."></textarea></div>
-              <div class="field full"><label class="check"><input type="checkbox" id="urgent"> Marcar como aviso urgente</label></div>
-            </div>
-            <button class="btn primary" type="submit">Salvar rascunho local</button>
-            <button class="btn secondary" type="button" id="cancelEdit">Cancelar</button>
-            <p class="muted" style="font-size:12px;margin-top:16px">Nesta versão, salvar não publica no site público. A conexão segura com o Firebase será implementada depois.</p>
-          </form>
-        </div>
-      </section>
+<form id="avisoForm">
+<label for="titulo">Título do aviso</label>
+<input id="titulo" maxlength="120" required>
 
-      <section id="cardapio" class="view">
-        <div class="page-head"><div><h1>🍎 Cardápio da merenda</h1><p class="muted">Prepare as informações do cardápio escolar.</p></div></div>
-        <div class="card">
-          <form id="menuForm">
-            <div class="field"><label for="menuWeek">Semana do cardápio</label><input id="menuWeek" placeholder="Ex.: 19 a 23 de outubro"></div>
-            <div class="field"><label for="menuText">Refeições e dias</label><textarea id="menuText" placeholder="Segunda-feira: ...&#10;Terça-feira: ...&#10;Quarta-feira: ..."></textarea></div>
-            <div class="field"><label for="menuImage">Imagem do cardápio (opcional)</label><input id="menuImage" type="file" accept="image/*"><small class="muted">Prévia local apenas; a imagem não será enviada ao site.</small></div>
-            <div id="imagePreview" class="preview" hidden></div>
-            <button class="btn primary" type="submit">Guardar rascunho local</button>
-          </form>
-        </div>
-      </section>
+<label for="categoria">Categoria</label>
+<select id="categoria" required>
+<option value="Direção">Direção</option>
+<option value="Provas">Provas</option>
+<option value="Eventos">Eventos</option>
+<option value="Horários">Horários</option>
+<option value="Cardápio">Cardápio</option>
+<option value="Urgente">Urgente</option>
+</select>
 
-      <section id="calendario" class="view">
-        <div class="page-head"><div><h1>📅 Calendário escolar</h1><p class="muted">Organize eventos e datas importantes.</p></div></div>
-        <div class="card">
-          <form id="eventForm">
-            <div class="field"><label for="eventTitle">Nome do evento *</label><input id="eventTitle" required maxlength="150" placeholder="Ex.: Feira de profissões"></div>
-            <div class="field"><label for="eventDate">Data *</label><input id="eventDate" type="date" required></div>
-            <div class="field"><label for="eventDetails">Detalhes</label><textarea id="eventDetails" placeholder="Horário, local e orientações"></textarea></div>
-            <button class="btn primary" type="submit">Guardar evento local</button>
-          </form>
-          <div id="eventsList" style="margin-top:22px"></div>
-        </div>
-      </section>
-    </div>
-    <footer>Mural Escolar Oficial · Painel administrativo em desenvolvimento</footer>
-  </main>
-</div>
+<label for="descricao">Descrição</label>
+<textarea id="descricao" maxlength="5000" required></textarea>
 
-<script>
-const $ = id => document.getElementById(id);
-let notices = [];
-let events = [];
-let menuSaved = false;
-let editingId = null;
+<label for="dataAviso">Data do aviso</label>
+<input id="dataAviso" type="date" required>
 
-function showMessage(text) {
-  $("message").textContent = text;
-  $("message").classList.add("show");
-  window.setTimeout(() => $("message").classList.remove("show"), 3500);
-}
-function go(view) {
-  document.querySelectorAll(".view").forEach(s => s.classList.toggle("active", s.id === view));
-  document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === view));
-  if(view === "avisos") renderNotices();
-  if(view === "dashboard") renderDashboard();
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => go(b.dataset.view)));
-document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => go(b.dataset.go)));
+<button type="submit">Publicar aviso</button>
+</form>
 
-function noticeHTML(n) {
-  return `<article class="notice">
-    <div class="notice-top"><span class="tag ${n.urgent ? "urgent" : ""}">${n.urgent ? "🚨 URGENTE" : escapeHTML(n.category)}</span><small class="muted">${n.date ? formatDate(n.date) : "Sem data relacionada"}</small></div>
-    <h3>${escapeHTML(n.title)}</h3><p>${escapeHTML(n.description)}</p>
-    <div class="actions"><button class="small-btn" data-edit="${n.id}">Editar</button><button class="small-btn danger" data-delete="${n.id}">Excluir</button></div>
-  </article>`;
-}
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function formatDate(value) {
-  if(!value) return "";
-  const [y,m,d] = value.split("-");
-  return `${d}/${m}/${y}`;
-}
-function renderNotices() {
-  const term = $("filter").value.toLowerCase().trim();
-  const filtered = notices.filter(n => `${n.title} ${n.category} ${n.description}`.toLowerCase().includes(term));
-  $("allNotices").innerHTML = filtered.length ? filtered.map(noticeHTML).join("") : '<p class="empty">Nenhum comunicado cadastrado ainda.</p>';
-}
-function renderDashboard() {
-  $("total").textContent = notices.length;
-  $("urgentTotal").textContent = notices.filter(n => n.urgent).length;
-  $("eventTotal").textContent = events.length;
-  $("menuStatus").textContent = menuSaved ? "Salvo" : "—";
-  $("recent").innerHTML = notices.length ? [...notices].slice(-4).reverse().map(noticeHTML).join("") : '<p class="empty">Ainda não há publicações nesta demonstração.</p>';
-  $("eventsList").innerHTML = events.length ? events.map(e => `<div class="notice"><strong>${escapeHTML(e.title)}</strong><p>${formatDate(e.date)}${e.details ? " · " + escapeHTML(e.details) : ""}</p><button class="small-btn danger" data-event-delete="${e.id}">Excluir</button></div>`).join("") : '<p class="empty">Nenhum evento cadastrado.</p>';
-}
-function resetForm() {
-  $("noticeForm").reset();
-  $("editId").value = "";
-  $("formTitle").textContent = "Criar comunicado";
-  editingId = null;
-}
-$("noticeForm").addEventListener("submit", e => {
+<p id="status" role="status"></p>
+
+<hr>
+<h2>Avisos publicados</h2>
+<div id="listaAvisos">Carregando avisos...</div>
+
+<button id="sair" type="button">Sair da administração</button>
+</section>
+</main>
+
+<script type="module">
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+
+import {
+  getFirestore, collection, addDoc, query, where, orderBy, getDocs,
+  serverTimestamp, deleteDoc, doc
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBe70DeHBd2OawVV4kXQvgQl3FZSc4xY",
+  authDomain: "mural-escolar-oficial.firebaseapp.com",
+  projectId: "mural-escolar-oficial",
+  storageBucket: "mural-escolar-oficial.firebasestorage.app",
+  messagingSenderId: "706068384737",
+  appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
+  measurementId: "G-5V2L9FCN0M"
+};
+
+const ADMIN_UID = "w3s8trwqH0W4ZJRyCSF9HTGRVG43";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const login = document.getElementById("login");
+const painel = document.getElementById("painel");
+const loginStatus = document.getElementById("loginStatus");
+const status = document.getElementById("status");
+const lista = document.getElementById("listaAvisos");
+
+document.getElementById("loginForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const id = editingId || String(Date.now());
-  const item = {id, title:$("title").value.trim(), category:$("category").value, date:$("date").value, description:$("description").value.trim(), urgent:$("urgent").checked};
-  if(editingId) notices = notices.map(n => n.id === editingId ? item : n);
-  else notices.unshift(item);
-  resetForm();
-  renderDashboard();
-  renderNotices();
-  showMessage("Rascunho salvo apenas nesta página. Ainda não foi publicado no mural.");
-  go("avisos");
+  loginStatus.textContent = "Entrando...";
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      document.getElementById("email").value.trim(),
+      document.getElementById("senha").value
+    );
+  } catch (error) {
+    loginStatus.textContent = "Não foi possível entrar. Confira o e-mail e a senha.";
+  }
 });
-$("cancelEdit").addEventListener("click", () => { resetForm(); go("avisos"); });
-$("filter").addEventListener("input", renderNotices);
 
-document.addEventListener("click", e => {
-  const edit = e.target.closest("[data-edit]");
-  const del = e.target.closest("[data-delete]");
-  const eventDel = e.target.closest("[data-event-delete]");
-  if(edit) {
-    const n = notices.find(x => x.id === edit.dataset.edit);
-    if(!n) return;
-    editingId = n.id;
-    $("editId").value = n.id;
-    $("title").value = n.title;
-    $("category").value = n.category;
-    $("date").value = n.date;
-    $("description").value = n.description;
-    $("urgent").checked = n.urgent;
-    $("formTitle").textContent = "Editar comunicado";
-    go("novo");
-  }
-  if(del && confirm("Excluir este rascunho local?")) {
-    notices = notices.filter(n => n.id !== del.dataset.delete);
-    renderDashboard(); renderNotices();
-    showMessage("Rascunho removido desta demonstração.");
-  }
-  if(eventDel && confirm("Excluir este evento local?")) {
-    events = events.filter(x => x.id !== eventDel.dataset.eventDelete);
-    renderDashboard();
-    showMessage("Evento removido desta demonstração.");
-  }
-});
-$("menuForm").addEventListener("submit", e => {
-  e.preventDefault();
-  menuSaved = true;
-  showMessage("Rascunho do cardápio registrado apenas nesta página; ainda não está publicado.");
-  renderDashboard();
-});
-$("menuImage").addEventListener("change", e => {
-  const file = e.target.files[0];
-  if(!file) return;
-  if(file.size > 3 * 1024 * 1024) {
-    showMessage("Escolha uma imagem de até 3 MB para a prévia.");
-    e.target.value = "";
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    login.hidden = false;
+    painel.hidden = true;
     return;
   }
-  const reader = new FileReader();
-  reader.onload = () => {
-    $("imagePreview").hidden = false;
-    $("imagePreview").innerHTML = `<strong>Prévia da imagem:</strong><br><img alt="Prévia do cardápio" src="${reader.result}" style="max-width:100%;max-height:350px;margin-top:12px;border-radius:10px">`;
-  };
-  reader.readAsDataURL(file);
+
+  if (user.uid !== ADMIN_UID) {
+    await signOut(auth);
+    loginStatus.textContent = "Esta conta não tem autorização para administrar o mural.";
+    return;
+  }
+
+  login.hidden = true;
+  painel.hidden = false;
+  await carregarAvisos();
 });
-$("eventForm").addEventListener("submit", e => {
+
+document.getElementById("avisoForm").addEventListener("submit", async e => {
   e.preventDefault();
-  events.push({id:String(Date.now()),title:$("eventTitle").value.trim(),date:$("eventDate").value,details:$("eventDetails").value.trim()});
-  e.target.reset();
-  renderDashboard();
-  showMessage("Evento salvo apenas nesta página, como demonstração.");
+  const user = auth.currentUser;
+
+  if (!user || user.uid !== ADMIN_UID) {
+    status.textContent = "Acesso não autorizado.";
+    return;
+  }
+
+  status.textContent = "Publicando aviso...";
+
+  try {
+    await addDoc(collection(db, "avisos"), {
+      titulo: document.getElementById("titulo").value.trim(),
+      categoria: document.getElementById("categoria").value,
+      descricao: document.getElementById("descricao").value.trim(),
+      dataAviso: document.getElementById("dataAviso").value,
+      publicado: true,
+      createdAt: serverTimestamp(),
+      autorUid: user.uid
+    });
+
+    status.textContent = "Aviso publicado com sucesso!";
+    e.target.reset();
+    await carregarAvisos();
+  } catch (error) {
+    console.error(error);
+    status.textContent = "Erro ao publicar. Confira as regras do Firestore.";
+  }
 });
-renderDashboard();
+
+async function carregarAvisos() {
+  lista.textContent = "Carregando...";
+  try {
+    const q = query(
+      collection(db, "avisos"),
+      where("publicado", "==", true),
+      orderBy("dataAviso", "desc")
+    );
+    const resultado = await getDocs(q);
+    lista.replaceChildren();
+
+    if (resultado.empty) {
+      lista.textContent = "Nenhum aviso publicado ainda.";
+      return;
+    }
+
+    resultado.forEach(item => {
+      const a = item.data();
+      const caixa = document.createElement("article");
+      caixa.className = "aviso";
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = a.titulo || "Aviso";
+
+      const categoria = document.createElement("p");
+      categoria.textContent = "Categoria: " + (a.categoria || "Geral");
+
+      const descricao = document.createElement("p");
+      descricao.textContent = a.descricao || "";
+
+      const data = document.createElement("p");
+      data.className = "pequeno";
+      data.textContent = "Data: " + (a.dataAviso || "Não informada");
+
+      const apagar = document.createElement("button");
+      apagar.type = "button";
+      apagar.textContent = "Excluir aviso";
+      apagar.addEventListener("click", async () => {
+        if (!confirm("Deseja excluir este aviso?")) return;
+        try {
+          await deleteDoc(doc(db, "avisos", item.id));
+          await carregarAvisos();
+        } catch (error) {
+          status.textContent = "Não foi possível excluir o aviso.";
+        }
+      });
+
+      caixa.append(titulo, categoria, descricao, data, apagar);
+      lista.append(caixa);
+    });
+  } catch (error) {
+    console.error(error);
+    lista.textContent = "Não foi possível carregar os avisos. Verifique as regras e o índice do Firestore.";
+  }
+}
+
+document.getElementById("sair").addEventListener("click", async () => {
+  await signOut(auth);
+});
 </script>
 </body>
 </html>
