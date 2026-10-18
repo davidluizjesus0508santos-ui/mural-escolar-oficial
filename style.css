@@ -1,15 +1,14 @@
 
-/* MURAL ESCOLAR OFICIAL */
-
 :root {
-  --verde: #174b35;
-  --verde-claro: #26734f;
-  --fundo: #f3f6f4;
-  --branco: #ffffff;
-  --texto: #202b25;
-  --cinza: #68756d;
-  --borda: #e0e8e2;
-  --sombra: 0 10px 30px rgba(20, 55, 37, 0.08);
+  --bg: #080c0a;
+  --panel: #111a15;
+  --panel-hover: #18251c;
+  --green: #21c55d;
+  --green-dark: #123d25;
+  --text: #f2f7f3;
+  --muted: #9baaa0;
+  --border: #26372c;
+  --danger: #ff5c5c;
 }
 
 * {
@@ -22,145 +21,140 @@ html {
 
 body {
   margin: 0;
-  background: var(--fundo);
-  color: var(--texto);
-  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
   line-height: 1.6;
 }
 
-header {
-  background: var(--verde);
-  color: white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+header, .topbar {
+  background: #0b120e !important;
+  border-bottom: 1px solid var(--border);
 }
 
-header a {
-  color: white;
-  text-decoration: none;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-main {
+main, .wrap {
   width: min(1180px, 92%);
-  margin: 35px auto;
+  margin-inline: auto;
 }
 
-section,
-article,
-.card,
-.aviso,
-.notice,
-.sidebar {
-  border-radius: 18px;
-}
-
-.card,
-.aviso,
-.notice {
-  background: var(--branco);
-  border: 1px solid var(--borda);
-  box-shadow: var(--sombra);
-  padding: 22px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover,
-.aviso:hover,
-.notice:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(20, 55, 37, 0.13);
-}
-
-button,
-.btn,
-input[type="submit"] {
-  background: var(--verde-claro);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-button:hover,
-.btn:hover,
-input[type="submit"]:hover {
-  background: var(--verde);
-  transform: translateY(-1px);
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  max-width: 100%;
-  padding: 12px 14px;
-  margin: 6px 0 14px;
-  border: 1px solid #ccd8cf;
-  border-radius: 10px;
-  background: white;
-  color: var(--texto);
-  font: inherit;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 3px solid rgba(38, 115, 79, 0.18);
-  border-color: var(--verde-claro);
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.25;
+h1, h2, h3 {
+  color: var(--text) !important;
+  line-height: 1.2;
   letter-spacing: -0.4px;
 }
 
-h2 {
-  color: var(--verde);
+p {
+  color: var(--muted);
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+a {
+  color: var(--green);
+  text-decoration: none;
 }
 
-footer {
-  margin-top: 50px;
-  padding: 28px 5%;
-  background: #102d20;
-  color: white;
+a:hover {
+  color: #8cf5ad;
+}
+
+button, .button, input, select, textarea {
+  font: inherit;
+  border-radius: 10px;
+}
+
+button, .button {
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+
+button:hover, .button:hover {
+  transform: translateY(-2px);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0b120e !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.card, .tile, .notice-card, .info-card,
+article, .panel {
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 16px !important;
+  padding: 20px;
+  box-shadow: 0 8px 28px #00000025;
+  transition: border-color .2s, transform .2s;
+}
+
+.card:hover, .tile:hover, .notice-card:hover,
+.info-card:hover, article:hover, .panel:hover {
+  border-color: #287a43 !important;
+  transform: translateY(-3px);
+}
+
+.hero {
+  background-color: var(--green-dark) !important;
+  border: 1px solid #245b36;
+  border-radius: 22px;
+  overflow: hidden;
+  padding: clamp(28px, 5vw, 64px) !important;
+  margin: 28px 0;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 800;
+}
+
+.grid {
+  gap: 18px;
+}
+
+.tag, .badge {
+  display: inline-block;
+  background: #173c25 !important;
+  color: #8cf5ad !important;
+  border: 1px solid #28643b;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: .8rem;
+}
+
+.urgent, .urgente {
+  border-color: var(--danger) !important;
+}
+
+footer, .footer {
+  margin-top: 48px;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
   text-align: center;
 }
 
 @media (max-width: 700px) {
-  main {
+  main, .wrap {
     width: 94%;
-    margin: 22px auto;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero {
+    padding: 24px !important;
   }
 
   nav {
-    gap: 9px;
-  }
-
-  .card,
-  .aviso,
-  .notice {
-    padding: 16px;
-  }
-
-  button,
-  .btn {
-    max-width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 }
