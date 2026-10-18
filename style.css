@@ -1,0 +1,166 @@
+
+/* MURAL ESCOLAR OFICIAL */
+
+:root {
+  --verde: #174b35;
+  --verde-claro: #26734f;
+  --fundo: #f3f6f4;
+  --branco: #ffffff;
+  --texto: #202b25;
+  --cinza: #68756d;
+  --borda: #e0e8e2;
+  --sombra: 0 10px 30px rgba(20, 55, 37, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  background: var(--verde);
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+main {
+  width: min(1180px, 92%);
+  margin: 35px auto;
+}
+
+section,
+article,
+.card,
+.aviso,
+.notice,
+.sidebar {
+  border-radius: 18px;
+}
+
+.card,
+.aviso,
+.notice {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  box-shadow: var(--sombra);
+  padding: 22px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover,
+.aviso:hover,
+.notice:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(20, 55, 37, 0.13);
+}
+
+button,
+.btn,
+input[type="submit"] {
+  background: var(--verde-claro);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+button:hover,
+.btn:hover,
+input[type="submit"]:hover {
+  background: var(--verde);
+  transform: translateY(-1px);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  margin: 6px 0 14px;
+  border: 1px solid #ccd8cf;
+  border-radius: 10px;
+  background: white;
+  color: var(--texto);
+  font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid rgba(38, 115, 79, 0.18);
+  border-color: var(--verde-claro);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+}
+
+h2 {
+  color: var(--verde);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 28px 5%;
+  background: #102d20;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  main {
+    width: 94%;
+    margin: 22px auto;
+  }
+
+  nav {
+    gap: 9px;
+  }
+
+  .card,
+  .aviso,
+  .notice {
+    padding: 16px;
+  }
+
+  button,
+  .btn {
+    max-width: 100%;
+  }
+}
