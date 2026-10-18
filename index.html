@@ -2,251 +2,243 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#143d2b">
-<title>Mural Escolar Oficial</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<style>
-:root{--green:#174a35;--dark:#103324;--pale:#e8f2ec;--bg:#f4f6f4;--white:#fff;--text:#202b25;--muted:#69756d;--border:#e1e8e2;--red:#b42332}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}
-a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-.container{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:10;background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-icon{height:45px;width:45px;border-radius:14px;background:var(--green);color:white;display:grid;place-items:center;font-size:20px}
-.brand strong{font:800 16px Manrope,sans-serif;display:block}
-.brand small{color:var(--muted);font-size:12px}
-.navlinks{display:flex;gap:20px;font-size:13px;font-weight:700}
-.navlinks a:hover{color:var(--green)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 15px;border:0;border-radius:12px;background:var(--green);color:white;font-weight:700;cursor:pointer}
-.btn:hover{background:var(--dark)}
-.hero{padding:30px 0 12px}
-.hero-card{min-height:340px;border-radius:25px;overflow:hidden;color:white;display:flex;align-items:center;background:linear-gradient(90deg,#0d2d20f5,#103324bd,#10332430),url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85") center/cover}
-.hero-content{max-width:680px;padding:clamp(26px,5vw,58px)}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:30px;background:#ffffff20;border:1px solid #ffffff40;font-size:12px}
-h1,h2,h3{font-family:Manrope,sans-serif}
-h1{font-size:clamp(30px,5vw,49px);line-height:1.12;margin:18px 0 12px}
-.hero p{color:#e1ebe4;line-height:1.75;max-width:520px}
-.hero .btn{background:white;color:var(--dark);margin-top:8px}
-.section{padding:26px 0}
-.section-heading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:17px}
-.section-heading h2{font-size:23px;margin:0}
-.section-heading p{color:var(--muted);font-size:14px;margin:6px 0 0}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.card{background:white;border:1px solid var(--border);border-radius:18px;padding:19px;transition:transform .2s,border-color .2s}
-.card:hover{transform:translateY(-3px);border-color:#9bb9a4}
-.iconbox{height:44px;width:44px;border-radius:13px;background:var(--pale);color:var(--green);display:grid;place-items:center;font-size:18px;margin-bottom:14px}
-.card h3{font-size:15px;margin:0 0 7px}
-.card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
-.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(250px,1fr);gap:19px;align-items:start}
-.panel{background:white;border:1px solid var(--border);border-radius:20px;padding:22px;margin-bottom:17px}
-.panelhead{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.panelhead h2{font-size:19px;margin:0}
-.muted{color:var(--muted);font-size:13px;line-height:1.6}
-.search{display:flex;gap:9px;margin:18px 0 12px}
-.search input,.search select{min-width:0;width:100%;padding:12px;border:1px solid var(--border);border-radius:11px;background:white;color:var(--text)}
-#notices{display:grid;gap:12px;margin-top:15px}
-.notice{padding:17px;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:14px;animation:appear .3s ease}
-.notice.urgent{border-left-color:var(--red);background:#fffafa}
-.notice h3{font-size:16px;margin:10px 0 7px}
-.notice p{font-size:14px;color:#59645d;line-height:1.7;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
-.tag{display:inline-block;background:var(--pale);color:var(--green);padding:5px 9px;border-radius:7px;font-size:11px;font-weight:800;text-transform:capitalize}
-.tag.urgenttag{background:#fbe8e9;color:var(--red)}
-.meta{font-size:11px;color:var(--muted);margin-top:12px}
-.empty{text-align:center;padding:28px 10px;color:var(--muted);line-height:1.7}
-.empty i{display:block;font-size:27px;color:#8ca594;margin-bottom:12px}
-.feature{background:var(--dark);color:white;border-radius:19px;padding:23px;margin-bottom:16px}
-.feature h3{font-size:19px;margin:0 0 9px}
-.feature p{font-size:13px;line-height:1.7;color:#d9e5dd}
-.feature a{font-weight:700;font-size:13px}
-.info{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
-.info:last-child{border-bottom:0}
-.info i{color:var(--green);margin-top:3px}
-.info strong{font-size:13px;display:block}
-.info small{display:block;color:var(--muted);line-height:1.6;margin-top:4px}
-.notice-count{font-size:11px;color:var(--muted)}
-footer{margin-top:30px;background:#10271d;color:white;padding:28px 0}
-.footerrow{display:flex;align-items:center;justify-content:space-between;gap:20px}
-footer p{font-size:12px;color:#cad7ce;line-height:1.6}
-footer a{font-size:13px;font-weight:700}
-@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:800px){.navlinks{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.hero-card{min-height:330px}.footerrow{align-items:flex-start;flex-direction:column}}
-@media(max-width:420px){.brand strong{font-size:14px}.brand small{font-size:10px}.grid{gap:9px}.card{padding:14px}.panel{padding:15px}.search{flex-direction:column}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b2a">
+  <meta name="description" content="Mural Escolar Oficial: comunicados, eventos e informações da escola.">
+  <title>Mural Escolar Oficial</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --green: #123b2a;
+      --accent: #2e8057;
+      --paper: #ffffff;
+      --bg: #f3f6f4;
+      --text: #203027;
+      --muted: #68766e;
+      --line: #e0e8e2;
+    }
+    body { background: var(--bg); color: var(--text); }
+    .topbar { background: var(--green); color: white; padding: 16px 0; }
+    .wrap { width: min(1120px, 92%); margin: auto; }
+    .brand { display:flex; align-items:center; gap:12px; font-size:1.15rem; font-weight:800; }
+    .brand-icon { display:grid; place-items:center; width:44px; height:44px; background:#ffffff18; border-radius:14px; font-size:24px; }
+    .topline { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+    .navlinks { display:flex; gap:18px; flex-wrap:wrap; }
+    .navlinks a { color:#e4eee7; text-decoration:none; font-size:.95rem; }
+    .navlinks a:hover { color:white; text-decoration:underline; }
+    .hero { margin-top:28px; overflow:hidden; border-radius:24px; background:linear-gradient(110deg,#102f22f5,#174b35df), url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85') center/cover; color:white; padding:clamp(30px,6vw,70px); }
+    .eyebrow { text-transform:uppercase; letter-spacing:2px; font-size:.78rem; font-weight:800; color:#bfe5cb; }
+    .hero h1 { max-width:700px; font-size:clamp(2rem,5vw,3.7rem); margin:12px 0; letter-spacing:-1.5px; }
+    .hero p { max-width:620px; color:#e0eee5; font-size:1.05rem; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:25px; }
+    .action { display:inline-block; border-radius:11px; padding:12px 18px; text-decoration:none; font-weight:700; }
+    .action.primary { background:#fff; color:var(--green); }
+    .action.secondary { border:1px solid #ffffff70; color:white; }
+    .section { margin-top:38px; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:18px; }
+    .section-head h2 { margin:0; color:var(--green); font-size:1.6rem; }
+    .section-head p { margin:5px 0 0; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; }
+    .tile { display:block; text-decoration:none; color:inherit; background:white; border:1px solid var(--line); padding:22px; border-radius:18px; transition:.2s; }
+    .tile:hover { transform:translateY(-4px); box-shadow:0 12px 28px #123b2a14; }
+    .tile-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:14px; background:#e8f3ec; font-size:23px; }
+    .tile h3 { margin:14px 0 5px; color:var(--green); }
+    .tile p { margin:0; color:var(--muted); font-size:.92rem; }
+    .notice-tools { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+    .notice-tools input,.notice-tools select { margin:0; flex:1; min-width:180px; background:white; }
+    .notices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+    .notice-card { background:white; border:1px solid var(--line); border-radius:18px; padding:22px; }
+    .notice-card h3 { color:var(--green); margin:10px 0; }
+    .notice-card p { white-space:pre-wrap; overflow-wrap:anywhere; }
+    .meta { color:var(--muted); font-size:.85rem; }
+    .tag { display:inline-block; border-radius:999px; padding:5px 10px; background:#e8f3ec; color:#205b3d; font-size:.78rem; font-weight:800; }
+    .tag.urgent { background:#fff0e9; color:#a43b20; }
+    .empty { grid-column:1/-1; background:white; border:1px dashed #b9cbbf; border-radius:18px; padding:30px; text-align:center; color:var(--muted); }
+    .info { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+    .info-card { background:#e8f0eb; border-radius:18px; padding:22px; }
+    .info-card h3 { color:var(--green); margin-top:0; }
+    .info-card p { margin-bottom:0; color:#526259; }
+    .footer { margin-top:48px; padding:30px 0; background:#102d20; color:#dce9e0; }
+    .footer p { margin:4px 0; }
+    .status { color:var(--muted); font-size:.9rem; margin:10px 0; }
+    @media(max-width:800px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .info { grid-template-columns:1fr; } }
+    @media(max-width:560px) { .notices { grid-template-columns:1fr; } .hero { border-radius:18px; } .navlinks { gap:12px; } }
+  </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="brand" href="#inicio">
-      <span class="brand-icon"><i class="fa-solid fa-school"></i></span>
-      <span><strong>Mural Escolar</strong><small>Portal da comunidade escolar</small></span>
-    </a>
-    <nav class="navlinks">
-      <a href="#inicio">Início</a><a href="#servicos">Área escolar</a><a href="#comunicados">Comunicados</a>
-    </nav>
-    <a class="btn" href="admin.html"><i class="fa-solid fa-lock"></i> Direção</a>
-  </div>
-</header>
-
-<main class="container">
-  <section class="hero" id="inicio">
-    <div class="hero-card">
-      <div class="hero-content">
-        <span class="pill"><i class="fa-solid fa-leaf"></i> EDUCAÇÃO • COMUNIDADE • FUTURO</span>
-        <h1>Uma escola conectada.<br>Um futuro em construção.</h1>
-        <p>Comunicados, datas importantes e informações escolares em um só lugar.</p>
-        <a class="btn" href="#comunicados">Ver comunicados <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
+  <header class="topbar">
+    <div class="wrap topline">
+      <div class="brand"><span class="brand-icon">🏫</span><span>Mural Escolar<br><small style="font-weight:400;color:#d6e6dc">OFICIAL</small></span></div>
+      <nav class="navlinks" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#acessos">Portal</a>
+        <a href="#avisos">Comunicados</a>
+        <a href="#informacoes">Informações</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <section class="section" id="servicos">
-    <div class="section-heading"><div><h2>Explore o portal</h2><p>Acesse as áreas escolares.</p></div></div>
-    <div class="grid">
-      <a class="card" href="#eventos"><span class="iconbox"><i class="fa-solid fa-calendar-days"></i></span><h3>Eventos</h3><p>Datas e atividades escolares.</p></a>
-      <a class="card" href="#provas"><span class="iconbox"><i class="fa-solid fa-book-open"></i></span><h3>Provas e trabalhos</h3><p>Organize seus estudos.</p></a>
-      <a class="card" href="#cardapio"><span class="iconbox"><i class="fa-solid fa-utensils"></i></span><h3>Cardápio</h3><p>Consulte a alimentação escolar.</p></a>
-      <a class="card" href="#horarios"><span class="iconbox"><i class="fa-solid fa-clock"></i></span><h3>Horários</h3><p>Informações sobre aulas.</p></a>
-    </div>
-  </section>
-
-  <div class="layout">
-    <section class="panel" id="comunicados">
-      <div class="panelhead"><div><h2><i class="fa-solid fa-bullhorn"></i> Comunicados</h2><p class="muted">Informações publicadas pela direção.</p></div><span class="notice-count" id="count"></span></div>
-      <div class="search">
-        <input id="search" type="search" placeholder="Buscar comunicado..." aria-label="Buscar comunicado">
-        <select id="filter" aria-label="Filtrar comunicados">
-          <option value="todos">Todas as categorias</option>
-          <option value="urgentes">Somente urgentes</option>
-          <option value="geral">Geral</option>
-          <option value="eventos">Eventos</option>
-          <option value="provas">Provas</option>
-          <option value="cardapio">Cardápio</option>
-          <option value="horarios">Horários</option>
-        </select>
+  <main class="wrap">
+    <section class="hero" id="inicio">
+      <div class="eyebrow">Informação • Comunidade • Aprendizagem</div>
+      <h1>Tudo o que acontece na escola, em um só lugar.</h1>
+      <p>Consulte os comunicados da direção, acompanhe as novidades e encontre informações importantes para sua rotina escolar.</p>
+      <div class="hero-actions">
+        <a class="action primary" href="#avisos">Ver comunicados ↓</a>
+        <a class="action secondary" href="#acessos">Explorar o portal</a>
       </div>
-      <div id="notices"><div class="empty"><i class="fa-solid fa-spinner fa-spin"></i>Carregando comunicados...</div></div>
     </section>
 
-    <aside>
-      <div class="feature">
-        <h3><i class="fa-solid fa-bell"></i> Fique por dentro</h3>
-        <p>Confira os comunicados publicados neste mural para acompanhar as informações disponíveis.</p>
-        <a href="#comunicados">Ver novidades <i class="fa-solid fa-arrow-right"></i></a>
+    <section class="section" id="acessos">
+      <div class="section-head">
+        <div><h2>Explore o portal</h2><p>Acesse rapidamente as informações da escola.</p></div>
       </div>
-      <div class="panel">
-        <h2 style="font-size:18px;margin-top:0">Áreas escolares</h2>
-        <div class="info" id="eventos"><i class="fa-solid fa-calendar-check"></i><div><strong>Eventos</strong><small>As datas serão exibidas quando forem divulgadas oficialmente.</small></div></div>
-        <div class="info" id="provas"><i class="fa-solid fa-graduation-cap"></i><div><strong>Provas e trabalhos</strong><small>Consulte os avisos da escola e dos professores.</small></div></div>
-        <div class="info" id="cardapio"><i class="fa-solid fa-utensils"></i><div><strong>Cardápio da merenda</strong><small>Consulte o cardápio oficial divulgado pela escola.</small></div></div>
-        <div class="info" id="horarios"><i class="fa-solid fa-clock"></i><div><strong>Horários</strong><small>Confirme os horários com a escola.</small></div></div>
+      <div class="grid">
+        <a class="tile" href="#eventos"><div class="tile-icon">📅</div><h3>Eventos</h3><p>Atividades e datas importantes.</p></a>
+        <a class="tile" href="#provas"><div class="tile-icon">📚</div><h3>Provas e trabalhos</h3><p>Organize sua rotina de estudos.</p></a>
+        <a class="tile" href="#cardapio"><div class="tile-icon">🍎</div><h3>Cardápio</h3><p>Consulte a alimentação escolar.</p></a>
+        <a class="tile" href="#horarios"><div class="tile-icon">🕒</div><h3>Horários</h3><p>Confira os horários divulgados.</p></a>
       </div>
-    </aside>
-  </div>
-</main>
+    </section>
 
-<footer>
-  <div class="container footerrow">
-    <div class="brand"><span class="brand-icon"><i class="fa-solid fa-school"></i></span><span><strong>Mural Escolar Oficial</strong><small>Portal da comunidade escolar</small></span></div>
-    <p>Consulte a escola para confirmar informações oficiais.<br>Portal informativo da comunidade escolar.</p>
-    <a href="admin.html"><i class="fa-solid fa-lock"></i> Acesso da direção</a>
-  </div>
-</footer>
+    <section class="section" id="avisos">
+      <div class="section-head">
+        <div><h2>Comunicados da escola</h2><p>Avisos publicados pela direção.</p></div>
+      </div>
+      <div class="notice-tools">
+        <input id="busca" type="search" placeholder="🔎 Buscar comunicado..." aria-label="Buscar comunicado">
+        <select id="categoria" aria-label="Filtrar por categoria">
+          <option value="">Todas as categorias</option>
+          <option value="geral">Geral</option>
+          <option value="eventos">Eventos</option>
+          <option value="provas">Provas e trabalhos</option>
+          <option value="cardapio">Cardápio</option>
+          <option value="horarios">Horários</option>
+          <option value="urgente">Urgentes</option>
+        </select>
+      </div>
+      <p id="status" class="status" role="status">Carregando comunicados...</p>
+      <div class="notices" id="lista-avisos">
+        <div class="empty">Carregando avisos publicados...</div>
+      </div>
+    </section>
 
-<script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getFirestore,collection,getDocs,query,where} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    <section class="section" id="informacoes">
+      <div class="section-head"><div><h2>Informações úteis</h2><p>Consulte os detalhes divulgados pela escola.</p></div></div>
+      <div class="info">
+        <article class="info-card" id="eventos"><h3>📅 Eventos</h3><p>Confira os comunicados para saber sobre atividades, reuniões e datas especiais.</p></article>
+        <article class="info-card" id="provas"><h3>📚 Provas e trabalhos</h3><p>Acompanhe as orientações e datas que forem publicadas pela direção.</p></article>
+        <article class="info-card" id="cardapio"><h3>🍎 Cardápio escolar</h3><p>Veja o <a href="cardapio.jpg" target="_blank" rel="noopener">cardápio disponível</a>.</p></article>
+        <article class="info-card" id="horarios"><h3>🕒 Horários</h3><p>Consulte os avisos oficiais para atualizações de horários.</p></article>
+      </div>
+    </section>
+  </main>
 
-/* Mantenha a configuração do Firebase do seu projeto. */
-const firebaseConfig={
-  apiKey:"AIzaSyBe70DeHBd2OawVV4kXQqVQgjQql3FZSc4xY",
-  authDomain:"mural-escolar-oficial.firebaseapp.com",
-  projectId:"mural-escolar-oficial",
-  storageBucket:"mural-escolar-oficial.firebasestorage.app",
-  messagingSenderId:"706068384737",
-  appId:"1:706068384737:web:d5736bf4d89a3c1e09e0a0",
-  measurementId:"G-5V2L9FCN0M"
-};
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>Mural Escolar Oficial</strong></p>
+      <p>Um espaço para manter a comunidade escolar informada.</p>
+      <p style="font-size:.85rem;margin-top:14px">Consulte sempre os comunicados oficiais da direção.</p>
+    </div>
+  </footer>
 
-const area=document.getElementById("notices");
-const busca=document.getElementById("search");
-const filtro=document.getElementById("filter");
-const contador=document.getElementById("count");
-let avisos=[];
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-function textoSeguro(valor){
-  const span=document.createElement("span");
-  span.textContent=valor==null?"":String(valor);
-  return span.innerHTML;
-}
-function dataSeguro(valor){
-  if(!valor)return "";
-  if(typeof valor==="string")return valor;
-  if(valor.toDate){
-    return valor.toDate().toLocaleDateString("pt-BR");
-  }
-  return "";
-}
-function renderizar(){
-  const termo=busca.value.trim().toLocaleLowerCase("pt-BR");
-  const tipo=filtro.value;
-  const filtrados=avisos.filter(a=>{
-    const categoria=String(a.categoria||"geral").toLocaleLowerCase("pt-BR");
-    const texto=[a.titulo,a.descricao,a.categoria].join(" ").toLocaleLowerCase("pt-BR");
-    const urgente=a.urgente===true;
-    const combinaBusca=texto.includes(termo);
-    const combinaTipo=tipo==="todos"||(tipo==="urgentes"&&urgente)||(tipo!=="urgentes"&&categoria===tipo);
-    return combinaBusca&&combinaTipo;
-  });
-  area.replaceChildren();
-  contador.textContent=filtrados.length+" aviso(s)";
-  if(!filtrados.length){
-    area.innerHTML='<div class="empty"><i class="fa-regular fa-calendar-check"></i>Nenhum comunicado encontrado.</div>';
-    return;
-  }
-  filtrados.forEach(a=>{
-    const artigo=document.createElement("article");
-    const urgente=a.urgente===true;
-    artigo.className="notice"+(urgente?" urgent":"");
-    const categoria=textoSeguro(a.categoria||"Geral");
-    const titulo=textoSeguro(a.titulo||"Comunicado");
-    const descricao=textoSeguro(a.descricao||"");
-    const data=dataSeguro(a.data||a.dataEvento||a.dataProva);
-    artigo.innerHTML=
-      (urgente?'<span class="tag urgenttag"><i class="fa-solid fa-triangle-exclamation"></i> URGENTE</span> ':"")+
-      '<span class="tag">'+categoria+'</span>'+
-      '<h3>'+titulo+'</h3><p>'+descricao+'</p>'+
-      (data?'<div class="meta"><i class="fa-regular fa-calendar"></i> '+textoSeguro(data)+'</div>':"")+
-      '<div class="meta"><i class="fa-solid fa-bullhorn"></i> Comunicado da escola</div>';
-    area.appendChild(artigo);
-  });
-}
-async function carregar(){
-  try{
-    const app=initializeApp(firebaseConfig);
-    const db=getFirestore(app);
-    const consulta=query(collection(db,"avisos"),where("publicado","==",true));
-    const resultado=await getDocs(consulta);
-    avisos=resultado.docs.map(d=>({id:d.id,...d.data()}));
-    avisos.sort((a,b)=>(b.urgente===true?1:0)-(a.urgente===true?1:0));
-    renderizar();
-  }catch(erro){
-    console.error("Falha ao carregar avisos do Firebase:",erro);
-    area.innerHTML='<div class="empty"><i class="fa-solid fa-circle-exclamation"></i>Não foi possível carregar os comunicados. Verifique a conexão e tente novamente.</div>';
-    contador.textContent="";
-  }
-}
-busca.addEventListener("input",renderizar);
-filtro.addEventListener("change",renderizar);
-carregar();
-</script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBe70DeHBd2OawVV4kXQqVQgjQql3FZSc4xY",
+      authDomain: "mural-escolar-oficial.firebaseapp.com",
+      projectId: "mural-escolar-oficial",
+      storageBucket: "mural-escolar-oficial.firebasestorage.app",
+      messagingSenderId: "706068384737",
+      appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
+      measurementId: "G-5V2L9FCN0M"
+    };
+
+    const statusEl = document.getElementById("status");
+    const listEl = document.getElementById("lista-avisos");
+    const searchEl = document.getElementById("busca");
+    const categoryEl = document.getElementById("categoria");
+    let avisos = [];
+
+    function textoSeguro(valor) {
+      return String(valor ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[c]);
+    }
+
+    function formatarData(valor) {
+      if (!valor) return "";
+      try {
+        const data = valor.toDate ? valor.toDate() : new Date(valor);
+        if (Number.isNaN(data.getTime())) return "";
+        return data.toLocaleDateString("pt-BR");
+      } catch {
+        return "";
+      }
+    }
+
+    function renderizar() {
+      const termo = searchEl.value.trim().toLocaleLowerCase("pt-BR");
+      const categoria = categoryEl.value;
+      const filtrados = avisos.filter(a => {
+        const cat = String(a.categoria || "geral").toLowerCase();
+        const conteudo = `${a.titulo || ""} ${a.descricao || ""} ${cat}`.toLocaleLowerCase("pt-BR");
+        const urgente = a.urgente === true;
+        const correspondeCategoria = !categoria ||
+          (categoria === "urgente" ? urgente : cat === categoria);
+        return correspondeCategoria && conteudo.includes(termo);
+      });
+
+      if (!filtrados.length) {
+        listEl.innerHTML = '<div class="empty">📭 Nenhum comunicado encontrado com esses filtros.</div>';
+        return;
+      }
+
+      listEl.innerHTML = filtrados.map(a => {
+        const urgente = a.urgente === true;
+        const data = formatarData(a.data || a.dataEvento || a.dataProva);
+        const categoria = textoSeguro(a.categoria || "geral");
+        return `
+          <article class="notice-card">
+            <span class="tag ${urgente ? "urgent" : ""}">${urgente ? "⚠️ URGENTE" : categoria.toUpperCase()}</span>
+            <h3>${textoSeguro(a.titulo || "Comunicado escolar")}</h3>
+            <p>${textoSeguro(a.descricao || "")}</p>
+            ${data ? `<div class="meta">📅 ${textoSeguro(data)}</div>` : ""}
+          </article>`;
+      }).join("");
+    }
+
+    searchEl.addEventListener("input", renderizar);
+    categoryEl.addEventListener("change", renderizar);
+
+    async function carregarAvisos() {
+      try {
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const avisosQuery = query(
+          collection(db, "avisos"),
+          where("publicado", "==", true)
+        );
+        const snapshot = await getDocs(avisosQuery);
+        avisos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        avisos.sort((a, b) => {
+          const da = a.data?.toDate ? a.data.toDate().getTime() : 0;
+          const db = b.data?.toDate ? b.data.toDate().getTime() : 0;
+          return db - da;
+        });
+        statusEl.textContent = `${avisos.length} comunicado(s) publicado(s)`;
+        renderizar();
+      } catch (erro) {
+        console.error("Erro ao carregar avisos:", erro);
+        statusEl.textContent = "Não foi possível carregar os comunicados.";
+        listEl.innerHTML = '<div class="empty">Não conseguimos carregar os avisos agora. Verifique sua conexão ou tente novamente mais tarde.</div>';
+      }
+    }
+
+    carregarAvisos();
+  </script>
 </body>
 </html>
