@@ -3,161 +3,280 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mural Escolar Oficial</title>
+<meta name="theme-color" content="#123d2b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
-:root{
-  --navy:#082d60;--blue:#1764b1;--light:#f1f6fc;
-  --text:#193456;--muted:#6c7e95;--border:#e0eaf5;
+:root {
+  --green:#174a35;
+  --green-dark:#103324;
+  --green-light:#e8f2ec;
+  --text:#202b25;
+  --muted:#6b756f;
+  --bg:#f4f6f4;
+  --white:#fff;
+  --border:#e4e9e5;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--text)}
-header{background:linear-gradient(110deg,#062653,#104c8d);color:white}
-.top{max-width:1240px;margin:auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:13px}
-.logo{font-size:36px}
-.brand h1{font-size:22px;margin:0}
-.brand p{font-size:12px;margin:5px 0 0;color:#d5e5fb}
-nav{display:flex;gap:8px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;padding:10px 12px;border-radius:8px;font-size:13px}
-nav a:hover,nav a:focus{background:#ffffff25}
-.hero{background:linear-gradient(90deg,#082d60ee,#082d6066),url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85') center/cover}
-.hero-inner{max-width:1240px;margin:auto;padding:52px 24px 58px;color:white}
-.hero h2{font-size:clamp(28px,4vw,43px);max-width:620px;margin:0 0 14px}
-.hero p{font-size:16px;line-height:1.7;max-width:580px;color:#edf5ff}
-main{max-width:1240px;margin:26px auto;padding:0 20px}
-.shortcuts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;margin-bottom:22px}
-.shortcut{display:flex;align-items:center;gap:12px;background:white;border:1px solid var(--border);border-radius:13px;padding:17px 14px;text-decoration:none;color:var(--text);box-shadow:0 4px 14px #173c6508}
-.shortcut:hover{transform:translateY(-2px);box-shadow:0 7px 20px #173c6515}
-.symbol{display:grid;place-items:center;min-width:43px;height:43px;border-radius:11px;background:#e5efff;color:#1759a0;font-size:21px}
-.shortcut strong{display:block;font-size:14px}
-.shortcut small{display:block;color:var(--muted);margin-top:5px;font-size:11px}
-.columns{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(260px,.9fr);gap:22px;align-items:start}
-.card{background:white;border:1px solid var(--border);border-radius:15px;padding:21px;margin-bottom:20px;box-shadow:0 5px 18px #163d6508}
-.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:16px}
-.section-title h2{margin:0;font-size:19px}
-.urgent{background:linear-gradient(110deg,#fff0f0,#fffafa);border:1px solid #ffd8d8;border-radius:13px;padding:20px;margin-bottom:22px}
-.urgent-label{display:inline-block;background:#d92d42;color:white;font-weight:bold;font-size:12px;padding:7px 10px;border-radius:6px;margin-bottom:12px}
-.urgent h2{font-size:21px;margin:0 0 9px}
-.urgent p{line-height:1.6;margin:0;color:#4f6179}
-.search{width:100%;padding:13px;border:1px solid #d5e1ef;border-radius:9px;font-size:15px;outline-color:var(--blue)}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0 18px}
-.filters button{border:1px solid #d8e5f4;background:#f5f8fd;color:#365577;padding:8px 11px;border-radius:20px;cursor:pointer}
-.filters button.active,.filters button:hover{background:var(--navy);color:white}
-.notice{border:1px solid var(--border);border-radius:12px;padding:17px;margin:12px 0}
-.notice h3{margin:8px 0;font-size:17px}
-.notice p{line-height:1.6;margin:8px 0;color:#536982;overflow-wrap:anywhere}
-.tag{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:bold;background:#e5efff;color:#1759a0}
-.tag.urgent-tag{background:#ffe4e7;color:#b42335}
-.meta{font-size:12px;color:var(--muted)}
-.empty{padding:22px;text-align:center;background:#f8faff;border-radius:10px;color:var(--muted);line-height:1.6}
-.side-link{display:block;background:var(--navy);color:white;text-decoration:none;text-align:center;padding:13px;border-radius:9px;margin-top:15px;font-weight:bold}
-.side-link:hover{background:var(--blue)}
-.calendar-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.calendar-head button{border:1px solid var(--border);background:white;border-radius:7px;padding:7px 10px;cursor:pointer}
-.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;margin-top:15px}
-.calendar-grid span{padding:8px 0;font-size:12px;border-radius:7px}
-.calendar-grid .day-name{color:var(--muted);font-weight:bold}
-.calendar-grid .today{background:#dceaff;color:#104d91;font-weight:bold}
-.calendar-grid .has-event{background:#d9f5e5;color:#146c43;font-weight:bold}
-.quote{background:linear-gradient(135deg,#e3efff,#f6faff);color:#173f70;font-size:15px;line-height:1.7;font-style:italic}
-footer{background:#062653;color:white;margin-top:25px}
-.footer-inner{max-width:1240px;margin:auto;padding:26px 24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-footer p{font-size:12px;color:#d5e5fb;line-height:1.6}
-@media(max-width:900px){.shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}.top{align-items:flex-start}}
-@media(max-width:500px){.shortcuts{grid-template-columns:1fr}.hero-inner{padding-top:38px}.card{padding:16px}nav a{padding:8px}.brand h1{font-size:18px}}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"DM Sans",sans-serif;
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  background:white;border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:5;
+}
+.nav{
+  min-height:76px;display:flex;align-items:center;
+  justify-content:space-between;gap:18px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{
+  width:46px;height:46px;border-radius:15px;
+  background:var(--green);color:white;display:grid;
+  place-items:center;font-size:21px;
+}
+.brand strong{font:800 17px "Manrope",sans-serif;display:block}
+.brand small{color:var(--muted);font-size:12px}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:600}
+.nav-links a:hover{color:var(--green)}
+.admin-link{
+  background:var(--green);color:white;padding:12px 16px;
+  border-radius:12px;font-size:13px;font-weight:700;
+}
+.hero{padding:36px 0 25px}
+.hero-card{
+  position:relative;overflow:hidden;border-radius:25px;
+  min-height:330px;display:flex;align-items:center;
+  background:linear-gradient(90deg,rgba(9,35,24,.94),rgba(12,44,30,.70),rgba(10,30,22,.15)),
+  url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85") center/cover;
+  color:white;
+}
+.hero-content{padding:clamp(26px,5vw,58px);max-width:680px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#ffffff20;border:1px solid #ffffff38;
+  padding:8px 12px;border-radius:30px;font-size:12px;
+}
+h1,h2,h3{font-family:"Manrope",sans-serif}
+h1{font-size:clamp(30px,5vw,49px);line-height:1.12;margin:19px 0 13px}
+.hero p{color:#e5eee8;line-height:1.7;max-width:510px}
+.hero-button{
+  display:inline-flex;gap:10px;align-items:center;
+  margin-top:12px;padding:14px 18px;background:white;
+  color:var(--green-dark);border-radius:12px;font-weight:800;
+}
+.section-head{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:12px;margin:35px 0 17px;
+}
+.section-head h2{font-size:23px;margin:0}
+.section-head p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.quick-card{
+  background:white;border:1px solid var(--border);
+  padding:22px 17px;border-radius:18px;transition:.2s;
+}
+.quick-card:hover{transform:translateY(-3px);border-color:#a9c6b4}
+.quick-icon{
+  width:45px;height:45px;display:grid;place-items:center;
+  border-radius:14px;background:var(--green-light);
+  color:var(--green);font-size:19px;margin-bottom:16px;
+}
+.quick-card strong{display:block;font-size:15px}
+.quick-card small{display:block;color:var(--muted);margin-top:6px;line-height:1.5}
+.content-grid{
+  display:grid;grid-template-columns:minmax(0,1.6fr) minmax(250px,1fr);
+  gap:20px;align-items:start;margin-bottom:45px;
+}
+.panel{
+  background:white;border:1px solid var(--border);
+  border-radius:20px;padding:23px;
+}
+.panel-title{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.panel-title h2{font-size:20px;margin:0}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#3e9b65;display:inline-block}
+.status{color:var(--muted);font-size:12px}
+#avisos{display:grid;gap:12px;margin-top:18px}
+.notice{
+  border:1px solid var(--border);border-radius:15px;padding:17px;
+  border-left:4px solid var(--green);
+}
+.notice h3{font-size:16px;margin:9px 0}
+.notice p{font-size:14px;line-height:1.65;color:#58635c;white-space:pre-wrap}
+.notice-meta{font-size:12px;color:var(--muted)}
+.tag{
+  display:inline-block;background:var(--green-light);
+  color:var(--green);padding:5px 9px;border-radius:7px;
+  font-size:11px;font-weight:800;text-transform:capitalize;
+}
+.empty{padding:30px 12px;text-align:center;color:var(--muted);line-height:1.7}
+.empty i{font-size:28px;color:#9aafa0;margin-bottom:12px}
+.side-box{
+  background:var(--green-dark);color:white;border-radius:20px;
+  padding:24px;margin-bottom:16px;
+}
+.side-box h3{font-size:20px;margin:0 0 10px}
+.side-box p{font-size:14px;line-height:1.7;color:#d8e6dc}
+.side-box a{display:inline-flex;gap:9px;align-items:center;font-weight:700;font-size:13px;margin-top:8px}
+.info-row{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--border)}
+.info-row:last-child{border:0}
+.info-row i{color:var(--green);margin-top:4px}
+.info-row strong{font-size:14px;display:block}
+.info-row small{color:var(--muted);display:block;margin-top:5px;line-height:1.5}
+footer{background:#10271d;color:white;padding:30px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+footer p{font-size:12px;color:#c4d2c8;line-height:1.7}
+footer a{font-size:13px;font-weight:700}
+@media(max-width:760px){
+  .nav-links{display:none}
+  .brand strong{font-size:14px}
+  .admin-link{padding:10px;font-size:12px}
+  .hero-card{min-height:350px}
+  .quick-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .quick-card{padding:16px 13px}
+  .content-grid{grid-template-columns:1fr}
+  .section-head h2{font-size:20px}
+  .panel{padding:17px}
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
 </style>
 </head>
+
 <body>
 <header>
-  <div class="top">
-    <div class="brand">
-      <div class="logo">🎓</div>
-      <div><h1>Mural Escolar Oficial</h1><p>Informação, educação e comunidade</p></div>
-    </div>
-    <nav>
-      <a href="#inicio">Início</a><a href="#avisos">Avisos</a>
-      <a href="#provas">Provas</a><a href="#eventos">Eventos</a>
-      <a href="#horarios">Horários</a><a href="#cardapio">Cardápio</a>
+  <div class="container nav">
+    <a class="brand" href="#">
+      <span class="brand-icon"><i class="fa-solid fa-school"></i></span>
+      <span>
+        <strong>Mural Escolar</strong>
+        <small>Portal da comunidade escolar</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#inicio">Início</a>
+      <a href="#atalhos">Área escolar</a>
+      <a href="#comunicados">Comunicados</a>
     </nav>
+    <a class="admin-link" href="admin.html">
+      <i class="fa-solid fa-lock"></i> Direção
+    </a>
   </div>
 </header>
 
-<section class="hero" id="inicio">
-  <div class="hero-inner">
-    <h2>Informação que aproxima nossa comunidade escolar.</h2>
-    <p>Bem-vindo ao Mural Escolar Oficial. Consulte comunicados, avaliações, eventos, horários e informações importantes da escola em um só lugar.</p>
-  </div>
-</section>
-
-<main>
-  <section class="shortcuts">
-    <a class="shortcut" href="#avisos"><span class="symbol">♧</span><span><strong>Avisos</strong><small>Comunicados oficiais</small></span></a>
-    <a class="shortcut" href="#provas"><span class="symbol">▤</span><span><strong>Provas</strong><small>Avaliações e datas</small></span></a>
-    <a class="shortcut" href="#eventos"><span class="symbol">▦</span><span><strong>Eventos</strong><small>Atividades escolares</small></span></a>
-    <a class="shortcut" href="#horarios"><span class="symbol">◷</span><span><strong>Horários</strong><small>Organização escolar</small></span></a>
-    <a class="shortcut" href="#cardapio"><span class="symbol">♨</span><span><strong>Cardápio</strong><small>Alimentação escolar</small></span></a>
+<main class="container">
+  <section class="hero" id="inicio">
+    <div class="hero-card">
+      <div class="hero-content">
+        <span class="eyebrow"><i class="fa-solid fa-leaf"></i> EDUCAÇÃO • COMUNIDADE • FUTURO</span>
+        <h1>Uma escola conectada.<br>Um futuro em construção.</h1>
+        <p>Fique por dentro dos comunicados, informações e novidades da nossa comunidade escolar.</p>
+        <a class="hero-button" href="#comunicados">
+          Ver comunicados <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <div class="columns">
-    <section>
-      <div id="urgente"></div>
-      <div class="card" id="avisos">
-        <div class="section-title"><h2>▤ &nbsp; Últimos comunicados</h2><span class="meta" id="contador"></span></div>
-        <input id="busca" class="search" type="search" placeholder="Buscar um aviso por título ou assunto...">
-        <div class="filters" id="filtros">
-          <button class="active" data-cat="Todos">Todos</button>
-          <button data-cat="Direção">Direção</button>
-          <button data-cat="Provas">Provas</button>
-          <button data-cat="Eventos">Eventos</button>
-          <button data-cat="Horários">Horários</button>
-          <button data-cat="Cardápio">Cardápio</button>
-          <button data-cat="Urgente">Urgente</button>
+  <section id="atalhos">
+    <div class="section-head">
+      <div>
+        <h2>Explore o portal</h2>
+        <p>Informações importantes em um só lugar.</p>
+      </div>
+    </div>
+    <div class="quick-grid">
+      <a class="quick-card" href="#comunicados">
+        <span class="quick-icon"><i class="fa-solid fa-bullhorn"></i></span>
+        <strong>Comunicados</strong>
+        <small>Novidades da direção</small>
+      </a>
+      <a class="quick-card" href="#informacoes">
+        <span class="quick-icon"><i class="fa-solid fa-calendar-days"></i></span>
+        <strong>Calendário</strong>
+        <small>Organização escolar</small>
+      </a>
+      <a class="quick-card" href="#informacoes">
+        <span class="quick-icon"><i class="fa-solid fa-book-open"></i></span>
+        <strong>Vida escolar</strong>
+        <small>Estudos e atividades</small>
+      </a>
+      <a class="quick-card" href="#informacoes">
+        <span class="quick-icon"><i class="fa-solid fa-people-group"></i></span>
+        <strong>Comunidade</strong>
+        <small>Juntos pela educação</small>
+      </a>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <section class="panel" id="comunicados">
+      <div class="panel-title">
+        <div>
+          <h2>Últimos comunicados</h2>
+          <p class="status">Informações publicadas pela direção</p>
         </div>
-        <div id="lista"><div class="empty">Carregando os comunicados oficiais...</div></div>
+        <span class="live-dot" title="Atualização de avisos"></span>
+      </div>
+      <div id="avisos">
+        <div class="empty">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          <p>Carregando comunicados...</p>
+        </div>
       </div>
     </section>
 
-    <aside>
-      <div class="card">
-        <div class="section-title"><h2>⚑ &nbsp; Acesso da direção</h2></div>
-        <p>Área administrativa para publicar e gerenciar os comunicados escolares.</p>
-        <a class="side-link" href="./admin.html">Entrar no painel →</a>
+    <aside id="informacoes">
+      <div class="side-box">
+        <h3>Educação que transforma</h3>
+        <p>Um espaço para acompanhar informações e fortalecer a parceria entre escola, estudantes e famílias.</p>
+        <a href="#comunicados">Acompanhar novidades <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-
-      <div class="card">
-        <div class="section-title"><h2>▦ &nbsp; Calendário escolar</h2></div>
-        <div class="calendar-head">
-          <button id="mesAnterior" aria-label="Mês anterior">←</button>
-          <strong id="mesNome"></strong>
-          <button id="mesProximo" aria-label="Próximo mês">→</button>
+      <div class="panel">
+        <div class="panel-title"><h2>Sobre o portal</h2></div>
+        <div class="info-row">
+          <i class="fa-solid fa-bell"></i>
+          <div><strong>Avisos oficiais</strong><small>Acompanhe os comunicados disponibilizados neste mural.</small></div>
         </div>
-        <div class="calendar-grid" id="calendario"></div>
-        <p class="meta">Dias em verde possuem avisos com data informada.</p>
-      </div>
-
-      <div class="card quote">
-        “A educação abre caminhos para novas possibilidades.”
-        <p class="meta">— Mural Escolar Oficial</p>
+        <div class="info-row">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div><strong>Informação organizada</strong><small>Conteúdo publicado pela equipe autorizada.</small></div>
+        </div>
+        <div class="info-row">
+          <i class="fa-solid fa-heart"></i>
+          <div><strong>Comunidade escolar</strong><small>Um portal pensado para aproximar as pessoas.</small></div>
+        </div>
       </div>
     </aside>
   </div>
 </main>
 
 <footer>
-  <div class="footer-inner">
-    <div><strong>🎓 Mural Escolar Oficial</strong><p>Informações que aproximam nossa comunidade escolar.</p></div>
-    <div><strong>Navegação</strong><p><a style="color:white" href="#inicio">Início</a> · <a style="color:white" href="#avisos">Avisos</a> · <a style="color:white" href="#eventos">Eventos</a></p></div>
-    <p>Consulte os comunicados oficiais da escola.<br>© <span id="ano"></span> Mural Escolar Oficial</p>
+  <div class="container footer-inner">
+    <div class="brand">
+      <span class="brand-icon"><i class="fa-solid fa-school"></i></span>
+      <span><strong>Mural Escolar Oficial</strong><small>Portal da comunidade escolar</small></span>
+    </div>
+    <p>Este é um portal informativo. Consulte a escola para confirmar informações oficiais.</p>
+    <a href="admin.html"><i class="fa-solid fa-lock"></i> Acesso da direção</a>
   </div>
 </footer>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore, collection, getDocs, query, where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBe70DeHBd2OawVV4kVQgjQql3FZSc4xY",
+  apiKey: "AIzaSyBe70DeHBd2OawVV4kXQqVQgjQql3FZSc4xY",
   authDomain: "mural-escolar-oficial.firebaseapp.com",
   projectId: "mural-escolar-oficial",
   storageBucket: "mural-escolar-oficial.firebasestorage.app",
@@ -166,123 +285,64 @@ const firebaseConfig = {
   measurementId: "G-5V2L9FCN0M"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const lista = document.getElementById("lista");
-const busca = document.getElementById("busca");
-let avisos = [];
-let categoriaAtual = "Todos";
-let mesVisivel = new Date();
+const area = document.getElementById("avisos");
 
-document.getElementById("ano").textContent = new Date().getFullYear();
-
-function mostrarAvisos(){
-  const termo = busca.value.trim().toLocaleLowerCase("pt-BR");
-  const filtrados = avisos.filter(a => {
-    const texto = `${a.titulo||""} ${a.descricao||""} ${a.categoria||""}`.toLocaleLowerCase("pt-BR");
-    return (categoriaAtual === "Todos" || a.categoria === categoriaAtual) && texto.includes(termo);
-  });
-
-  document.getElementById("contador").textContent = `${filtrados.length} aviso(s)`;
-  lista.replaceChildren();
-
-  const urgente = filtrados.find(a => a.categoria === "Urgente");
-  const destaque = document.getElementById("urgente");
-  destaque.replaceChildren();
-
-  if(urgente){
-    const caixa = document.createElement("article");
-    caixa.className = "urgent";
-    const tag = document.createElement("span");
-    tag.className = "urgent-label";
-    tag.textContent = "⚠ AVISO IMPORTANTE";
-    const titulo = document.createElement("h2");
-    titulo.textContent = urgente.titulo || "Comunicado importante";
-    const descricao = document.createElement("p");
-    descricao.textContent = urgente.descricao || "";
-    caixa.append(tag,titulo,descricao);
-    destaque.append(caixa);
-  }
-
-  if(!filtrados.length){
-    const vazio = document.createElement("div");
-    vazio.className = "empty";
-    vazio.textContent = avisos.length ? "Nenhum comunicado corresponde à sua busca." : "Ainda não há comunicados publicados pela direção.";
-    lista.append(vazio);
-    return;
-  }
-
-  filtrados.forEach(a => {
-    const artigo = document.createElement("article");
-    artigo.className = "notice";
-    const tag = document.createElement("span");
-    tag.className = "tag" + (a.categoria === "Urgente" ? " urgent-tag" : "");
-    tag.textContent = a.categoria || "Comunicado";
-    const titulo = document.createElement("h3");
-    titulo.textContent = a.titulo || "Comunicado escolar";
-    const descricao = document.createElement("p");
-    descricao.textContent = a.descricao || "";
-    const data = document.createElement("div");
-    data.className = "meta";
-    data.textContent = "Data: " + (a.dataAviso || "Não informada");
-    artigo.append(tag,titulo,descricao,data);
-    lista.append(artigo);
-  });
-  desenharCalendario();
+function safe(value) {
+  const el = document.createElement("span");
+  el.textContent = value == null ? "" : String(value);
+  return el.innerHTML;
 }
 
-function desenharCalendario(){
-  const ano = mesVisivel.getFullYear();
-  const mes = mesVisivel.getMonth();
-  document.getElementById("mesNome").textContent =
-    mesVisivel.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
-  const cal = document.getElementById("calendario");
-  cal.replaceChildren();
-  ["D","S","T","Q","Q","S","S"].forEach(d=>{
-    const s=document.createElement("span");s.className="day-name";s.textContent=d;cal.append(s);
-  });
-  const inicio = new Date(ano,mes,1).getDay();
-  const total = new Date(ano,mes+1,0).getDate();
-  for(let i=0;i<inicio;i++){const s=document.createElement("span");cal.append(s);}
-  for(let dia=1;dia<=total;dia++){
-    const s=document.createElement("span");
-    s.textContent=dia;
-    const iso=`${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
-    if(avisos.some(a=>a.dataAviso===iso))s.classList.add("has-event");
-    const hoje=new Date();
-    if(hoje.getFullYear()===ano&&hoje.getMonth()===mes&&hoje.getDate()===dia)s.classList.add("today");
-    cal.append(s);
-  }
-}
-document.getElementById("mesAnterior").addEventListener("click",()=>{mesVisivel.setMonth(mesVisivel.getMonth()-1);desenharCalendario();});
-document.getElementById("mesProximo").addEventListener("click",()=>{mesVisivel.setMonth(mesVisivel.getMonth()+1);desenharCalendario();});
-document.getElementById("filtros").querySelectorAll("button").forEach(b=>{
-  b.addEventListener("click",()=>{
-    categoriaAtual=b.dataset.cat;
-    document.querySelectorAll("#filtros button").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");mostrarAvisos();
-  });
-});
-busca.addEventListener("input",mostrarAvisos);
+function mostrarAviso(dados) {
+  const artigo = document.createElement("article");
+  artigo.className = "notice";
 
-async function carregarAvisos(){
-  try{
-    const q=query(collection(db,"avisos"),where("publicado","==",true));
-    const resultado=await getDocs(q);
-    avisos=resultado.docs.map(d=>d.data());
-    avisos.sort((a,b)=>(b.dataAviso||"").localeCompare(a.dataAviso||""));
-    mostrarAvisos();
-    desenharCalendario();
-  }catch(error){
-    console.error("Erro ao carregar avisos:",error);
-    lista.replaceChildren();
-    const erro=document.createElement("div");
-    erro.className="empty";
-    erro.textContent="Não foi possível carregar os comunicados. Tente novamente mais tarde.";
-    lista.append(erro);
+  const categoria = safe(dados.categoria || "Geral");
+  const titulo = safe(dados.titulo || "Comunicado");
+  const descricao = safe(dados.descricao || "");
+
+  artigo.innerHTML = `
+    <span class="tag">${categoria}</span>
+    <h3>${titulo}</h3>
+    <p>${descricao}</p>
+    <div class="notice-meta"><i class="fa-regular fa-bell"></i> Comunicado da escola</div>
+  `;
+  area.appendChild(artigo);
+}
+
+async function carregarAvisos() {
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const consulta = query(
+      collection(db, "avisos"),
+      where("publicado", "==", true)
+    );
+    const resultado = await getDocs(consulta);
+
+    area.replaceChildren();
+
+    if (resultado.empty) {
+      area.innerHTML = `
+        <div class="empty">
+          <i class="fa-regular fa-calendar-check"></i>
+          <p>Ainda não há comunicados publicados pela direção.</p>
+        </div>`;
+      return;
+    }
+
+    const documentos = resultado.docs.map(doc => doc.data());
+    documentos.reverse().forEach(mostrarAviso);
+  } catch (erro) {
+    console.error("Erro ao carregar comunicados:", erro);
+    area.innerHTML = `
+      <div class="empty">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Não foi possível carregar os comunicados. Tente atualizar a página.</p>
+      </div>`;
   }
 }
-desenharCalendario();
+
 carregarAvisos();
 </script>
 </body>
