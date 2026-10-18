@@ -156,5 +156,17 @@ footer, .footer {
   nav {
     gap: 10px;
     flex-wrap: wrap;
-  }
+  #cardapio img,
+.info-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#cardapio img {
+  display: block;
+  width: 100%;
+  max-height: 650px;
+  margin: 16px auto;
+  border-radius: 14px;
 }
