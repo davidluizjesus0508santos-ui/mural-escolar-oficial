@@ -28,8 +28,8 @@
 
     body {
       margin: 0;
-      background: var(--fundo) !important;
-      color: var(--texto);
+      background: #f3f6f4 !important;
+      color: var(--texto) !important;
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
     }
@@ -39,8 +39,8 @@
     }
 
     .topbar {
-      background: var(--verde);
-      color: white;
+      background: var(--verde) !important;
+      color: white !important;
       padding: 18px 6%;
       display: flex;
       justify-content: space-between;
@@ -70,7 +70,6 @@
       background: linear-gradient(135deg, #123b2a, #286347);
       color: white;
       padding: 64px 7%;
-      text-align: left;
     }
 
     .hero-content {
@@ -78,7 +77,7 @@
       margin: auto;
     }
 
-    .hero .tag {
+    .tag {
       display: inline-block;
       background: #ffffff20;
       border: 1px solid #ffffff50;
@@ -133,7 +132,7 @@
     }
 
     .section-head p {
-      color: var(--cinza);
+      color: var(--cinza) !important;
       margin-top: 0;
     }
 
@@ -147,7 +146,7 @@
     .tile,
     .info-card,
     .notice-card {
-      background: white !important;
+      background: #ffffff !important;
       color: var(--texto) !important;
       border: 1px solid var(--borda);
       border-radius: 16px;
@@ -156,8 +155,8 @@
     }
 
     .tile {
-      text-decoration: none;
       display: block;
+      text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -166,7 +165,7 @@
       box-shadow: 0 8px 24px #173b2420;
     }
 
-    .tile .emoji {
+    .emoji {
       font-size: 2rem;
     }
 
@@ -192,7 +191,7 @@
 
     input,
     select {
-      background: white !important;
+      background: #ffffff !important;
       color: var(--texto) !important;
       border: 1px solid #cbd8ce;
       border-radius: 10px;
@@ -211,7 +210,7 @@
       gap: 16px;
     }
 
-    .notice-card .category {
+    .category {
       display: inline-block;
       background: var(--verde-claro);
       color: var(--verde);
@@ -235,32 +234,34 @@
       border: 1px solid var(--borda);
       border-radius: 12px;
       padding: 20px;
-      color: var(--cinza);
+      color: var(--cinza) !important;
     }
 
+    /* CARDÁPIO EM TAMANHO GRANDE */
     #cardapio {
       grid-column: 1 / -1;
     }
 
     .foto-cardapio {
       display: block;
-      width: 100%;
-      max-width: 900px;
-      height: auto;
+      width: 100% !important;
+      max-width: 900px !important;
+      height: auto !important;
       object-fit: contain;
-      margin: 16px auto 0;
+      margin: 20px auto 0;
       border-radius: 12px;
       border: 1px solid var(--borda);
     }
 
     footer {
-      background: var(--verde);
-      color: white;
+      background: var(--verde) !important;
+      color: white !important;
       padding: 26px 20px;
       text-align: center;
     }
 
     footer p {
+      color: white !important;
       margin: 4px;
     }
 
@@ -338,7 +339,7 @@
         <a class="tile" href="#horarios">
           <span class="emoji">⏰</span>
           <h3>Horários</h3>
-          <p>Consulte informações sobre horários.</p>
+          <p>Informações sobre horários.</p>
         </a>
       </div>
     </section>
@@ -350,7 +351,12 @@
       </div>
 
       <div class="filters">
-        <input id="busca" type="search" placeholder="Buscar comunicado..." aria-label="Buscar comunicado">
+        <input
+          id="busca"
+          type="search"
+          placeholder="Buscar comunicado..."
+          aria-label="Buscar comunicado"
+        >
 
         <select id="filtro" aria-label="Filtrar comunicados">
           <option value="todos">Todas as categorias</option>
@@ -377,7 +383,7 @@
       <div class="info-grid">
         <article class="info-card" id="eventos">
           <h3>📅 Eventos escolares</h3>
-          <p>Confira os comunicados da direção sobre eventos e atividades.</p>
+          <p>Confira os avisos da direção sobre eventos e atividades.</p>
         </article>
 
         <article class="info-card" id="provas">
@@ -388,9 +394,10 @@
         <article class="info-card" id="cardapio">
           <h3>🍎 Cardápio escolar</h3>
           <p>Confira o cardápio da escola abaixo.</p>
-          <a href="cardapio.jpg" target="_blank" rel="noopener">
+
+          <a href="./cardapio.jpg" target="_blank" rel="noopener">
             <img
-              src="cardapio.jpg"
+              src="./cardapio.jpg"
               alt="Cardápio escolar completo"
               class="foto-cardapio"
               loading="lazy"
@@ -441,10 +448,6 @@
 
     let avisos = [];
 
-    function textoSeguro(valor) {
-      return String(valor ?? "");
-    }
-
     function formatarData(valor) {
       if (!valor) return "";
 
@@ -466,45 +469,52 @@
       const categoria = filtro.value;
 
       const filtrados = avisos.filter((aviso) => {
-        const titulo = textoSeguro(aviso.titulo).toLowerCase();
-        const descricao = textoSeguro(aviso.descricao).toLowerCase();
-        const tipo = textoSeguro(aviso.categoria || "geral").toLowerCase();
-        const urgente = aviso.urgente === true;
+        const titulo = String(aviso.titulo || "").toLowerCase();
+        const descricao = String(aviso.descricao || "").toLowerCase();
+        const tipo = String(aviso.categoria || "geral").toLowerCase();
 
         const correspondeBusca =
           titulo.includes(termo) || descricao.includes(termo);
 
         const correspondeCategoria =
           categoria === "todos" ||
-          (categoria === "urgente" ? urgente : tipo === categoria);
+          (categoria === "urgente"
+            ? aviso.urgente === true
+            : tipo === categoria);
 
         return correspondeBusca && correspondeCategoria;
       });
 
+      lista.replaceChildren();
+
       if (filtrados.length === 0) {
-        lista.innerHTML = '<p class="empty">Nenhum comunicado encontrado.</p>';
+        const vazio = document.createElement("p");
+        vazio.className = "empty";
+        vazio.textContent = "Nenhum comunicado encontrado.";
+        lista.append(vazio);
         return;
       }
 
-      lista.replaceChildren();
-
       filtrados.forEach((aviso) => {
         const cartao = document.createElement("article");
-        cartao.className = "notice-card" + (aviso.urgente === true ? " urgent" : "");
+        cartao.className =
+          "notice-card" + (aviso.urgente === true ? " urgent" : "");
 
-        const categoriaEl = document.createElement("span");
-        categoriaEl.className = "category";
-        categoriaEl.textContent = textoSeguro(aviso.categoria || "Geral");
+        const etiqueta = document.createElement("span");
+        etiqueta.className = "category";
+        etiqueta.textContent = String(aviso.categoria || "Geral");
 
-        const tituloEl = document.createElement("h3");
-        tituloEl.textContent = textoSeguro(aviso.titulo || "Comunicado");
+        const titulo = document.createElement("h3");
+        titulo.textContent = String(aviso.titulo || "Comunicado");
 
-        const descricaoEl = document.createElement("p");
-        descricaoEl.textContent = textoSeguro(aviso.descricao);
+        const descricao = document.createElement("p");
+        descricao.textContent = String(aviso.descricao || "");
 
-        cartao.append(categoriaEl, tituloEl, descricaoEl);
+        cartao.append(etiqueta, titulo, descricao);
 
-        const data = formatarData(aviso.data || aviso.dataEvento || aviso.dataProva);
+        const data = formatarData(
+          aviso.data || aviso.dataEvento || aviso.dataProva
+        );
 
         if (data) {
           const dataEl = document.createElement("p");
@@ -532,16 +542,23 @@
 
         const resultado = await getDocs(q);
 
-        avisos = resultado.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data()
+        avisos = resultado.docs.map((documento) => ({
+          id: documento.id,
+          ...documento.data()
         }));
 
         renderizar();
       } catch (erro) {
         console.error("Erro ao carregar comunicados:", erro);
-        lista.innerHTML =
-          '<p class="error">Não foi possível carregar os comunicados. Tente novamente mais tarde.</p>';
+
+        lista.replaceChildren();
+
+        const mensagem = document.createElement("p");
+        mensagem.className = "error";
+        mensagem.textContent =
+          "Não foi possível carregar os comunicados. Tente novamente mais tarde.";
+
+        lista.append(mensagem);
       }
     }
 
