@@ -1,6 +1,13 @@
-
 <img
-  src="cardapio.jpg"
+  src="./cardapio.jpg"
   alt="Cardápio semanal da merenda escolar"
-  style="max-width:100%; border-radius:12px;"
+  style="
+    display: block;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 12px;
+    object-fit: contain;
+  "
 >
