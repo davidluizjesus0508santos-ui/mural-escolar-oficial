@@ -4,54 +4,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123b2a">
+  <meta name="theme-color" content="#17365e">
   <title>Mural Escolar Oficial</title>
   <link rel="stylesheet" href="style.css">
 
   <style>
     :root {
-      --verde: #123b2a;
-      --verde-claro: #e7f1ea;
-      --fundo: #f3f6f4;
-      --texto: #203027;
-      --cinza: #647168;
-      --borda: #dce5de;
+      --verde: #16734a;
+      --verde-claro: #e8f6ee;
+      --rosa: #e83e8c;
+      --laranja: #f28c28;
+      --azul: #2878c8;
+      --marinho: #17365e;
+      --fundo: #f5f7fb;
+      --texto: #243044;
+      --cinza: #657184;
+      --borda: #e0e6ef;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      background: #f3f6f4 !important;
-      color: var(--texto) !important;
+      background: var(--fundo);
+      color: var(--texto);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
     }
 
-    a {
-      color: var(--verde);
-    }
+    a { color: var(--verde); }
 
     .topbar {
-      background: var(--verde) !important;
-      color: white !important;
-      padding: 18px 6%;
+      background: var(--marinho);
+      color: white;
+      padding: 16px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
       flex-wrap: wrap;
+      border-bottom: 5px solid var(--rosa);
     }
 
     .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 1.2rem;
       font-weight: 800;
+    }
+
+    .brand img {
+      width: auto;
+      height: 64px;
+      max-width: 100px;
+      object-fit: contain;
+      background: white;
+      border-radius: 10px;
+      padding: 4px;
     }
 
     .topbar nav {
@@ -66,16 +77,16 @@
       font-weight: bold;
     }
 
+    .topbar nav a:hover { color: #ffd7e8; }
+
     .hero {
-      background: linear-gradient(135deg, #123b2a, #286347);
+      background: linear-gradient(120deg, var(--marinho), #245b75 58%, var(--verde));
+      border-bottom: 6px solid var(--laranja);
       color: white;
       padding: 64px 7%;
     }
 
-    .hero-content {
-      max-width: 1000px;
-      margin: auto;
-    }
+    .hero-content { max-width: 1000px; margin: auto; }
 
     .tag {
       display: inline-block;
@@ -87,14 +98,14 @@
     }
 
     .hero h1 {
-      color: white !important;
+      color: white;
       font-size: clamp(2rem, 5vw, 3.5rem);
       line-height: 1.1;
       margin: 18px 0;
     }
 
     .hero p {
-      color: #edf5ef !important;
+      color: #edf5ef;
       max-width: 650px;
       font-size: 1.1rem;
     }
@@ -104,7 +115,7 @@
       margin-top: 14px;
       padding: 12px 20px;
       background: white;
-      color: var(--verde);
+      color: var(--marinho);
       border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
@@ -121,33 +132,27 @@
       scroll-margin-top: 20px;
     }
 
-    .section-head {
-      margin-bottom: 20px;
-    }
+    .section-head { margin-bottom: 20px; }
 
     .section-head h2 {
-      color: var(--verde) !important;
+      color: var(--marinho);
       font-size: clamp(1.5rem, 3vw, 2rem);
       margin-bottom: 4px;
+      border-left: 5px solid var(--rosa);
+      padding-left: 12px;
     }
 
-    .section-head p {
-      color: var(--cinza) !important;
-      margin-top: 0;
-    }
+    .section-head p { color: var(--cinza); margin-top: 0; }
 
-    .tiles,
-    .info-grid {
+    .tiles, .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
     }
 
-    .tile,
-    .info-card,
-    .notice-card {
-      background: #ffffff !important;
-      color: var(--texto) !important;
+    .tile, .info-card, .notice-card {
+      background: white;
+      color: var(--texto);
       border: 1px solid var(--borda);
       border-radius: 16px;
       padding: 22px;
@@ -165,22 +170,19 @@
       box-shadow: 0 8px 24px #173b2420;
     }
 
-    .emoji {
-      font-size: 2rem;
-    }
+    .tile:nth-child(4n+1) { border-top: 4px solid var(--verde); }
+    .tile:nth-child(4n+2) { border-top: 4px solid var(--rosa); }
+    .tile:nth-child(4n+3) { border-top: 4px solid var(--laranja); }
+    .tile:nth-child(4n) { border-top: 4px solid var(--azul); }
 
-    .tile h3,
-    .info-card h3,
-    .notice-card h3 {
-      color: var(--verde) !important;
+    .emoji { font-size: 2rem; }
+
+    .tile h3, .info-card h3, .notice-card h3 {
+      color: var(--marinho);
       margin-top: 8px;
     }
 
-    .tile p,
-    .info-card p,
-    .notice-card p {
-      color: var(--cinza) !important;
-    }
+    .tile p, .info-card p, .notice-card p { color: var(--cinza); }
 
     .filters {
       display: flex;
@@ -189,20 +191,16 @@
       margin-bottom: 18px;
     }
 
-    input,
-    select {
-      background: #ffffff !important;
-      color: var(--texto) !important;
+    input, select {
+      background: white;
+      color: var(--texto);
       border: 1px solid #cbd8ce;
       border-radius: 10px;
       padding: 12px;
       font: inherit;
     }
 
-    #busca {
-      flex: 1;
-      min-width: 200px;
-    }
+    #busca { flex: 1; min-width: 200px; }
 
     .notice-grid {
       display: grid;
@@ -212,41 +210,32 @@
 
     .category {
       display: inline-block;
-      background: var(--verde-claro);
-      color: var(--verde);
+      background: #eaf1ff;
+      color: var(--marinho);
       border-radius: 30px;
       padding: 4px 10px;
       font-size: 0.8rem;
       font-weight: bold;
     }
 
-    .notice-card .date {
-      font-size: 0.85rem;
-    }
+    .notice-card .date { font-size: 0.85rem; }
+    .urgent { border: 2px solid #c7473d; }
 
-    .urgent {
-      border: 2px solid #c7473d;
-    }
-
-    .empty,
-    .error {
-      background: white !important;
+    .empty, .error {
+      background: white;
       border: 1px solid var(--borda);
       border-radius: 12px;
       padding: 20px;
-      color: var(--cinza) !important;
+      color: var(--cinza);
     }
 
-    /* CARDÁPIO EM TAMANHO GRANDE */
-    #cardapio {
-      grid-column: 1 / -1;
-    }
+    #cardapio { grid-column: 1 / -1; }
 
     .foto-cardapio {
       display: block;
-      width: 100% !important;
-      max-width: 900px !important;
-      height: auto !important;
+      width: 100%;
+      max-width: 900px;
+      height: auto;
       object-fit: contain;
       margin: 20px auto 0;
       border-radius: 12px;
@@ -254,36 +243,30 @@
     }
 
     footer {
-      background: var(--verde) !important;
-      color: white !important;
+      background: var(--marinho);
+      border-top: 5px solid var(--laranja);
+      color: white;
       padding: 26px 20px;
       text-align: center;
     }
 
-    footer p {
-      color: white !important;
-      margin: 4px;
-    }
+    footer p { color: white; margin: 4px; }
 
     @media (max-width: 600px) {
-      .hero {
-        padding: 42px 22px;
-      }
-
-      main {
-        padding: 24px 14px 40px;
-      }
-
-      .topbar {
-        padding: 16px 20px;
-      }
+      .hero { padding: 42px 22px; }
+      main { padding: 24px 14px 40px; }
+      .topbar { padding: 16px 20px; }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">🏫 Mural Escolar Oficial</div>
+    <div class="brand">
+      <img src="./logo-escola.png" alt="Logo da escola">
+      <span>Mural Escolar Oficial</span>
+    </div>
+
     <nav>
       <a href="#inicio">Início</a>
       <a href="#comunicados">Comunicados</a>
