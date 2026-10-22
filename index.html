@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#17365e">
+  <meta name="description" content="Mural Escolar Oficial da escola.">
   <title>Mural Escolar Oficial</title>
-  <link rel="stylesheet" href="style.css">
 
   <style>
     :root {
       --verde: #16734a;
-      --verde-claro: #e8f6ee;
       --rosa: #e83e8c;
       --laranja: #f28c28;
       --azul: #2878c8;
@@ -23,6 +22,7 @@
     }
 
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -33,35 +33,34 @@
       line-height: 1.6;
     }
 
-    a { color: var(--verde); }
+    a { color: var(--azul); }
 
     .topbar {
       background: var(--marinho);
       color: white;
-      padding: 16px 6%;
+      padding: 14px 5%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 18px;
       flex-wrap: wrap;
-      border-bottom: 5px solid var(--rosa);
+      border-bottom: 5px solid var(--verde);
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       font-weight: 800;
     }
 
-    .brand img {
-      width: auto;
+    .logo-escola {
+      width: 64px;
       height: 64px;
-      max-width: 100px;
       object-fit: contain;
       background: white;
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 4px;
     }
 
@@ -77,37 +76,45 @@
       font-weight: bold;
     }
 
-    .topbar nav a:hover { color: #ffd7e8; }
-
-    .hero {
-      background: linear-gradient(120deg, var(--marinho), #245b75 58%, var(--verde));
-      border-bottom: 6px solid var(--laranja);
-      color: white;
-      padding: 64px 7%;
+    .topbar nav a:hover {
+      color: #ffd4e8;
+      text-decoration: underline;
     }
 
-    .hero-content { max-width: 1000px; margin: auto; }
+    .hero {
+      background:
+        radial-gradient(circle at 90% 15%, #e83e8c55, transparent 30%),
+        linear-gradient(130deg, var(--marinho), #245b88);
+      color: white;
+      padding: 64px 7%;
+      border-bottom: 6px solid var(--laranja);
+    }
+
+    .hero-content {
+      max-width: 1050px;
+      margin: auto;
+    }
 
     .tag {
       display: inline-block;
       background: #ffffff20;
-      border: 1px solid #ffffff50;
+      border: 1px solid #ffffff60;
       padding: 6px 12px;
       border-radius: 30px;
-      font-size: 0.85rem;
+      font-size: .85rem;
     }
 
     .hero h1 {
       color: white;
       font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1.1;
+      line-height: 1.12;
       margin: 18px 0;
     }
 
     .hero p {
-      color: #edf5ef;
-      max-width: 650px;
-      font-size: 1.1rem;
+      color: #edf4ff;
+      max-width: 680px;
+      font-size: 1.08rem;
     }
 
     .button {
@@ -120,6 +127,8 @@
       text-decoration: none;
       font-weight: bold;
     }
+
+    .button:hover { background: #e8f6ee; }
 
     main {
       max-width: 1200px;
@@ -142,11 +151,11 @@
       padding-left: 12px;
     }
 
-    .section-head p { color: var(--cinza); margin-top: 0; }
+    .section-head p { color: var(--cinza); }
 
     .tiles, .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 18px;
     }
 
@@ -162,18 +171,19 @@
     .tile {
       display: block;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 4px solid var(--azul);
+      transition: transform .2s, box-shadow .2s;
     }
+
+    .tile:nth-child(2) { border-top-color: var(--rosa); }
+    .tile:nth-child(3) { border-top-color: var(--laranja); }
+    .tile:nth-child(4) { border-top-color: var(--verde); }
+    .tile:nth-child(5) { border-top-color: var(--marinho); }
 
     .tile:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 24px #173b2420;
     }
-
-    .tile:nth-child(4n+1) { border-top: 4px solid var(--verde); }
-    .tile:nth-child(4n+2) { border-top: 4px solid var(--rosa); }
-    .tile:nth-child(4n+3) { border-top: 4px solid var(--laranja); }
-    .tile:nth-child(4n) { border-top: 4px solid var(--azul); }
 
     .emoji { font-size: 2rem; }
 
@@ -182,7 +192,9 @@
       margin-top: 8px;
     }
 
-    .tile p, .info-card p, .notice-card p { color: var(--cinza); }
+    .tile p, .info-card p, .notice-card p {
+      color: var(--cinza);
+    }
 
     .filters {
       display: flex;
@@ -194,32 +206,41 @@
     input, select {
       background: white;
       color: var(--texto);
-      border: 1px solid #cbd8ce;
+      border: 1px solid #cbd5e1;
       border-radius: 10px;
       padding: 12px;
       font: inherit;
     }
 
-    #busca { flex: 1; min-width: 200px; }
+    #busca {
+      flex: 1;
+      min-width: 200px;
+    }
 
     .notice-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 16px;
     }
 
     .category {
       display: inline-block;
-      background: #eaf1ff;
-      color: var(--marinho);
+      background: #e8f6ee;
+      color: var(--verde);
       border-radius: 30px;
       padding: 4px 10px;
-      font-size: 0.8rem;
+      font-size: .8rem;
       font-weight: bold;
     }
 
-    .notice-card .date { font-size: 0.85rem; }
-    .urgent { border: 2px solid #c7473d; }
+    .notice-card .date {
+      font-size: .85rem;
+    }
+
+    .notice-card.urgent {
+      border: 2px solid #c7473d;
+      border-top: 5px solid #c7473d;
+    }
 
     .empty, .error {
       background: white;
@@ -236,7 +257,6 @@
       width: 100%;
       max-width: 900px;
       height: auto;
-      object-fit: contain;
       margin: 20px auto 0;
       border-radius: 12px;
       border: 1px solid var(--borda);
@@ -244,18 +264,19 @@
 
     footer {
       background: var(--marinho);
-      border-top: 5px solid var(--laranja);
       color: white;
-      padding: 26px 20px;
+      padding: 28px 20px;
       text-align: center;
+      border-top: 5px solid var(--laranja);
     }
 
-    footer p { color: white; margin: 4px; }
+    footer p { margin: 4px; }
 
     @media (max-width: 600px) {
       .hero { padding: 42px 22px; }
       main { padding: 24px 14px 40px; }
-      .topbar { padding: 16px 20px; }
+      .topbar { padding: 14px 18px; }
+      .logo-escola { width: 54px; height: 54px; }
     }
   </style>
 </head>
@@ -263,7 +284,12 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <img src="./logo-escola.png" alt="Logo da escola">
+      <img
+        class="logo-escola"
+        src="./Painel%20Escolar%20Oficial%20Colorido.png"
+        alt="Logo da escola"
+        onerror="this.style.display='none'"
+      >
       <span>Mural Escolar Oficial</span>
     </div>
 
@@ -376,15 +402,9 @@
 
         <article class="info-card" id="cardapio">
           <h3>🍎 Cardápio escolar</h3>
-          <p>Confira o cardápio da escola abaixo.</p>
-
+          <p>Confira o cardápio divulgado oficialmente pela escola.</p>
           <a href="./cardapio.jpg" target="_blank" rel="noopener">
-            <img
-              src="./cardapio.jpg"
-              alt="Cardápio escolar completo"
-              class="foto-cardapio"
-              loading="lazy"
-            >
+            Abrir cardápio
           </a>
         </article>
 
@@ -399,18 +419,21 @@
   <footer>
     <p><strong>Mural Escolar Oficial</strong></p>
     <p>Informação e organização para toda a comunidade escolar.</p>
-    <p>Consulte sempre os comunicados oficiais da escola.</p>
+    <p>Consulte sempre os comunicados oficiais da direção.</p>
   </footer>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
     import {
       getFirestore,
       collection,
       getDocs,
       query,
       where
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBe70DeHBd2OawVV4kXQqVQgjQql3FZSc4xY",
@@ -448,12 +471,12 @@
     }
 
     function renderizar() {
-      const termo = busca.value.trim().toLowerCase();
+      const termo = busca.value.trim().toLocaleLowerCase("pt-BR");
       const categoria = filtro.value;
 
       const filtrados = avisos.filter((aviso) => {
-        const titulo = String(aviso.titulo || "").toLowerCase();
-        const descricao = String(aviso.descricao || "").toLowerCase();
+        const titulo = String(aviso.titulo || "").toLocaleLowerCase("pt-BR");
+        const descricao = String(aviso.descricao || "").toLocaleLowerCase("pt-BR");
         const tipo = String(aviso.categoria || "geral").toLowerCase();
 
         const correspondeBusca =
@@ -508,7 +531,7 @@
 
         if (aviso.urgente === true) {
           const alerta = document.createElement("strong");
-          alerta.textContent = "⚠️ Aviso urgente";
+          alerta.textContent = " ⚠️ Aviso urgente";
           cartao.append(alerta);
         }
 
