@@ -2,240 +2,457 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Administração | Mural Escolar Oficial</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
-header{background:#102e64;color:white;padding:22px;text-align:center}
-main{max-width:750px;margin:30px auto;padding:20px}
-.card{background:white;padding:24px;border-radius:16px;box-shadow:0 5px 20px #0001;margin-bottom:20px}
-h2{margin-top:0}
-label{display:block;margin-top:15px;font-weight:bold}
-input,select,textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #cbd5e1;border-radius:8px;font:inherit}
-textarea{min-height:120px;resize:vertical}
-button{border:0;border-radius:8px;padding:12px 18px;background:#2459a9;color:white;font-weight:bold;cursor:pointer;margin-top:16px}
-button:hover{background:#183f80}
-#status{white-space:pre-wrap;margin-top:15px}
-.aviso{border:1px solid #dbe5f2;padding:15px;border-radius:10px;margin-top:12px}
-.pequeno{color:#64748b;font-size:14px}
-</style>
-</head>
-<body>
-<header>
-<h1>Mural Escolar Oficial</h1>
-<p>Painel administrativo da direção</p>
-</header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADM | Mural Escolar Oficial</title>
 
-<main>
-<section class="card" id="login">
-<h2>Entrar na administração</h2>
-<form id="loginForm">
-<label for="email">E-mail da direção</label>
-<input id="email" type="email" autocomplete="username" required>
-
-<label for="senha">Senha</label>
-<input id="senha" type="password" autocomplete="current-password" required>
-
-<button type="submit">Entrar</button>
-</form>
-<p id="loginStatus" role="status"></p>
-</section>
-
-<section class="card" id="painel" hidden>
-<h2>Publicar aviso</h2>
-<p class="pequeno">Os avisos publicados poderão aparecer no mural dos alunos.</p>
-
-<form id="avisoForm">
-<label for="titulo">Título do aviso</label>
-<input id="titulo" maxlength="120" required>
-
-<label for="categoria">Categoria</label>
-<select id="categoria" required>
-<option value="Direção">Direção</option>
-<option value="Provas">Provas</option>
-<option value="Eventos">Eventos</option>
-<option value="Horários">Horários</option>
-<option value="Cardápio">Cardápio</option>
-<option value="Urgente">Urgente</option>
-</select>
-
-<label for="descricao">Descrição</label>
-<textarea id="descricao" maxlength="5000" required></textarea>
-
-<label for="dataAviso">Data do aviso</label>
-<input id="dataAviso" type="date" required>
-
-<button type="submit">Publicar aviso</button>
-</form>
-
-<p id="status" role="status"></p>
-
-<hr>
-<h2>Avisos publicados</h2>
-<div id="listaAvisos">Carregando avisos...</div>
-
-<button id="sair" type="button">Sair da administração</button>
-</section>
-</main>
-
-<script type="module">
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-
-import {
-  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
-} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
-
-import {
-  getFirestore, collection, addDoc, query, where, orderBy, getDocs,
-  serverTimestamp, deleteDoc, doc
-} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBe70DeHBd2OawVV4kXQvgQl3FZSc4xY",
-  authDomain: "mural-escolar-oficial.firebaseapp.com",
-  projectId: "mural-escolar-oficial",
-  storageBucket: "mural-escolar-oficial.firebasestorage.app",
-  messagingSenderId: "706068384737",
-  appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
-  measurementId: "G-5V2L9FCN0M"
-};
-
-const ADMIN_UID = "w3s8trwqH0W4ZJRyCSF9HTGRVG43";
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-const login = document.getElementById("login");
-const painel = document.getElementById("painel");
-const loginStatus = document.getElementById("loginStatus");
-const status = document.getElementById("status");
-const lista = document.getElementById("listaAvisos");
-
-document.getElementById("loginForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  loginStatus.textContent = "Entrando...";
-  try {
-    await signInWithEmailAndPassword(
-      auth,
-      document.getElementById("email").value.trim(),
-      document.getElementById("senha").value
-    );
-  } catch (error) {
-    loginStatus.textContent = "Não foi possível entrar. Confira o e-mail e a senha.";
-  }
-});
-
-onAuthStateChanged(auth, async user => {
-  if (!user) {
-    login.hidden = false;
-    painel.hidden = true;
-    return;
-  }
-
-  if (user.uid !== ADMIN_UID) {
-    await signOut(auth);
-    loginStatus.textContent = "Esta conta não tem autorização para administrar o mural.";
-    return;
-  }
-
-  login.hidden = true;
-  painel.hidden = false;
-  await carregarAvisos();
-});
-
-document.getElementById("avisoForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const user = auth.currentUser;
-
-  if (!user || user.uid !== ADMIN_UID) {
-    status.textContent = "Acesso não autorizado.";
-    return;
-  }
-
-  status.textContent = "Publicando aviso...";
-
-  try {
-    await addDoc(collection(db, "avisos"), {
-      titulo: document.getElementById("titulo").value.trim(),
-      categoria: document.getElementById("categoria").value,
-      descricao: document.getElementById("descricao").value.trim(),
-      dataAviso: document.getElementById("dataAviso").value,
-      publicado: true,
-      createdAt: serverTimestamp(),
-      autorUid: user.uid
-    });
-
-    status.textContent = "Aviso publicado com sucesso!";
-    e.target.reset();
-    await carregarAvisos();
-  } catch (error) {
-    console.error(error);
-    status.textContent = "Erro ao publicar. Confira as regras do Firestore.";
-  }
-});
-
-async function carregarAvisos() {
-  lista.textContent = "Carregando...";
-  try {
-    const q = query(
-      collection(db, "avisos"),
-      where("publicado", "==", true),
-      orderBy("dataAviso", "desc")
-    );
-    const resultado = await getDocs(q);
-    lista.replaceChildren();
-
-    if (resultado.empty) {
-      lista.textContent = "Nenhum aviso publicado ainda.";
-      return;
+  <style>
+    :root {
+      --fundo: #07111f;
+      --painel: #101e30;
+      --azul: #2563eb;
+      --branco: #f8fafc;
+      --cinza: #a8b4c7;
+      --borda: #263850;
+      --verde: #16a34a;
+      --vermelho: #dc2626;
     }
 
-    resultado.forEach(item => {
-      const a = item.data();
-      const caixa = document.createElement("article");
-      caixa.className = "aviso";
+    * {
+      box-sizing: border-box;
+    }
 
-      const titulo = document.createElement("h3");
-      titulo.textContent = a.titulo || "Aviso";
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--fundo);
+      color: var(--branco);
+    }
 
-      const categoria = document.createElement("p");
-      categoria.textContent = "Categoria: " + (a.categoria || "Geral");
+    header {
+      padding: 22px;
+      background: #0c1a2c;
+      border-bottom: 1px solid var(--borda);
+      text-align: center;
+    }
 
-      const descricao = document.createElement("p");
-      descricao.textContent = a.descricao || "";
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 25px;
+    }
 
-      const data = document.createElement("p");
-      data.className = "pequeno";
-      data.textContent = "Data: " + (a.dataAviso || "Não informada");
+    header p {
+      margin: 0;
+      color: var(--cinza);
+    }
 
-      const apagar = document.createElement("button");
-      apagar.type = "button";
-      apagar.textContent = "Excluir aviso";
-      apagar.addEventListener("click", async () => {
-        if (!confirm("Deseja excluir este aviso?")) return;
-        try {
-          await deleteDoc(doc(db, "avisos", item.id));
-          await carregarAvisos();
-        } catch (error) {
-          status.textContent = "Não foi possível excluir o aviso.";
+    main {
+      width: min(950px, 92%);
+      margin: 30px auto;
+    }
+
+    .painel {
+      background: var(--painel);
+      padding: 24px;
+      margin-bottom: 22px;
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 21px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      color: #dbeafe;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+      background: #07111f;
+      color: white;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    button, .botao {
+      display: inline-block;
+      padding: 12px 17px;
+      margin-top: 15px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--azul);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button:hover, .botao:hover {
+      filter: brightness(1.15);
+    }
+
+    .secundario {
+      background: #334155;
+    }
+
+    .aprovar {
+      background: var(--verde);
+    }
+
+    .rejeitar {
+      background: var(--vermelho);
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    .aviso {
+      padding: 13px;
+      margin-top: 15px;
+      border-radius: 8px;
+      background: #172a43;
+      color: #dbeafe;
+      overflow-wrap: anywhere;
+    }
+
+    .item {
+      padding: 17px 0;
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .item:last-child {
+      border-bottom: 0;
+    }
+
+    .item p {
+      color: var(--cinza);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .status {
+      color: #93c5fd;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: var(--cinza);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Mural Escolar Oficial</h1>
+    <p>Painel administrativo da escola</p>
+  </header>
+
+  <main>
+    <section class="painel" id="login">
+      <h2>Entrar no ADM</h2>
+      <p>Entre com a conta autorizada pela administração.</p>
+
+      <form id="form-login">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="username"
+          placeholder="Seu e-mail" required>
+
+        <label for="senha">Senha</label>
+        <input id="senha" type="password"
+          autocomplete="current-password"
+          placeholder="Sua senha" required>
+
+        <button type="submit">Entrar</button>
+      </form>
+
+      <div id="mensagem-login" class="aviso oculto" role="status"></div>
+    </section>
+
+    <section id="painel-admin" class="oculto">
+      <div class="painel">
+        <h2>Área administrativa</h2>
+        <p id="usuario-logado"></p>
+        <button id="sair" class="secundario">Sair da conta</button>
+      </div>
+
+      <div class="painel">
+        <h2>Publicar aviso</h2>
+
+        <form id="form-aviso">
+          <label for="titulo">Título do aviso</label>
+          <input id="titulo" maxlength="120"
+            placeholder="Ex.: Reunião de responsáveis" required>
+
+          <label for="categoria">Categoria</label>
+          <select id="categoria" required>
+            <option value="Comunicado">Comunicado</option>
+            <option value="Evento">Evento</option>
+            <option value="Calendário">Calendário</option>
+            <option value="Cardápio">Cardápio</option>
+            <option value="Urgente">Urgente</option>
+          </select>
+
+          <label for="conteudo">Texto do aviso</label>
+          <textarea id="conteudo" maxlength="5000"
+            placeholder="Escreva o comunicado..." required></textarea>
+
+          <label for="data-evento">Data do evento (opcional)</label>
+          <input id="data-evento" type="date">
+
+          <button type="submit">Publicar aviso</button>
+        </form>
+
+        <div id="mensagem-aviso" class="aviso oculto" role="status"></div>
+      </div>
+
+      <div class="painel">
+        <h2>Avisos publicados</h2>
+        <div id="lista-avisos">
+          <p>Carregando avisos...</p>
+        </div>
+      </div>
+
+      <div class="painel">
+        <h2>Caixa de sugestões</h2>
+        <p>As sugestões serão exibidas aqui quando a coleção e as regras do Firebase estiverem configuradas.</p>
+        <div id="lista-sugestoes">
+          <p>Nenhuma sugestão carregada.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Mural Escolar Oficial · Painel restrito a administradores autorizados
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      where,
+      orderBy,
+      serverTimestamp,
+      doc,
+      updateDoc,
+      deleteDoc
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Use aqui a mesma configuração do Firebase do index.html.
+    const firebaseConfig = {
+      apiKey: "COLE_SUA_API_KEY",
+      authDomain: "COLE_SEU_AUTH_DOMAIN",
+      projectId: "COLE_SEU_PROJECT_ID",
+      storageBucket: "COLE_SEU_STORAGE_BUCKET",
+      messagingSenderId: "COLE_SEU_MESSAGING_SENDER_ID",
+      appId: "COLE_SEU_APP_ID"
+    };
+
+    const login = document.getElementById("login");
+    const painel = document.getElementById("painel-admin");
+    const mensagemLogin = document.getElementById("mensagem-login");
+    const mensagemAviso = document.getElementById("mensagem-aviso");
+    const listaAvisos = document.getElementById("lista-avisos");
+
+    const mostrarMensagem = (elemento, texto) => {
+      elemento.textContent = texto;
+      elemento.classList.remove("oculto");
+    };
+
+    let auth;
+    let db;
+    let inicializado = false;
+
+    try {
+      if (
+        firebaseConfig.apiKey === "COLE_SUA_API_KEY" ||
+        firebaseConfig.projectId === "COLE_SEU_PROJECT_ID"
+      ) {
+        throw new Error(
+          "Falta configurar o Firebase com os dados do index.html."
+        );
+      }
+
+      const app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+      inicializado = true;
+
+      onAuthStateChanged(auth, async (usuario) => {
+        if (!usuario) {
+          login.classList.remove("oculto");
+          painel.classList.add("oculto");
+          return;
         }
+
+        login.classList.add("oculto");
+        painel.classList.remove("oculto");
+        document.getElementById("usuario-logado").textContent =
+          "Conta conectada: " + usuario.email;
+
+        await carregarAvisos();
       });
+    } catch (erro) {
+      mostrarMensagem(mensagemLogin, erro.message);
+    }
 
-      caixa.append(titulo, categoria, descricao, data, apagar);
-      lista.append(caixa);
-    });
-  } catch (error) {
-    console.error(error);
-    lista.textContent = "Não foi possível carregar os avisos. Verifique as regras e o índice do Firestore.";
-  }
-}
+    document.getElementById("form-login").addEventListener(
+      "submit", async (evento) => {
+        evento.preventDefault();
 
-document.getElementById("sair").addEventListener("click", async () => {
-  await signOut(auth);
-});
-</script>
+        if (!inicializado) {
+          mostrarMensagem(
+            mensagemLogin,
+            "Configure o Firebase no código antes de entrar."
+          );
+          return;
+        }
+
+        try {
+          await signInWithEmailAndPassword(
+            auth,
+            document.getElementById("email").value.trim(),
+            document.getElementById("senha").value
+          );
+          mensagemLogin.classList.add("oculto");
+        } catch (erro) {
+          mostrarMensagem(
+            mensagemLogin,
+            "Não foi possível entrar. Confira a conta e a configuração do Firebase."
+          );
+        }
+      }
+    );
+
+    document.getElementById("sair").addEventListener(
+      "click", async () => {
+        if (auth) await signOut(auth);
+      }
+    );
+
+    document.getElementById("form-aviso").addEventListener(
+      "submit", async (evento) => {
+        evento.preventDefault();
+
+        if (!auth?.currentUser || !db) {
+          mostrarMensagem(mensagemAviso, "Entre em uma conta autorizada.");
+          return;
+        }
+
+        try {
+          await addDoc(collection(db, "avisos"), {
+            titulo: document.getElementById("titulo").value.trim(),
+            categoria: document.getElementById("categoria").value,
+            conteudo: document.getElementById("conteudo").value.trim(),
+            dataEvento: document.getElementById("data-evento").value,
+            publicado: true,
+            autor: auth.currentUser.email,
+            criadoEm: serverTimestamp()
+          });
+
+          document.getElementById("form-aviso").reset();
+          mostrarMensagem(mensagemAviso, "Aviso publicado.");
+          await carregarAvisos();
+        } catch (erro) {
+          mostrarMensagem(
+            mensagemAviso,
+            "Publicação bloqueada. Verifique as regras do Firestore e a autorização da conta."
+          );
+        }
+      }
+    );
+
+    async function carregarAvisos() {
+      if (!db) return;
+
+      listaAvisos.textContent = "Carregando avisos...";
+
+      try {
+        const consulta = query(
+          collection(db, "avisos"),
+          orderBy("criadoEm", "desc")
+        );
+
+        const resultado = await getDocs(consulta);
+        listaAvisos.replaceChildren();
+
+        if (resultado.empty) {
+          listaAvisos.textContent = "Nenhum aviso cadastrado.";
+          return;
+        }
+
+        resultado.forEach((registro) => {
+          const aviso = registro.data();
+          const item = document.createElement("article");
+          item.className = "item";
+
+          const titulo = document.createElement("h3");
+          titulo.textContent = aviso.titulo || "Sem título";
+
+          const categoria = document.createElement("span");
+          categoria.className = "status";
+          categoria.textContent =
+            (aviso.categoria || "Comunicado") +
+            (aviso.publicado ? " · Publicado" : " · Rascunho");
+
+          const conteudo = document.createElement("p");
+          conteudo.textContent = aviso.conteudo || "";
+
+          const botao = document.createElement("button");
+          botao.className = "rejeitar";
+          botao.textContent = "Excluir aviso";
+
+          botao.addEventListener("click", async () => {
+            if (!confirm("Deseja excluir este aviso?")) return;
+
+            try {
+              await deleteDoc(doc(db, "avisos", registro.id));
+              await carregarAvisos();
+            } catch (erro) {
+              alert("Não foi possível excluir. Verifique as permissões.");
+            }
+          });
+
+          item.append(titulo, categoria, conteudo, botao);
+          listaAvisos.appendChild(item);
+        });
+      } catch (erro) {
+        listaAvisos.textContent =
+          "Não foi possível carregar. Confira as regras do Firestore.";
+      }
+    }
+  </script>
 </body>
 </html>
