@@ -21,7 +21,9 @@
       --borda: #e0e7e2;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -36,7 +38,9 @@
       line-height: 1.6;
     }
 
-    a { color: var(--verde); }
+    a {
+      color: var(--verde);
+    }
 
     .topbar {
       position: sticky;
@@ -81,7 +85,9 @@
       font-weight: bold;
     }
 
-    nav a:hover { color: var(--rosa); }
+    nav a:hover {
+      color: var(--rosa);
+    }
 
     .hero {
       padding: 65px 6%;
@@ -158,7 +164,9 @@
       scroll-margin-top: 100px;
     }
 
-    .section-head { margin-bottom: 20px; }
+    .section-head {
+      margin-bottom: 20px;
+    }
 
     .section-head h2 {
       color: var(--marinho);
@@ -166,7 +174,9 @@
       margin: 0;
     }
 
-    .section-head p { color: var(--cinza); }
+    .section-head p {
+      color: var(--cinza);
+    }
 
     .accent-line {
       width: 75px;
@@ -182,13 +192,16 @@
       );
     }
 
-    .tiles, .cards {
+    .tiles,
+    .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
 
-    .tile, .card, .notice-card {
+    .tile,
+    .card,
+    .notice-card {
       background: white;
       border: 1px solid var(--borda);
       border-radius: 17px;
@@ -204,20 +217,36 @@
       transition: transform .2s;
     }
 
-    .tile:nth-child(4n+2) { border-top-color: var(--rosa); }
-    .tile:nth-child(4n+3) { border-top-color: var(--laranja); }
-    .tile:nth-child(4n) { border-top-color: var(--azul); }
+    .tile:nth-child(4n+2) {
+      border-top-color: var(--rosa);
+    }
 
-    .tile:hover { transform: translateY(-3px); }
+    .tile:nth-child(4n+3) {
+      border-top-color: var(--laranja);
+    }
 
-    .emoji { font-size: 1.9rem; }
+    .tile:nth-child(4n) {
+      border-top-color: var(--azul);
+    }
 
-    .tile h3, .card h3, .notice-card h3 {
+    .tile:hover {
+      transform: translateY(-3px);
+    }
+
+    .emoji {
+      font-size: 1.9rem;
+    }
+
+    .tile h3,
+    .card h3,
+    .notice-card h3 {
       color: var(--marinho);
       margin: 8px 0;
     }
 
-    .tile p, .card p, .notice-card p {
+    .tile p,
+    .card p,
+    .notice-card p {
       color: var(--cinza);
     }
 
@@ -228,7 +257,9 @@
       margin-bottom: 18px;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #cbd8ce;
@@ -265,9 +296,12 @@
       font-weight: bold;
     }
 
-    .urgent { border: 2px solid #c7473d; }
+    .urgent {
+      border: 2px solid #c7473d;
+    }
 
-    .empty, .error {
+    .empty,
+    .error {
       background: white;
       border: 1px solid var(--borda);
       border-radius: 12px;
@@ -276,10 +310,11 @@
       grid-column: 1 / -1;
     }
 
+    /* CARDÁPIO AMPLIADO */
     .menu-image {
       display: block;
       width: 100%;
-      max-width: 900px;
+      max-width: 1200px;
       height: auto;
       margin: 18px auto;
       border: 1px solid var(--borda);
@@ -301,13 +336,26 @@
       border-top: 5px solid var(--rosa);
     }
 
-    footer p { margin: 4px; }
+    footer p {
+      margin: 4px;
+    }
 
     @media (max-width: 760px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo { height: 230px; }
-      .topbar { position: static; }
-      nav { gap: 10px; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo {
+        height: 230px;
+      }
+
+      .topbar {
+        position: static;
+      }
+
+      nav {
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -539,7 +587,6 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
     const lista = document.getElementById("lista-avisos");
     const busca = document.getElementById("busca");
     const filtro = document.getElementById("filtro");
