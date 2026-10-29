@@ -7,28 +7,23 @@
   <title>ADM | Mural Escolar Oficial</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #07111f;
-      color: #ffffff;
+      color: #fff;
     }
 
     header {
-      background: #0d1b30;
       padding: 24px 16px;
       text-align: center;
+      background: #0d1b30;
       border-bottom: 2px solid #2563eb;
     }
 
-    header h1 {
-      margin: 0 0 8px;
-      color: #60a5fa;
-    }
+    header h1 { color: #60a5fa; }
 
     main {
       width: min(900px, 92%);
@@ -36,22 +31,20 @@
     }
 
     .painel {
-      background: #101e32;
       padding: 22px;
       margin-bottom: 22px;
-      border-radius: 12px;
+      background: #101e32;
       border: 1px solid #263b59;
+      border-radius: 12px;
     }
 
-    h2 {
-      margin-top: 0;
-      color: #93c5fd;
-    }
+    h2 { color: #93c5fd; }
 
     input, textarea, select, button {
+      display: block;
       width: 100%;
       padding: 12px;
-      margin: 8px 0;
+      margin: 10px 0;
       border-radius: 7px;
       font-size: 16px;
     }
@@ -62,52 +55,33 @@
       border: 1px solid #405675;
     }
 
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
+    textarea { min-height: 120px; }
 
     button {
-      border: 0;
-      background: #2563eb;
       color: white;
+      background: #2563eb;
+      border: 0;
       font-weight: bold;
       cursor: pointer;
     }
 
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    button.secundario {
-      background: #334155;
-    }
-
-    button.excluir {
-      background: #b91c1c;
-    }
+    button:hover { background: #1d4ed8; }
+    .secundario { background: #334155; }
+    .excluir { background: #b91c1c; }
+    .oculto { display: none; }
 
     .aviso {
-      background: #0a1628;
       padding: 16px;
       margin: 12px 0;
-      border-radius: 8px;
+      background: #0a1628;
       border-left: 4px solid #3b82f6;
+      border-radius: 8px;
       overflow-wrap: anywhere;
     }
 
-    .aviso small {
-      color: #a9bad1;
-    }
-
-    #mensagem {
+    #mensagem, #mensagemADM {
       white-space: pre-wrap;
       overflow-wrap: anywhere;
-      padding: 10px 0;
-    }
-
-    .oculto {
-      display: none;
     }
 
     footer {
@@ -129,26 +103,16 @@
       <h2>Entrar no ADM</h2>
 
       <form id="formLogin">
-        <input
-          id="email"
-          type="email"
-          placeholder="E-mail do administrador"
-          autocomplete="username"
-          required
-        >
+        <input id="email" type="email"
+          placeholder="E-mail do administrador" required>
 
-        <input
-          id="senha"
-          type="password"
-          placeholder="Senha"
-          autocomplete="current-password"
-          required
-        >
+        <input id="senha" type="password"
+          placeholder="Senha" required>
 
         <button type="submit">Entrar</button>
       </form>
 
-      <div id="mensagem" role="status"></div>
+      <p id="mensagem" role="status"></p>
     </section>
 
     <section id="areaADM" class="oculto">
@@ -156,21 +120,86 @@
         <h2>Publicar aviso</h2>
 
         <form id="formAviso">
-          <input
-            id="titulo"
-            type="text"
-            placeholder="Título do aviso"
-            maxlength="120"
-            required
-          >
+          <input id="titulo" type="text"
+            placeholder="Título do aviso" maxlength="120" required>
 
           <select id="categoria" required>
             <option value="">Escolha a categoria</option>
-            <option value="Comunicado">Comunicado</option>
-            <option value="Evento">Evento</option>
-            <option value="Cardápio">Cardápio</option>
-            <option value="Importante">Importante</option>
+            <option>Comunicado</option>
+            <option>Evento</option>
+            <option>Cardápio</option>
+            <option>Importante</option>
           </select>
 
-          <textarea
-            id="conte
+          <textarea id="conteudo"
+            placeholder="Escreva o aviso..." maxlength="5000"
+            required></textarea>
+
+          <button type="submit">Publicar aviso</button>
+        </form>
+
+        <button id="sair" class="secundario" type="button">
+          Sair do ADM
+        </button>
+
+        <p id="mensagemADM" role="status"></p>
+      </div>
+
+      <div class="painel">
+        <h2>Avisos publicados</h2>
+        <div id="listaAvisos">Carregando avisos...</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Mural Escolar Oficial</footer>
+
+  <script type="module">
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from
+      "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      deleteDoc,
+      doc,
+      serverTimestamp
+    } from
+      "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBe70DeHBd2OawVVk4xVQgjQql3FZSc4xY",
+      authDomain: "mural-escolar-oficial.firebaseapp.com",
+      projectId: "mural-escolar-oficial",
+      storageBucket: "mural-escolar-oficial.firebasestorage.app",
+      messagingSenderId: "706068384737",
+      appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
+      measurementId: "G-5V2L9FCN0M"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const areaLogin = document.getElementById("areaLogin");
+    const areaADM = document.getElementById("areaADM");
+    const mensagem = document.getElementById("mensagem");
+    const mensagemADM = document.getElementById("mensagemADM");
+    const listaAvisos = document.getElementById("listaAvisos");
+
+    function explicarErro(erro) {
+      const erros = {
+        "auth/api-key-not-valid":
+          "A chave de API foi rejeitada. Confira a chave nas configurações do Firebase.",
+        "auth/invalid-credential":
+          "E-mail ou senha incor
