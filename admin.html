@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ADM | Mural Escolar Oficial</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       padding: 24px;
@@ -14,65 +16,132 @@
       background: #0b1220;
       color: #fff;
     }
-    main { max-width: 700px; margin: 0 auto; }
+
+    main {
+      max-width: 750px;
+      margin: auto;
+    }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid #344054;
+    }
+
+    h1 { color: #fff; }
+    h2 { color: #93c5fd; }
+
     section {
       background: #172033;
       padding: 22px;
-      margin: 18px 0;
+      margin: 20px 0;
       border-radius: 14px;
     }
-    h1, h2 { color: #fff; }
+
     input, textarea, button {
-      display: block;
       width: 100%;
-      margin: 12px 0;
-      padding: 12px;
+      padding: 13px;
+      margin: 9px 0;
       border-radius: 8px;
       font-size: 16px;
     }
+
     input, textarea {
+      border: 1px solid #cbd5e1;
       background: #fff;
-      color: #111;
-      border: 1px solid #ccc;
+      color: #111827;
     }
+
     button {
       border: 0;
-      background: #2463eb;
+      background: #2563eb;
       color: white;
       font-weight: bold;
       cursor: pointer;
     }
-    .secondary { background: #374151; }
+
+    button:hover { background: #1d4ed8; }
+
+    .secondary { background: #475569; }
+
     .notice {
-      padding: 14px;
+      padding: 15px;
       margin: 12px 0;
-      border: 1px solid #46536b;
-      border-radius: 8px;
+      background: #0b1220;
+      border: 1px solid #344054;
+      border-radius: 9px;
       overflow-wrap: anywhere;
     }
-    #status { overflow-wrap: anywhere; }
+
+    .notice h3 { color: #93c5fd; }
+
+    #status {
+      padding: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    [hidden] { display: none !important; }
   </style>
 </head>
+
 <body>
 <main>
-  <h1>Painel Administrativo</h1>
-  <p>Mural Escolar Oficial</p>
+  <header>
+    <h1>Mural Escolar Oficial</h1>
+    <p>Painel Administrativo</p>
+  </header>
+
+  <p id="status" role="status">Iniciando...</p>
 
   <section id="loginSection">
-    <h2>Entrar</h2>
-    <input id="email" type="email" placeholder="E-mail do administrador">
-    <input id="password" type="password" placeholder="Senha" autocomplete="current-password">
-    <button id="loginBtn">Entrar no painel</button>
-  </section>
+    <h2>Entrar no ADM</h2>
 
-  <p id="status" role="status">Configure o Firebase para começar.</p>
+    <form id="loginForm">
+      <input
+        id="email"
+        type="email"
+        placeholder="E-mail do administrador"
+        autocomplete="username"
+        required
+      >
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Senha"
+        autocomplete="current-password"
+        required
+      >
+
+      <button type="submit">Entrar</button>
+    </form>
+  </section>
 
   <section id="adminSection" hidden>
     <h2>Publicar aviso</h2>
-    <input id="title" placeholder="Título do aviso">
-    <textarea id="content" rows="5" placeholder="Escreva o aviso"></textarea>
-    <button id="publishBtn">Publicar aviso</button>
-    <button id="logoutBtn" class="secondary">Sair</button>
+
+    <form id="noticeForm">
+      <input
+        id="title"
+        type="text"
+        placeholder="Título do aviso"
+        maxlength="120"
+        required
+      >
+
+      <textarea
+        id="content"
+        rows="5"
+        placeholder="Escreva o aviso para a escola"
+        maxlength="5000"
+        required
+      ></textarea>
+
+      <button type="submit">Publicar aviso</button>
+    </form>
+
+    <button id="logoutBtn" class="secondary" type="button">
+      Sair da conta
+    </button>
   </section>
 
   <section id="noticesSection" hidden>
@@ -84,133 +153,213 @@
 <script type="module">
   import { initializeApp } from
     "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import {
-    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import {
-    getFirestore, collection, addDoc, getDocs,
-    query, orderBy, serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  // ID informado pelo usuário. Não substitui a configuração completa.
-  const meuId = "w3s8trwqH0W4ZJRyCSF9HTGRVG43";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  // Preencha com os valores de Configuração do SDK no Firebase Console.
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    serverTimestamp
+  } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Configuração do projeto mural-escolar-oficial
   const firebaseConfig = {
-    apiKey: "COLE_SUA_API_KEY",
-    authDomain: "COLE_SEU_AUTH_DOMAIN",
-    projectId: "COLE_SEU_PROJECT_ID",
-    storageBucket: "COLE_SEU_STORAGE_BUCKET",
-    messagingSenderId: "COLE_SEU_MESSAGING_SENDER_ID",
-    appId: "COLE_SEU_APP_ID"
+    apiKey: "AIzaSyBe70DeHBd2OawVV4kXQqVQgjQql3FZSc4xY",
+    authDomain: "mural-escolar-oficial.firebaseapp.com",
+    projectId: "mural-escolar-oficial",
+    storageBucket: "mural-escolar-oficial.firebasestorage.app",
+    messagingSenderId: "706068384737",
+    appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
+    measurementId: "G-5V2L9FCN0M"
   };
 
   const status = document.getElementById("status");
   const loginSection = document.getElementById("loginSection");
   const adminSection = document.getElementById("adminSection");
   const noticesSection = document.getElementById("noticesSection");
+  const noticesContainer = document.getElementById("notices");
 
-  const configIncomplete = Object.values(firebaseConfig).some(
-    value => value.startsWith("COLE_") || !value
-  );
+  let db;
+  let auth;
+  let currentUser = null;
 
-  if (configIncomplete) {
-    status.textContent =
-      "Configure o Firebase no código antes de entrar. ID informado: " + meuId;
-  } else {
+  function showError(message) {
+    status.textContent = message;
+  }
+
+  function errorMessage(error) {
+    const messages = {
+      "auth/invalid-credential":
+        "E-mail ou senha incorretos. Confira a conta no Firebase Authentication.",
+      "auth/invalid-email":
+        "O formato do e-mail é inválido.",
+      "auth/too-many-requests":
+        "Muitas tentativas. Aguarde antes de tentar novamente.",
+      "auth/network-request-failed":
+        "Falha de conexão. Verifique a internet.",
+      "permission-denied":
+        "Acesso negado pelas regras de segurança do Firestore.",
+      "permission-denied":
+        "Acesso negado pelas regras de segurança do Firestore."
+    };
+
+    return messages[error.code] ||
+      "Erro: " + (error.code || error.message);
+  }
+
+  function setLoggedIn(user) {
+    currentUser = user;
+    loginSection.hidden = !!user;
+    adminSection.hidden = !user;
+    noticesSection.hidden = !user;
+  }
+
+  async function loadNotices() {
+    noticesContainer.replaceChildren();
+
+    try {
+      const q = query(
+        collection(db, "avisos"),
+        orderBy("createdAt", "desc")
+      );
+
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        noticesContainer.textContent =
+          "Ainda não existem avisos publicados.";
+        return;
+      }
+
+      snapshot.forEach((item) => {
+        const data = item.data();
+        const card = document.createElement("article");
+        card.className = "notice";
+
+        const heading = document.createElement("h3");
+        heading.textContent = data.title || "Aviso";
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = data.content || "";
+
+        const date = document.createElement("small");
+        date.textContent = data.createdAt?.toDate
+          ? data.createdAt.toDate().toLocaleString("pt-BR")
+          : "Data de publicação indisponível";
+
+        card.append(heading, paragraph, date);
+        noticesContainer.appendChild(card);
+      });
+    } catch (error) {
+      showError(errorMessage(error));
+    }
+  }
+
+  async function startApp() {
     try {
       const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const db = getFirestore(app);
+      auth = getAuth(app);
+      db = getFirestore(app);
 
-      document.getElementById("loginBtn").onclick = async () => {
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
+      document.getElementById("loginForm").addEventListener(
+        "submit",
+        async (event) => {
+          event.preventDefault();
 
-        try {
-          await signInWithEmailAndPassword(auth, email, password);
-          status.textContent = "Login realizado.";
-        } catch (error) {
-          status.textContent = "Erro no login: " + error.code;
+          const email =
+            document.getElementById("email").value.trim();
+          const password =
+            document.getElementById("password").value;
+
+          try {
+            showError("Verificando login...");
+            await signInWithEmailAndPassword(auth, email, password);
+            showError("Login realizado.");
+          } catch (error) {
+            showError(errorMessage(error));
+          }
         }
-      };
+      );
 
-      document.getElementById("logoutBtn").onclick = () => signOut(auth);
+      document.getElementById("noticeForm").addEventListener(
+        "submit",
+        async (event) => {
+          event.preventDefault();
 
-      onAuthStateChanged(auth, async user => {
-        loginSection.hidden = !!user;
-        adminSection.hidden = !user;
-        noticesSection.hidden = !user;
+          if (!currentUser) {
+            showError("Entre na conta autorizada antes de publicar.");
+            return;
+          }
+
+          const title =
+            document.getElementById("title").value.trim();
+          const content =
+            document.getElementById("content").value.trim();
+
+          if (!title || !content) {
+            showError("Preencha o título e o conteúdo.");
+            return;
+          }
+
+          try {
+            showError("Publicando aviso...");
+
+            await addDoc(collection(db, "avisos"), {
+              title,
+              content,
+              author: currentUser.email,
+              createdAt: serverTimestamp()
+            });
+
+            document.getElementById("noticeForm").reset();
+            showError("Aviso publicado com sucesso.");
+            await loadNotices();
+          } catch (error) {
+            showError(errorMessage(error));
+          }
+        }
+      );
+
+      document.getElementById("logoutBtn").addEventListener(
+        "click",
+        async () => {
+          try {
+            await signOut(auth);
+            showError("Você saiu do painel.");
+          } catch (error) {
+            showError(errorMessage(error));
+          }
+        }
+      );
+
+      onAuthStateChanged(auth, async (user) => {
+        setLoggedIn(user);
 
         if (user) {
-          status.textContent = "Conectado: " + user.email;
+          showError("Conectado: " + (user.email || "administrador"));
           await loadNotices();
         } else {
-          status.textContent = "Entre com sua conta autorizada.";
+          showError("Entre com sua conta para acessar o painel.");
         }
       });
 
-      document.getElementById("publishBtn").onclick = async () => {
-        const title = document.getElementById("title").value.trim();
-        const content = document.getElementById("content").value.trim();
-
-        if (!title || !content) {
-          status.textContent = "Preencha o título e o conteúdo.";
-          return;
-        }
-
-        try {
-          await addDoc(collection(db, "avisos"), {
-            title,
-            content,
-            createdAt: serverTimestamp(),
-            author: auth.currentUser.email
-          });
-          document.getElementById("title").value = "";
-          document.getElementById("content").value = "";
-          status.textContent = "Aviso publicado.";
-          await loadNotices();
-        } catch (error) {
-          status.textContent = "Erro ao publicar: " + error.code;
-        }
-      };
-
-      async function loadNotices() {
-        const container = document.getElementById("notices");
-        container.replaceChildren();
-
-        try {
-          const q = query(
-            collection(db, "avisos"),
-            orderBy("createdAt", "desc")
-          );
-          const snapshot = await getDocs(q);
-
-          snapshot.forEach(docSnap => {
-            const data = docSnap.data();
-            const card = document.createElement("article");
-            card.className = "notice";
-
-            const heading = document.createElement("h3");
-            heading.textContent = data.title || "Aviso";
-            const paragraph = document.createElement("p");
-            paragraph.textContent = data.content || "";
-
-            card.append(heading, paragraph);
-            container.appendChild(card);
-          });
-
-          if (snapshot.empty) {
-            container.textContent = "Nenhum aviso publicado ainda.";
-          }
-        } catch (error) {
-          status.textContent = "Erro ao carregar avisos: " + error.code;
-        }
-      }
     } catch (error) {
-      status.textContent = "Erro ao iniciar Firebase: " + error.message;
+      showError("Não foi possível iniciar o Firebase: " + error.message);
     }
   }
+
+  startApp();
 </script>
 </body>
 </html>
