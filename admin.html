@@ -21,151 +21,558 @@
       --shadow: 0 12px 32px rgba(16, 39, 71, .07);
       --radius: 17px;
     }
+
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
-      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
     }
+
     button, input, textarea, select { font: inherit; }
     button { cursor: pointer; }
     .hidden { display: none !important; }
 
     .login-screen {
-      min-height: 100vh; display: grid; place-items: center; padding: 24px;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
       background: radial-gradient(circle at 15% 15%, #244b79 0, transparent 34%),
                   linear-gradient(135deg, #0b1d34, #17395f);
     }
+
     .login-card {
-      width: min(440px, 100%); padding: 38px; background: #fff;
-      border: 1px solid rgba(255,255,255,.3); border-radius: 24px;
+      width: min(440px, 100%);
+      padding: 38px;
+      background: #fff;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 24px;
       box-shadow: 0 25px 70px rgba(0,0,0,.22);
     }
+
     .brand-mark {
-      width: 52px; height: 52px; display: grid; place-items: center;
-      border-radius: 15px; background: var(--blue-soft); color: var(--blue);
-      font-size: 25px; font-weight: 900; margin-bottom: 22px;
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 22px;
     }
-    .login-card h1 { margin: 0 0 8px; font-size: 25px; letter-spacing: -.6px; }
-    .login-card > p { margin: 0 0 25px; color: var(--muted); line-height: 1.55; }
+
+    .login-card h1 {
+      margin: 0 0 8px;
+      font-size: 25px;
+      letter-spacing: -.6px;
+    }
+
+    .login-card > p {
+      margin: 0 0 25px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
     .field { margin-bottom: 17px; }
-    label { display: block; margin-bottom: 8px; color: #344761; font-size: 13px; font-weight: 750; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #344761;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
     input, textarea, select {
-      width: 100%; border: 1px solid #dce5ef; border-radius: 11px;
-      background: #fff; color: var(--text); padding: 13px 14px; outline: none;
+      width: 100%;
+      border: 1px solid #dce5ef;
+      border-radius: 11px;
+      background: #fff;
+      color: var(--text);
+      padding: 13px 14px;
+      outline: none;
       transition: border-color .18s, box-shadow .18s;
     }
+
     input:focus, textarea:focus, select:focus {
-      border-color: #6a9bd5; box-shadow: 0 0 0 4px rgba(40,104,178,.11);
+      border-color: #6a9bd5;
+      box-shadow: 0 0 0 4px rgba(40,104,178,.11);
     }
-    textarea { min-height: 145px; resize: vertical; line-height: 1.55; }
+
+    textarea {
+      min-height: 145px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
     .btn {
-      border: 0; border-radius: 11px; padding: 12px 17px; font-weight: 750;
+      border: 0;
+      border-radius: 11px;
+      padding: 12px 17px;
+      font-weight: 750;
       transition: transform .18s, filter .18s, box-shadow .18s;
     }
-    .btn:hover { filter: brightness(1.04); transform: translateY(-1px); }
-    .btn:disabled { opacity: .6; cursor: wait; transform: none; }
-    .btn-primary { color: #fff; background: var(--blue); box-shadow: 0 7px 16px rgba(40,104,178,.2); }
-    .btn-muted { color: #40536c; background: #edf2f7; }
-    .btn-danger { color: #fff; background: var(--red); }
+
+    .btn:hover {
+      filter: brightness(1.04);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .6;
+      cursor: wait;
+      transform: none;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--blue);
+      box-shadow: 0 7px 16px rgba(40,104,178,.2);
+    }
+
+    .btn-muted {
+      color: #40536c;
+      background: #edf2f7;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background: var(--red);
+    }
+
     .btn-full { width: 100%; }
-    .message { margin: 14px 0 0; padding: 11px 13px; border-radius: 10px; font-size: 13px; line-height: 1.5; }
+
+    .message {
+      margin: 14px 0 0;
+      padding: 11px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     .message:empty { display: none; }
-    .message.error { color: #8d2632; background: #fff0f1; border: 1px solid #f5cdd1; }
-    .message.success { color: #126343; background: #eaf8f1; border: 1px solid #c8ead9; }
-    .message.info { color: #285783; background: #edf5ff; border: 1px solid #d6e7fb; }
+
+    .message.error {
+      color: #8d2632;
+      background: #fff0f1;
+      border: 1px solid #f5cdd1;
+    }
+
+    .message.success {
+      color: #126343;
+      background: #eaf8f1;
+      border: 1px solid #c8ead9;
+    }
+
+    .message.info {
+      color: #285783;
+      background: #edf5ff;
+      border: 1px solid #d6e7fb;
+    }
 
     .app { min-height: 100vh; }
-    .sidebar {
-      position: fixed; inset: 0 auto 0 0; z-index: 20; width: 258px;
-      display: flex; flex-direction: column; padding: 25px 17px;
-      color: #eaf1fb; background: var(--navy);
-    }
-    .side-brand { display: flex; align-items: center; gap: 12px; padding: 0 9px 29px; }
-    .side-logo {
-      flex: 0 0 42px; height: 42px; display: grid; place-items: center;
-      border-radius: 13px; color: #fff; background: #2d6db6; font-weight: 900; font-size: 20px;
-    }
-    .side-brand strong { display: block; font-size: 14px; letter-spacing: .2px; }
-    .side-brand small { display: block; margin-top: 3px; color: #9eb3ce; font-size: 11px; }
-    .nav-label { padding: 8px 12px; color: #829ab8; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
-    .nav-list { display: grid; gap: 6px; }
-    .nav-link {
-      width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 13px;
-      border: 0; border-radius: 11px; color: #bdcce0; background: transparent;
-      text-align: left; font-size: 13px; font-weight: 650;
-    }
-    .nav-link .ico { width: 20px; text-align: center; font-size: 17px; }
-    .nav-link:hover, .nav-link.active { color: #fff; background: #1d416b; }
-    .nav-link.active { box-shadow: inset 3px 0 #70a8e8; }
-    .side-bottom { margin-top: auto; padding: 16px 10px 0; border-top: 1px solid #29415f; }
-    .side-bottom small { color: #91a6c0; line-height: 1.5; }
 
-    .main-area { min-height: 100vh; margin-left: 258px; }
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 20;
+      width: 258px;
+      display: flex;
+      flex-direction: column;
+      padding: 25px 17px;
+      color: #eaf1fb;
+      background: var(--navy);
+    }
+
+    .side-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 9px 29px;
+    }
+
+    .side-logo {
+      flex: 0 0 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: #fff;
+      background: #2d6db6;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .side-brand strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+
+    .side-brand small {
+      display: block;
+      margin-top: 3px;
+      color: #9eb3ce;
+      font-size: 11px;
+    }
+
+    .nav-label {
+      padding: 8px 12px;
+      color: #829ab8;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .nav-list { display: grid; gap: 6px; }
+
+    .nav-link {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 13px;
+      border: 0;
+      border-radius: 11px;
+      color: #bdcce0;
+      background: transparent;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .nav-link .ico {
+      width: 20px;
+      text-align: center;
+      font-size: 17px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #fff;
+      background: #1d416b;
+    }
+
+    .nav-link.active {
+      box-shadow: inset 3px 0 #70a8e8;
+    }
+
+    .side-bottom {
+      margin-top: auto;
+      padding: 16px 10px 0;
+      border-top: 1px solid #29415f;
+    }
+
+    .side-bottom small {
+      color: #91a6c0;
+      line-height: 1.5;
+    }
+
+    .main-area {
+      min-height: 100vh;
+      margin-left: 258px;
+    }
+
     .topbar {
-      height: 76px; display: flex; align-items: center; justify-content: space-between;
-      gap: 18px; padding: 0 36px; background: #fff; border-bottom: 1px solid var(--line);
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 36px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
     }
-    .topbar-title { font-size: 13px; color: var(--muted); }
-    .topbar-title strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 2px; }
-    .user-chip { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+    .topbar-title {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .topbar-title strong {
+      display: block;
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
     .avatar {
-      width: 37px; height: 37px; display: grid; place-items: center; flex: 0 0 auto;
-      border-radius: 50%; color: #245b94; background: #e8f1fb; font-weight: 850;
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: #245b94;
+      background: #e8f1fb;
+      font-weight: 850;
     }
+
     .user-meta { min-width: 0; }
-    .user-meta strong { display: block; font-size: 12px; }
-    .user-meta small { display: block; max-width: 190px; overflow: hidden; text-overflow: ellipsis; color: var(--muted); font-size: 11px; }
-    .content { width: min(1250px, 100%); margin: 0 auto; padding: 34px 36px 55px; }
-    .page-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
-    .eyebrow { margin: 0 0 7px; color: var(--blue); font-size: 11px; font-weight: 850; letter-spacing: 1.1px; text-transform: uppercase; }
-    .page-heading h1 { margin: 0; font-size: clamp(24px, 3vw, 31px); letter-spacing: -.9px; }
-    .page-heading p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
-    .stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 17px; margin-bottom: 25px; }
+
+    .user-meta strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .user-meta small {
+      display: block;
+      max-width: 190px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .content {
+      width: min(1250px, 100%);
+      margin: 0 auto;
+      padding: 34px 36px 55px;
+    }
+
+    .page-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .page-heading h1 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 31px);
+      letter-spacing: -.9px;
+    }
+
+    .page-heading p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 17px;
+      margin-bottom: 25px;
+    }
+
     .stat-card {
-      display: flex; align-items: center; gap: 15px; padding: 20px;
-      border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
       box-shadow: var(--shadow);
     }
-    .stat-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 13px; font-size: 20px; background: #eaf2fc; }
+
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      font-size: 20px;
+      background: #eaf2fc;
+    }
+
     .stat-card:nth-child(2) .stat-icon { background: #eaf7f0; }
     .stat-card:nth-child(3) .stat-icon { background: #fff4e7; }
-    .stat-card small { display: block; color: var(--muted); font-size: 11px; font-weight: 650; }
-    .stat-card strong { display: block; margin-top: 3px; font-size: 25px; letter-spacing: -.8px; }
+
+    .stat-card small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 25px;
+      letter-spacing: -.8px;
+    }
+
     .panel {
-      padding: 24px; border: 1px solid var(--line); border-radius: var(--radius);
-      background: var(--surface); box-shadow: var(--shadow); margin-bottom: 20px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
     }
-    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 19px; }
-    .panel-head h2 { margin: 0; font-size: 17px; letter-spacing: -.3px; }
-    .panel-head p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 19px;
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: -.3px;
+    }
+
+    .panel-head p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 16px;
+    }
+
     .span-2 { grid-column: 1 / -1; }
-    .check-row { display: flex; align-items: center; gap: 9px; margin: 3px 0 16px; color: #42556e; font-size: 13px; }
-    .check-row input { width: 16px; height: 16px; accent-color: var(--blue); }
-    .form-actions { display: flex; gap: 9px; flex-wrap: wrap; }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 3px 0 16px;
+      color: #42556e;
+      font-size: 13px;
+    }
+
+    .check-row input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--blue);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
     .notice-list { display: grid; gap: 12px; }
+
     .notice {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;
-      padding: 17px; border: 1px solid var(--line); border-radius: 13px; background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
     }
-    .notice h3 { margin: 0 0 7px; font-size: 14px; }
-    .notice p { margin: 0; color: #64748b; font-size: 12px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
-    .notice-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-bottom: 8px; }
-    .pill { display: inline-flex; padding: 4px 8px; border-radius: 20px; color: #285b91; background: #edf4fc; font-size: 10px; font-weight: 800; }
-    .pill.draft { color: #98601b; background: #fff4df; }
-    .notice-actions { display: flex; gap: 7px; flex: 0 0 auto; }
-    .notice-actions .btn { padding: 8px 11px; font-size: 11px; }
-    .empty-state { padding: 28px 16px; border: 1px dashed #cfdae7; border-radius: 12px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    .notice h3 {
+      margin: 0 0 7px;
+      font-size: 14px;
+    }
+
+    .notice p {
+      margin: 0;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .notice-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 20px;
+      color: #285b91;
+      background: #edf4fc;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .pill.draft {
+      color: #98601b;
+      background: #fff4df;
+    }
+
+    .notice-actions {
+      display: flex;
+      gap: 7px;
+      flex: 0 0 auto;
+    }
+
+    .notice-actions .btn {
+      padding: 8px 11px;
+      font-size: 11px;
+    }
+
+    .empty-state {
+      padding: 28px 16px;
+      border: 1px dashed #cfdae7;
+      border-radius: 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
     .placeholder {
-      padding: 32px; text-align: center; border: 1px dashed #cbd8e7;
-      border-radius: 15px; background: #f9fbfe;
+      padding: 32px;
+      text-align: center;
+      border: 1px dashed #cbd8e7;
+      border-radius: 15px;
+      background: #f9fbfe;
     }
+
     .placeholder .big-icon { font-size: 34px; }
+
     .placeholder h3 { margin: 9px 0 5px; }
-    .placeholder p { max-width: 480px; margin: auto; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .mobile-menu { display: none; border: 0; background: transparent; color: var(--navy); font-size: 22px; }
-    .footer-note { padding: 8px 0 0; color: #94a3b8; font-size: 11px; text-align: center; }
+
+    .placeholder p {
+      max-width: 480px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .footer-note {
+      padding: 8px 0 0;
+      color: #94a3b8;
+      font-size: 11px;
+      text-align: center;
+    }
 
     @media (max-width: 900px) {
       .sidebar { width: 220px; }
@@ -173,46 +580,92 @@
       .content { padding: 28px 22px 45px; }
       .topbar { padding: 0 22px; }
     }
+
     @media (max-width: 680px) {
-      .sidebar { width: 100%; height: auto; position: relative; padding: 13px 15px; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 13px 15px;
+      }
+
       .side-brand { padding: 0 4px 12px; }
       .nav-label, .side-bottom { display: none; }
-      .nav-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .nav-link { padding: 10px; font-size: 12px; }
+
+      .nav-list {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .nav-link {
+        width: auto;
+        flex: 0 0 auto;
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .nav-link.active { box-shadow: inset 0 -2px #70a8e8; }
       .main-area { margin-left: 0; }
-      .topbar { height: 65px; padding: 0 16px; }
-      .content { padding: 24px 15px 40px; }
+
+      .topbar {
+        height: auto;
+        min-height: 66px;
+        padding: 12px 17px;
+      }
+
+      .content { padding: 25px 15px 35px; }
       .stats { grid-template-columns: 1fr; gap: 10px; }
-      .stat-card { padding: 15px; }
+      .stat-card { padding: 14px 16px; }
+      .page-heading { align-items: flex-start; }
+      .panel { padding: 18px; }
       .form-grid { grid-template-columns: 1fr; }
       .span-2 { grid-column: auto; }
-      .panel { padding: 18px; }
-      .page-heading { align-items: flex-start; flex-direction: column; }
       .notice { flex-direction: column; }
       .notice-actions { width: 100%; }
+      .notice-actions .btn { flex: 1; }
+      .login-card { padding: 28px 23px; }
     }
   </style>
 </head>
+
 <body>
+
   <section class="login-screen" id="loginScreen">
-    <form class="login-card" id="formLogin">
+    <div class="login-card">
       <div class="brand-mark">M</div>
-      <h1>Painel administrativo</h1>
-      <p>Mural Escolar Oficial. Acesso restrito à equipe autorizada da direção.</p>
-      <div class="field">
-        <label for="email">E-mail</label>
-        <input id="email" type="email" autocomplete="username" placeholder="seuemail@escola.com" required>
-      </div>
-      <div class="field">
-        <label for="senha">Senha</label>
-        <input id="senha" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
-      </div>
-      <button class="btn btn-primary btn-full" id="botaoEntrar" type="submit">Entrar no painel</button>
-      <div class="message" id="mensagemLogin" role="status" aria-live="polite"></div>
-    </form>
+
+      <p class="eyebrow">Mural Escolar Oficial</p>
+      <h1>Acesso administrativo</h1>
+      <p>Entre com a conta autorizada pela direção da escola.</p>
+
+      <form id="formLogin">
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" autocomplete="username"
+            placeholder="seuemail@escola.com" required>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password"
+            autocomplete="current-password"
+            placeholder="Sua senha" required>
+        </div>
+
+        <button class="btn btn-primary btn-full"
+          id="botaoEntrar" type="submit">
+          Entrar no painel
+        </button>
+      </form>
+
+      <div id="mensagemLogin" class="message"
+        role="status" aria-live="polite"></div>
+    </div>
   </section>
 
   <div class="app hidden" id="app">
+
     <aside class="sidebar">
       <div class="side-brand">
         <div class="side-logo">M</div>
@@ -221,176 +674,287 @@
           <small>Painel administrativo</small>
         </div>
       </div>
-      <div class="nav-label">Menu principal</div>
-      <nav class="nav-list">
-        <button class="nav-link active" data-page="inicio"><span class="ico">▦</span> Visão geral</button>
-        <button class="nav-link" data-page="avisos"><span class="ico">▤</span> Comunicados</button>
-        <button class="nav-link" data-page="galeria"><span class="ico">▧</span> Galeria da escola</button>
-        <button class="nav-link" data-page="sugestoes"><span class="ico">✉</span> Sugestões</button>
+
+      <div class="nav-label">GERENCIAMENTO</div>
+
+      <nav class="nav-list" aria-label="Menu administrativo">
+        <button class="nav-link active" data-page="inicio">
+          <span class="ico">⌂</span>Visão geral
+        </button>
+
+        <button class="nav-link" data-page="avisos">
+          <span class="ico">▤</span>Comunicados
+        </button>
+
+        <button class="nav-link" data-page="galeria">
+          <span class="ico">▧</span>Galeria da escola
+        </button>
+
+        <button class="nav-link" data-page="sugestoes">
+          <span class="ico">✧</span>Sugestões
+        </button>
       </nav>
+
       <div class="side-bottom">
-        <small>Escola Estadual Profª Silvia Aparecida Bueno Ortolan</small>
+        <small>
+          Área restrita.<br>
+          As alterações são registradas no Firebase.
+        </small>
       </div>
     </aside>
 
-    <main class="main-area">
+    <div class="main-area">
+
       <header class="topbar">
         <div class="topbar-title">
           <strong id="topTitle">Visão geral</strong>
-          Administração do Mural Escolar Oficial
+          Administração escolar
         </div>
+
         <div class="user-chip">
-          <div class="avatar">D</div>
+          <div class="avatar">A</div>
+
           <div class="user-meta">
-            <strong>Conta autorizada</strong>
-            <small id="usuarioLogado">Carregando...</small>
+            <strong>Administrador</strong>
+            <small id="usuarioLogado">Conta conectada</small>
           </div>
-          <button class="btn btn-muted" id="botaoSair" type="button">Sair</button>
+
+          <button class="btn btn-muted" id="botaoSair" type="button">
+            Sair
+          </button>
         </div>
       </header>
 
-      <div class="content">
+      <main class="content">
+
         <section class="page" id="page-inicio">
+
           <div class="page-heading">
             <div>
               <p class="eyebrow">Painel de controle</p>
               <h1>Visão geral</h1>
-              <p>Acompanhe os comunicados e as atividades do mural escolar.</p>
+              <p>Acompanhe e organize as informações publicadas no mural.</p>
             </div>
-            <button class="btn btn-primary" data-go="avisos" type="button">+ Novo comunicado</button>
           </div>
 
           <div class="stats">
             <article class="stat-card">
               <div class="stat-icon">▤</div>
-              <div><small>Total de comunicados</small><strong id="totalAvisos">0</strong></div>
+              <div>
+                <small>Total de comunicados</small>
+                <strong id="totalAvisos">—</strong>
+              </div>
             </article>
+
             <article class="stat-card">
               <div class="stat-icon">✓</div>
-              <div><small>Publicados</small><strong id="totalPublicados">0</strong></div>
+              <div>
+                <small>Publicados</small>
+                <strong id="totalPublicados">—</strong>
+              </div>
             </article>
+
             <article class="stat-card">
-              <div class="stat-icon">◷</div>
-              <div><small>Rascunhos</small><strong id="totalRascunhos">0</strong></div>
+              <div class="stat-icon">✎</div>
+              <div>
+                <small>Rascunhos</small>
+                <strong id="totalRascunhos">—</strong>
+              </div>
             </article>
           </div>
 
           <section class="panel">
             <div class="panel-head">
-              <div><h2>Comunicados recentes</h2><p>Últimas publicações cadastradas no sistema.</p></div>
-              <button class="btn btn-muted" id="atualizarAvisos" type="button">Atualizar</button>
+              <div>
+                <h2>Publicar comunicado</h2>
+                <p>As informações serão exibidas no mural público após a publicação.</p>
+              </div>
             </div>
-            <div class="notice-list" id="avisosRecentes">
-              <div class="empty-state">Carregando comunicados...</div>
-            </div>
-          </section>
-          <div class="footer-note">Mural Escolar Oficial • Área administrativa</div>
-        </section>
 
-        <section class="page hidden" id="page-avisos">
-          <div class="page-heading">
-            <div>
-              <p class="eyebrow">Publicações</p>
-              <h1>Comunicados</h1>
-              <p>Crie avisos para aparecerem no mural da comunidade escolar.</p>
-            </div>
-          </div>
-
-          <section class="panel">
-            <div class="panel-head">
-              <div><h2>Novo comunicado</h2><p>Preencha os campos para publicar um aviso.</p></div>
-            </div>
             <form id="formAviso">
+
               <div class="form-grid">
+
                 <div class="field span-2">
                   <label for="titulo">Título do comunicado</label>
-                  <input id="titulo" maxlength="120" placeholder="Ex.: Reunião de responsáveis" required>
+                  <input id="titulo" maxlength="120"
+                    placeholder="Ex.: Reunião de responsáveis" required>
                 </div>
+
                 <div class="field">
                   <label for="categoria">Categoria</label>
                   <select id="categoria">
                     <option value="Comunicado">Comunicado</option>
                     <option value="Evento">Evento</option>
-                    <option value="Avaliação">Avaliação</option>
-                    <option value="Aviso">Aviso</option>
+                    <option value="Calendário">Calendário</option>
                     <option value="Cardápio">Cardápio</option>
+                    <option value="Urgente">Urgente</option>
                   </select>
                 </div>
+
                 <div class="field">
                   <label for="dataEvento">Data do evento (opcional)</label>
                   <input id="dataEvento" type="date">
                 </div>
+
                 <div class="field span-2">
                   <label for="descricao">Descrição</label>
-                  <textarea id="descricao" maxlength="3000" placeholder="Escreva as informações do comunicado..." required></textarea>
+                  <textarea id="descricao" maxlength="5000"
+                    placeholder="Escreva as informações que a comunidade escolar precisa saber..."
+                    required></textarea>
                 </div>
+
               </div>
-              <label class="check-row"><input id="urgente" type="checkbox"> Marcar como urgente</label>
+
+              <label class="check-row">
+                <input type="checkbox" id="urgente">
+                Marcar como aviso urgente
+              </label>
+
               <div class="form-actions">
-                <button class="btn btn-primary" id="botaoPublicar" type="submit">Publicar comunicado</button>
-                <button class="btn btn-muted" type="reset">Limpar campos</button>
+                <button class="btn btn-primary"
+                  id="botaoPublicar" type="submit">
+                  Publicar comunicado
+                </button>
+
+                <button class="btn btn-muted" type="reset">
+                  Limpar campos
+                </button>
               </div>
-              <div class="message" id="mensagemAviso" role="status" aria-live="polite"></div>
             </form>
+
+            <div id="mensagemAviso" class="message"
+              role="status" aria-live="polite"></div>
           </section>
 
           <section class="panel">
             <div class="panel-head">
-              <div><h2>Todos os comunicados</h2><p>Consulte ou exclua publicações existentes.</p></div>
+              <div>
+                <h2>Atividade recente</h2>
+                <p>Últimos comunicados cadastrados.</p>
+              </div>
+
+              <button class="btn btn-muted" data-go="avisos" type="button">
+                Ver todos
+              </button>
             </div>
+
+            <div class="notice-list" id="avisosRecentes">
+              <div class="empty-state">Carregando comunicados...</div>
+            </div>
+          </section>
+
+        </section>
+
+        <section class="page hidden" id="page-avisos">
+
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Conteúdo do mural</p>
+              <h1>Comunicados</h1>
+              <p>Consulte e remova comunicados cadastrados.</p>
+            </div>
+          </div>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Todos os comunicados</h2>
+                <p>Os comunicados publicados aparecem no site para a comunidade escolar.</p>
+              </div>
+
+              <button class="btn btn-muted" id="atualizarAvisos" type="button">
+                Atualizar
+              </button>
+            </div>
+
             <div class="notice-list" id="listaAvisos">
               <div class="empty-state">Carregando comunicados...</div>
             </div>
           </section>
+
         </section>
 
         <section class="page hidden" id="page-galeria">
+
           <div class="page-heading">
             <div>
-              <p class="eyebrow">Memória escolar</p>
+              <p class="eyebrow">Imagens institucionais</p>
               <h1>Galeria da escola</h1>
-              <p>Espaço destinado às fotografias da escola e de suas atividades.</p>
+              <p>Espaço reservado para as fotografias da escola.</p>
             </div>
           </div>
-          <section class="panel">
-            <div class="placeholder">
-              <div class="big-icon">▧</div>
-              <h3>Galeria em preparação</h3>
-              <p>A estrutura visual está preparada. A próxima etapa será conectar o envio e o armazenamento das fotografias com segurança no Firebase.</p>
-            </div>
-          </section>
+
+          <div class="panel placeholder">
+            <div class="big-icon">▧</div>
+            <h3>Galeria em preparação</h3>
+            <p>
+              A próxima etapa será configurar o Firebase Storage e as
+              permissões de envio. Assim poderemos adicionar fotos da
+              fachada, dos espaços e dos projetos escolares sem expor
+              imagens de estudantes sem autorização.
+            </p>
+          </div>
+
         </section>
 
         <section class="page hidden" id="page-sugestoes">
+
           <div class="page-heading">
             <div>
               <p class="eyebrow">Participação escolar</p>
-              <h1>Sugestões</h1>
-              <p>Área reservada para acompanhar as sugestões enviadas pela comunidade.</p>
+              <h1>Caixa de sugestões</h1>
+              <p>Área preparada para receber e analisar propostas.</p>
             </div>
           </div>
-          <section class="panel">
-            <div class="placeholder">
-              <div class="big-icon">✉</div>
-              <h3>Caixa de sugestões em preparação</h3>
-              <p>Esta área será conectada ao banco de dados em uma próxima etapa, com acesso controlado para a equipe autorizada.</p>
-            </div>
-          </section>
+
+          <div class="panel placeholder">
+            <div class="big-icon">✧</div>
+            <h3>Caixa de sugestões ainda não configurada</h3>
+            <p>
+              O site ainda não envia sugestões ao Firebase.
+              Vamos implementar o formulário e as regras de acesso
+              antes de ativar esta área.
+            </p>
+          </div>
+
         </section>
-      </div>
-    </main>
+
+        <p class="footer-note">
+          Mural Escolar Oficial · Painel restrito a administradores autorizados
+        </p>
+
+      </main>
+    </div>
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
     import {
-      getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
     import {
-      getFirestore, collection, addDoc, getDocs, deleteDoc, doc,
-      query, orderBy, serverTimestamp
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      deleteDoc,
+      doc,
+      query,
+      orderBy,
+      serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+    // CONFIGURAÇÃO DO FIREBASE
     const firebaseConfig = {
       apiKey: "AIzaSyBe70DeHBd2OawVVk4xVQgjQql3FZSc4xY",
       authDomain: "mural-escolar-oficial.firebaseapp.com",
@@ -401,29 +965,41 @@
       measurementId: "G-5V2L9FCN0M"
     };
 
+
+    // UID AUTORIZADO DA DIREÇÃO
     const UID_DIRECAO = "w3s8trwqH0W4ZJRyCSF9HTGRVG43";
+
 
     const appFirebase = initializeApp(firebaseConfig);
     const auth = getAuth(appFirebase);
     const db = getFirestore(appFirebase);
 
+
     const $ = (id) => document.getElementById(id);
+
     const loginScreen = $("loginScreen");
     const appScreen = $("app");
+
     const mensagemLogin = $("mensagemLogin");
     const mensagemAviso = $("mensagemAviso");
+
     const botaoEntrar = $("botaoEntrar");
     const botaoPublicar = $("botaoPublicar");
+
     const listaAvisos = $("listaAvisos");
     const avisosRecentes = $("avisosRecentes");
+
     let avisosCache = [];
+
 
     function mensagem(elemento, texto, tipo = "info") {
       elemento.textContent = texto;
       elemento.className = "message " + tipo;
     }
 
+
     function explicarErro(erro) {
+
       const codigos = {
         "auth/invalid-credential": "E-mail ou senha incorretos.",
         "auth/invalid-email": "O formato do e-mail é inválido.",
@@ -432,218 +1008,441 @@
         "permission-denied": "O Firebase bloqueou esta operação. Confira as regras e o UID autorizado.",
         "failed-precondition": "A consulta precisa de uma configuração adicional no Firestore."
       };
-      return codigos[erro.code] || "Não foi possível concluir. Código: " + (erro.code || "erro desconhecido");
+
+      return codigos[erro.code] ||
+        "Não foi possível concluir. Código: " +
+        (erro.code || "erro desconhecido");
     }
 
+
     function formatarData(valor) {
+
       if (!valor) return "";
+
       try {
-        if (typeof valor === "string" && /^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+
+        if (
+          typeof valor === "string" &&
+          /^\d{4}-\d{2}-\d{2}$/.test(valor)
+        ) {
           const [ano, mes, dia] = valor.split("-");
           return `${dia}/${mes}/${ano}`;
         }
-        const data = typeof valor.toDate === "function" ? valor.toDate() : new Date(valor);
-        return Number.isNaN(data.getTime()) ? "" : data.toLocaleDateString("pt-BR");
-      } catch { return ""; }
+
+        const data = typeof valor.toDate === "function"
+          ? valor.toDate()
+          : new Date(valor);
+
+        return Number.isNaN(data.getTime())
+          ? ""
+          : data.toLocaleDateString("pt-BR");
+
+      } catch {
+        return "";
+      }
     }
 
+
     function mostrarAviso(registro, compacto = false) {
+
       const dados = registro.data;
+
       const artigo = document.createElement("article");
       artigo.className = "notice";
 
       const texto = document.createElement("div");
       texto.style.minWidth = "0";
+
       const meta = document.createElement("div");
       meta.className = "notice-meta";
 
       const categoria = document.createElement("span");
       categoria.className = "pill";
       categoria.textContent = dados.categoria || "Comunicado";
+
       meta.append(categoria);
 
       const status = document.createElement("span");
-      status.className = "pill " + (dados.publicado === true ? "" : "draft");
-      status.textContent = dados.publicado === true ? "Publicado" : "Rascunho";
+      status.className = "pill " +
+        (dados.publicado === true ? "" : "draft");
+
+      status.textContent = dados.publicado === true
+        ? "Publicado"
+        : "Rascunho";
+
       meta.append(status);
 
       const titulo = document.createElement("h3");
       titulo.textContent = dados.titulo || "Aviso sem título";
 
       const descricao = document.createElement("p");
-      descricao.textContent = dados.descricao || dados.conteudo || "Sem descrição.";
+      descricao.textContent =
+        dados.descricao || dados.conteudo || "Sem descrição.";
+
       texto.append(meta, titulo, descricao);
 
       if (dados.dataEvento) {
+
         const data = document.createElement("p");
         data.style.marginTop = "7px";
         data.textContent = "Data: " + formatarData(dados.dataEvento);
+
         texto.append(data);
       }
 
       artigo.append(texto);
 
       if (!compacto) {
+
         const acoes = document.createElement("div");
         acoes.className = "notice-actions";
+
         const excluir = document.createElement("button");
+
         excluir.className = "btn btn-danger";
         excluir.type = "button";
         excluir.textContent = "Excluir";
+
         excluir.addEventListener("click", async () => {
-          if (!confirm("Excluir este comunicado permanentemente?")) return;
+
+          if (!confirm("Excluir este comunicado permanentemente?")) {
+            return;
+          }
+
           excluir.disabled = true;
+
           try {
+
             await deleteDoc(doc(db, "avisos", registro.id));
+
             await carregarAvisos();
-            mensagem(mensagemAviso, "Comunicado excluído.", "success");
+
+            mensagem(
+              mensagemAviso,
+              "Comunicado excluído.",
+              "success"
+            );
+
           } catch (erro) {
-            mensagem(mensagemAviso, explicarErro(erro), "error");
+
+            mensagem(
+              mensagemAviso,
+              explicarErro(erro),
+              "error"
+            );
+
             excluir.disabled = false;
           }
         });
+
         acoes.append(excluir);
         artigo.append(acoes);
       }
+
       return artigo;
     }
 
+
     function atualizarIndicadores() {
+
       const total = avisosCache.length;
-      const publicados = avisosCache.filter(item => item.data.publicado === true).length;
+
+      const publicados = avisosCache.filter(
+        item => item.data.publicado === true
+      ).length;
+
       $("totalAvisos").textContent = total;
       $("totalPublicados").textContent = publicados;
       $("totalRascunhos").textContent = total - publicados;
     }
 
+
     async function carregarAvisos() {
+
       listaAvisos.replaceChildren();
       avisosRecentes.replaceChildren();
+
       const carregando = document.createElement("div");
+
       carregando.className = "empty-state";
       carregando.textContent = "Carregando comunicados...";
+
       listaAvisos.append(carregando);
 
       try {
-        const consulta = query(collection(db, "avisos"), orderBy("criadoEm", "desc"));
+
+        const consulta = query(
+          collection(db, "avisos"),
+          orderBy("criadoEm", "desc")
+        );
+
         const resultado = await getDocs(consulta);
-        avisosCache = resultado.docs.map(documento => ({ id: documento.id, data: documento.data() }));
+
+        avisosCache = resultado.docs.map(documento => ({
+          id: documento.id,
+          data: documento.data()
+        }));
+
         atualizarIndicadores();
+
         listaAvisos.replaceChildren();
 
         if (avisosCache.length === 0) {
+
           const vazio = document.createElement("div");
+
           vazio.className = "empty-state";
           vazio.textContent = "Nenhum comunicado cadastrado.";
+
           listaAvisos.append(vazio);
           avisosRecentes.append(vazio.cloneNode(true));
+
           return;
         }
 
-        avisosCache.forEach(registro => listaAvisos.append(mostrarAviso(registro)));
-        avisosCache.slice(0, 3).forEach(registro => avisosRecentes.append(mostrarAviso(registro, true)));
+        avisosCache.forEach(registro => {
+          listaAvisos.append(mostrarAviso(registro));
+        });
+
+        avisosCache.slice(0, 3).forEach(registro => {
+          avisosRecentes.append(mostrarAviso(registro, true));
+        });
+
       } catch (erro) {
+
         listaAvisos.replaceChildren();
+
         const falha = document.createElement("div");
+
         falha.className = "empty-state";
         falha.textContent = explicarErro(erro);
+
         listaAvisos.append(falha);
         avisosRecentes.replaceChildren(falha.cloneNode(true));
       }
     }
 
+
+    // LOGIN
     $("formLogin").addEventListener("submit", async (evento) => {
+
       evento.preventDefault();
+
       botaoEntrar.disabled = true;
-      mensagem(mensagemLogin, "Verificando acesso...", "info");
+
+      mensagem(
+        mensagemLogin,
+        "Verificando acesso...",
+        "info"
+      );
+
       try {
-        await signInWithEmailAndPassword(auth, $("email").value.trim(), $("senha").value);
+
+        await signInWithEmailAndPassword(
+          auth,
+          $("email").value.trim(),
+          $("senha").value
+        );
+
       } catch (erro) {
-        mensagem(mensagemLogin, explicarErro(erro), "error");
+
+        mensagem(
+          mensagemLogin,
+          explicarErro(erro),
+          "error"
+        );
+
       } finally {
+
         botaoEntrar.disabled = false;
       }
     });
 
+
+    // VERIFICAÇÃO DE ACESSO
     onAuthStateChanged(auth, async (usuario) => {
+
       if (!usuario) {
+
         appScreen.classList.add("hidden");
         loginScreen.classList.remove("hidden");
+
         return;
       }
 
       if (usuario.uid !== UID_DIRECAO) {
+
         await signOut(auth);
-        mensagem(mensagemLogin, "Esta conta não está autorizada a acessar o painel.", "error");
+
+        mensagem(
+          mensagemLogin,
+          "Esta conta não está autorizada a acessar o painel.",
+          "error"
+        );
+
         return;
       }
 
       loginScreen.classList.add("hidden");
       appScreen.classList.remove("hidden");
-      $("usuarioLogado").textContent = usuario.email || "Conta autorizada";
+
+      $("usuarioLogado").textContent =
+        usuario.email || "Conta autorizada";
+
       await carregarAvisos();
     });
 
+
+    // PUBLICAR COMUNICADO
     $("formAviso").addEventListener("submit", async (evento) => {
+
       evento.preventDefault();
-      if (!auth.currentUser || auth.currentUser.uid !== UID_DIRECAO) {
-        mensagem(mensagemAviso, "A conta atual não tem autorização para publicar.", "error");
+
+      if (
+        !auth.currentUser ||
+        auth.currentUser.uid !== UID_DIRECAO
+      ) {
+
+        mensagem(
+          mensagemAviso,
+          "A conta atual não tem autorização para publicar.",
+          "error"
+        );
+
         return;
       }
 
       const titulo = $("titulo").value.trim();
       const descricao = $("descricao").value.trim();
+
       if (!titulo || !descricao) {
-        mensagem(mensagemAviso, "Preencha o título e a descrição.", "error");
+
+        mensagem(
+          mensagemAviso,
+          "Preencha o título e a descrição.",
+          "error"
+        );
+
         return;
       }
 
       botaoPublicar.disabled = true;
-      mensagem(mensagemAviso, "Publicando comunicado...", "info");
+
+      mensagem(
+        mensagemAviso,
+        "Publicando comunicado...",
+        "info"
+      );
+
       try {
+
         await addDoc(collection(db, "avisos"), {
-          titulo,
-          descricao,
+
+          titulo: titulo,
+          descricao: descricao,
           categoria: $("categoria").value,
           dataEvento: $("dataEvento").value,
           urgente: $("urgente").checked,
           publicado: true,
           autor: auth.currentUser.email || auth.currentUser.uid,
           criadoEm: serverTimestamp()
+
         });
+
         $("formAviso").reset();
-        mensagem(mensagemAviso, "Comunicado publicado e enviado ao mural.", "success");
+
+        mensagem(
+          mensagemAviso,
+          "Comunicado publicado e enviado ao mural.",
+          "success"
+        );
+
         await carregarAvisos();
+
       } catch (erro) {
-        mensagem(mensagemAviso, explicarErro(erro), "error");
+
+        mensagem(
+          mensagemAviso,
+          explicarErro(erro),
+          "error"
+        );
+
       } finally {
+
         botaoPublicar.disabled = false;
       }
     });
 
+
+    // SAIR
     $("botaoSair").addEventListener("click", async () => {
-      try { await signOut(auth); }
-      catch (erro) { mensagem(mensagemLogin, explicarErro(erro), "error"); }
+
+      try {
+
+        await signOut(auth);
+
+      } catch (erro) {
+
+        mensagem(
+          mensagemLogin,
+          explicarErro(erro),
+          "error"
+        );
+      }
     });
 
-    $("atualizarAvisos").addEventListener("click", carregarAvisos);
 
+    // ATUALIZAR LISTA
+    $("atualizarAvisos").addEventListener(
+      "click",
+      carregarAvisos
+    );
+
+
+    // NAVEGAÇÃO DO PAINEL
     function abrirPagina(nome) {
-      document.querySelectorAll(".page").forEach(pagina => pagina.classList.add("hidden"));
-      $("page-" + nome).classList.remove("hidden");
-      document.querySelectorAll(".nav-link").forEach(botao => {
-        botao.classList.toggle("active", botao.dataset.page === nome);
+
+      document.querySelectorAll(".page").forEach(pagina => {
+        pagina.classList.add("hidden");
       });
-      const titulos = { inicio: "Visão geral", avisos: "Comunicados", galeria: "Galeria da escola", sugestoes: "Sugestões" };
+
+      $("page-" + nome).classList.remove("hidden");
+
+      document.querySelectorAll(".nav-link").forEach(botao => {
+
+        botao.classList.toggle(
+          "active",
+          botao.dataset.page === nome
+        );
+      });
+
+      const titulos = {
+        inicio: "Visão geral",
+        avisos: "Comunicados",
+        galeria: "Galeria da escola",
+        sugestoes: "Sugestões"
+      };
+
       $("topTitle").textContent = titulos[nome] || "Painel";
     }
 
+
     document.querySelectorAll(".nav-link").forEach(botao => {
-      botao.addEventListener("click", () => abrirPagina(botao.dataset.page));
+
+      botao.addEventListener("click", () => {
+        abrirPagina(botao.dataset.page);
+      });
     });
+
+
     document.querySelectorAll("[data-go]").forEach(botao => {
-      botao.addEventListener("click", () => abrirPagina(botao.dataset.go));
+
+      botao.addEventListener("click", () => {
+        abrirPagina(botao.dataset.go);
+      });
     });
+
   </script>
+
 </body>
 </html>
