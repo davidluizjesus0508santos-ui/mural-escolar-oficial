@@ -1,905 +1,431 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#173b70">
-  <meta name="description" content="Mural Escolar Oficial: comunicados, fotos, cardápio e calendário da comunidade escolar.">
-  <title>Mural Escolar Oficial</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173b70">
+<meta name="description" content="Mural Escolar Oficial">
+<title>Mural Escolar Oficial</title>
 
-  <style>
-    :root {
-      --verde: #1f5fae;
-      --rosa: #4f8edc;
-      --laranja: #78a9e8;
-      --azul: #2d6fbd;
-      --marinho: #173b70;
-      --fundo: #f3f7fc;
-      --texto: #243044;
-      --cinza: #657184;
-      --borda: #dce6f2;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 100px;
-    }
-
-    body {
-      margin: 0;
-      background: var(--fundo);
-      color: var(--texto);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: var(--verde);
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: white;
-      padding: 13px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      box-shadow: 0 3px 18px #17365e12;
-      border-bottom: 4px solid var(--azul);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--marinho);
-      font-weight: 800;
-      font-size: 1.05rem;
-      text-decoration: none;
-      letter-spacing: -.3px;
-    }
-
-    .brand img {
-      width: 54px;
-      height: 54px;
-      object-fit: contain;
-    }
-
-    nav {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--marinho);
-      font-weight: bold;
-      padding: 8px 10px;
-      border-radius: 8px;
-      transition: background .2s, color .2s;
-    }
-
-    nav a:hover {
-      color: var(--marinho);
-      background: #edf4fd;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 65px 6%;
-      color: white;
-      background: linear-gradient(
-        120deg,
-        #102b50,
-        #1c4f88,
-        #347fc2
-      );
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 35px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 6px 12px;
-      border: 1px solid #ffffff66;
-      border-radius: 30px;
-      font-size: .82rem;
-    }
-
-    h1 {
-      font-size: clamp(2.1rem, 5vw, 4rem);
-      line-height: 1.1;
-      margin: 18px 0;
-    }
-
-    .hero p {
-      color: #edf5f1;
-      font-size: 1.08rem;
-    }
-
-    .hero-photo {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 20px;
-      border: 4px solid #ffffff30;
-      box-shadow: 0 18px 45px #061a3340;
-    }
-
-    .btn {
-      display: inline-block;
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font: inherit;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px #061a3325;
-    }
-
-    .btn-light {
-      background: white;
-      color: var(--marinho);
-      margin-top: 12px;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 35px 20px 60px;
-    }
-
-    section {
-      margin-bottom: 48px;
-      scroll-margin-top: 100px;
-    }
-
-    .section-head {
-      margin-bottom: 20px;
-    }
-
-    .section-head h2 {
-      color: var(--marinho);
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      margin: 0;
-    }
-
-    .section-head p {
-      color: var(--cinza);
-      margin-bottom: 0;
-    }
-
-    .accent-line {
-      width: 75px;
-      height: 5px;
-      margin-top: 10px;
-      border-radius: 10px;
-      background: linear-gradient(
-        90deg,
-        #173b70,
-        #4f8edc
-      );
-    }
-
-    .tiles,
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .tile,
-    .card,
-    .notice-card {
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 17px;
-      padding: 22px;
-      box-shadow: 0 10px 30px #173b700d;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .tile {
-      display: block;
-      color: var(--texto);
-      text-decoration: none;
-      border-top: 4px solid var(--verde);
-    }
-
-    .tile:nth-child(4n+2) {
-      border-top-color: #4f8edc;
-    }
-
-    .tile:nth-child(4n+3) {
-      border-top-color: #78a9e8;
-    }
-
-    .tile:nth-child(4n) {
-      border-top-color: #2d6fbd;
-    }
-
-    .tile:hover,
-    .card:hover,
-    .notice-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 34px #173b7018;
-    }
-
-    .emoji {
-      font-size: 1.9rem;
-    }
-
-    .tile h3,
-    .card h3,
-    .notice-card h3 {
-      color: var(--marinho);
-      margin: 8px 0;
-    }
-
-    .tile p,
-    .card p,
-    .notice-card p {
-      color: var(--cinza);
-    }
-
-    .filters {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd8ce;
-      border-radius: 10px;
-      background: white;
-      color: var(--texto);
-      font: inherit;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 3px solid #4f8edc35;
-      border-color: #2d6fbd;
-    }
-
-    #busca {
-      flex: 1;
-      min-width: 220px;
-      width: auto;
-    }
-
-    #filtro {
-      width: auto;
-      min-width: 190px;
-    }
-
-    .notice-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-    }
-
-    .notice-card {
-      border-left: 4px solid #4f8edc;
-    }
-
-    .category {
-      display: inline-block;
-      background: #eaf1ff;
-      color: var(--marinho);
-      border-radius: 30px;
-      padding: 4px 10px;
-      font-size: .8rem;
-      font-weight: bold;
-    }
-
-    .urgent {
-      border: 2px solid #c7473d;
-    }
-
-    .notice-card.urgent {
-      border-left-color: #c7473d;
-      background: #fffafa;
-    }
-
-    .empty,
-    .error {
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 12px;
-      padding: 20px;
-      color: var(--cinza);
-      grid-column: 1 / -1;
-    }
-
-    .menu-image {
-      display: block;
-      width: 100%;
-      max-width: 1200px;
-      height: auto;
-      margin: 18px auto;
-      border: 1px solid var(--borda);
-      border-radius: 14px;
-    }
-
-    .suggestion-note {
-      padding: 15px;
-      background: #edf4fd;
-      border-left: 4px solid var(--azul);
-      border-radius: 8px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .gallery-item {
-      margin: 0;
-      overflow: hidden;
-      border-radius: 16px;
-      background: white;
-      border: 1px solid var(--borda);
-      box-shadow: 0 10px 28px #173b700d;
-    }
-
-    .gallery-item img {
-      display: block;
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      transition: transform .3s;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.035);
-    }
-
-    .gallery-item figcaption {
-      padding: 12px 14px;
-      color: var(--marinho);
-      font-weight: 700;
-    }
-
-    .gallery-help {
-      color: var(--cinza);
-      font-size: .92rem;
-    }
-
-    footer {
-      background: var(--marinho);
-      color: white;
-      text-align: center;
-      padding: 28px 18px;
-      border-top: 5px solid #4f8edc;
-    }
-
-    footer p {
-      margin: 4px;
-    }
-
-    @media (max-width: 760px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-photo {
-        height: 230px;
-      }
-
-      .topbar {
-        position: static;
-      }
-
-      nav {
-        gap: 10px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-item img {
-        height: 210px;
-      }
-    }
-  </style>
+<style>
+:root {
+  --azul: #1f5fae;
+  --marinho: #173b70;
+  --fundo: #f3f7fc;
+  --texto: #243044;
+  --cinza: #657184;
+  --borda: #dce6f2;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+a { color: var(--azul); }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  padding: 13px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  box-shadow: 0 3px 18px #17365e12;
+  border-bottom: 4px solid var(--azul);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--marinho);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+.brand img { width: 54px; height: 54px; object-fit: contain; }
+nav { display: flex; gap: 10px; flex-wrap: wrap; }
+nav a {
+  text-decoration: none;
+  color: var(--marinho);
+  font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+nav a:hover { background: #edf4fd; }
+.hero {
+  padding: 65px 6%;
+  color: white;
+  background: linear-gradient(120deg,#102b50,#1c4f88,#347fc2);
+}
+.hero-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 35px;
+}
+.eyebrow {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #ffffff66;
+  border-radius: 30px;
+  font-size: .82rem;
+}
+h1 { font-size: clamp(2.1rem,5vw,4rem); line-height: 1.1; }
+.hero-photo {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 4px solid #ffffff30;
+}
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-light { background: white; color: var(--marinho); }
+main { max-width: 1200px; margin: auto; padding: 35px 20px 60px; }
+section { margin-bottom: 48px; scroll-margin-top: 100px; }
+.section-head { margin-bottom: 20px; }
+.section-head h2 { color: var(--marinho); font-size: clamp(1.5rem,3vw,2.2rem); margin: 0; }
+.section-head p { color: var(--cinza); }
+.accent-line {
+  width: 75px; height: 5px; margin-top: 10px;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#173b70,#4f8edc);
+}
+.tiles,.cards,.notice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 16px;
+}
+.tile,.card,.notice-card {
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 17px;
+  padding: 22px;
+  box-shadow: 0 10px 30px #173b700d;
+  transition: .2s;
+}
+.tile { display: block; color: var(--texto); text-decoration: none; border-top: 4px solid var(--azul); }
+.tile:hover,.card:hover,.notice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px #173b7018;
+}
+.emoji { font-size: 1.9rem; }
+h3 { color: var(--marinho); margin: 8px 0; }
+.tile p,.card p,.notice-card p { color: var(--cinza); }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+input,select,textarea {
+  width: 100%; padding: 12px;
+  border: 1px solid #cbd8ce; border-radius: 10px;
+  background: white; color: var(--texto); font: inherit;
+}
+#busca { flex: 1; min-width: 220px; width: auto; }
+#filtro { width: auto; min-width: 190px; }
+.notice-card { border-left: 4px solid #4f8edc; }
+.category {
+  display: inline-block; background: #eaf1ff; color: var(--marinho);
+  border-radius: 30px; padding: 4px 10px; font-size: .8rem; font-weight: bold;
+}
+.notice-card.urgent { border: 2px solid #c7473d; background: #fffafa; }
+.empty,.error {
+  background: white; border: 1px solid var(--borda);
+  border-radius: 12px; padding: 20px; color: var(--cinza);
+  grid-column: 1 / -1;
+}
+.menu-image {
+  display: block; width: 100%; max-width: 1200px;
+  height: auto; margin: 18px auto; border-radius: 14px;
+}
+.gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.gallery-item {
+  margin: 0; overflow: hidden; border-radius: 16px;
+  background: white; border: 1px solid var(--borda);
+}
+.gallery-item img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.gallery-item figcaption { padding: 12px 14px; color: var(--marinho); font-weight: 700; }
+.suggestion-note {
+  padding: 15px; background: #edf4fd;
+  border-left: 4px solid var(--azul); border-radius: 8px;
+}
+footer {
+  background: var(--marinho); color: white; text-align: center;
+  padding: 28px 18px; border-top: 5px solid #4f8edc;
+}
+@media(max-width:760px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-photo { height: 230px; }
+  .topbar { position: static; }
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 
 <body>
+<header class="topbar">
+  <a class="brand" href="#inicio">
+    <img src="./logo-escola.png" alt="Logo da escola" onerror="this.style.display='none'">
+    <span>Mural Escolar Oficial</span>
+  </a>
+  <nav aria-label="Navegação principal">
+    <a href="#inicio">Início</a>
+    <a href="#comunicados">Avisos</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#cardapio">Cardápio</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#sugestoes">Sugestões</a>
+    <a href="admin.html">Direção</a>
+  </nav>
+</header>
 
-  <header class="topbar">
-    <a class="brand" href="#inicio">
-      <img
-        src="./logo-escola.png"
-        alt="Logo da escola"
-        onerror="this.style.display='none'"
-      >
-      <span>Mural Escolar Oficial</span>
-    </a>
-
-    <nav aria-label="Navegação principal">
-      <a href="#inicio">Início</a>
-      <a href="#comunicados">Avisos</a>
-      <a href="#eventos">Eventos</a>
-      <a href="#cardapio">Cardápio</a>
-      <a href="#galeria">Galeria</a>
-      <a href="#sugestoes">Sugestões</a>
-      <a href="admin.html">Direção</a>
-    </nav>
-  </header>
-
-  <section class="hero" id="inicio">
-    <div class="hero-inner">
-
-      <div>
-        <span class="eyebrow">INFORMAÇÃO • ESCOLA • COMUNIDADE</span>
-
-        <h1>Uma escola conectada com sua comunidade.</h1>
-
-        <p>
-          Acompanhe comunicados oficiais, eventos, cardápio e
-          informações importantes em um só lugar.
-        </p>
-
-        <a class="btn btn-light" href="#comunicados">
-          Consultar avisos
-        </a>
-      </div>
-
-      <div>
-        <img
-          class="hero-photo"
-          src="./fachada-escola.jpg"
-          alt="Fachada da escola"
-          onerror="this.style.display='none'"
-        >
-      </div>
-
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">INFORMAÇÃO • ESCOLA • COMUNIDADE</span>
+      <h1>Uma escola conectada com sua comunidade.</h1>
+      <p>Acompanhe comunicados oficiais, eventos, cardápio e informações importantes em um só lugar.</p>
+      <a class="btn btn-light" href="#comunicados">Consultar avisos</a>
     </div>
-  </section>
+    <div>
+      <img class="hero-photo" src="./fachada-escola.jpg" alt="Fachada da escola" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
 
-  <main>
+<main>
+<section id="atalhos">
+  <div class="section-head">
+    <h2>Explore o mural</h2><div class="accent-line"></div>
+    <p>Encontre rapidamente o que precisa.</p>
+  </div>
+  <div class="tiles">
+    <a class="tile" href="#comunicados"><span class="emoji">📢</span><h3>Comunicados</h3><p>Avisos publicados pela direção.</p></a>
+    <a class="tile" href="#eventos"><span class="emoji">📅</span><h3>Calendário de eventos</h3><p>Datas e atividades escolares.</p></a>
+    <a class="tile" href="#cardapio"><span class="emoji">🍎</span><h3>Cardápio escolar</h3><p>Consulte o cardápio.</p></a>
+    <a class="tile" href="#sugestoes"><span class="emoji">💡</span><h3>Caixa de sugestões</h3><p>Envie ideias para avaliação.</p></a>
+  </div>
+</section>
 
-    <section id="atalhos">
-      <div class="section-head">
-        <h2>Explore o mural</h2>
-        <div class="accent-line"></div>
-        <p>Encontre rapidamente o que precisa.</p>
-      </div>
+<section id="comunicados">
+  <div class="section-head">
+    <h2>Comunicados oficiais</h2><div class="accent-line"></div>
+    <p>Os avisos publicados aparecem abaixo.</p>
+  </div>
+  <div class="filters">
+    <input id="busca" type="search" placeholder="Pesquisar avisos..." aria-label="Pesquisar avisos">
+    <select id="filtro" aria-label="Filtrar avisos">
+      <option value="todos">Todas as categorias</option>
+      <option value="geral">Geral</option>
+      <option value="eventos">Eventos</option>
+      <option value="provas">Provas</option>
+      <option value="cardapio">Cardápio</option>
+      <option value="horarios">Horários</option>
+      <option value="urgente">Urgentes</option>
+    </select>
+  </div>
+  <div id="lista-avisos" class="notice-grid">
+    <p class="empty">Carregando comunicados...</p>
+  </div>
+</section>
 
-      <div class="tiles">
+<section id="eventos">
+  <div class="section-head">
+    <h2>Calendário e informações escolares</h2><div class="accent-line"></div>
+    <p>Consulte as informações divulgadas pela escola.</p>
+  </div>
+  <div class="cards">
+    <article class="card"><span class="emoji">📅</span><h3>Eventos escolares</h3><p>Confira avisos sobre reuniões e atividades.</p></article>
+    <article class="card"><span class="emoji">📚</span><h3>Provas e estudos</h3><p>Acompanhe as datas divulgadas pela direção.</p></article>
+    <article class="card"><span class="emoji">⏰</span><h3>Horários</h3><p>Consulte os avisos oficiais sobre horários.</p></article>
+  </div>
+</section>
 
-        <a class="tile" href="#comunicados">
-          <span class="emoji">📢</span>
-          <h3>Comunicados</h3>
-          <p>Avisos publicados pela direção.</p>
-        </a>
+<section id="cardapio">
+  <div class="section-head">
+    <h2>Cardápio escolar</h2><div class="accent-line"></div>
+    <p>Imagem do cardápio disponibilizada pela escola.</p>
+  </div>
+  <article class="card">
+    <a href="./cardapio.jpg" target="_blank" rel="noopener">
+      <img class="menu-image" src="./cardapio.jpg" alt="Cardápio escolar" loading="lazy">
+    </a>
+  </article>
+</section>
 
-        <a class="tile" href="#eventos">
-          <span class="emoji">📅</span>
-          <h3>Calendário de eventos</h3>
-          <p>Datas e atividades escolares.</p>
-        </a>
+<section id="galeria">
+  <div class="section-head">
+    <h2>Galeria da escola</h2><div class="accent-line"></div>
+    <p>Um pouco do espaço e das atividades da nossa comunidade escolar.</p>
+  </div>
+  <div class="gallery-grid">
+    <figure class="gallery-item">
+      <img src="./fachada-escola.jpg" alt="Fachada da escola" loading="lazy" onerror="this.closest('figure').style.display='none'">
+      <figcaption>Conheça nossa escola</figcaption>
+    </figure>
+    <figure class="gallery-item">
+      <img src="./foto-escola-1.jpg" alt="Espaço da escola" loading="lazy" onerror="this.closest('figure').style.display='none'">
+      <figcaption>Nossos espaços</figcaption>
+    </figure>
+    <figure class="gallery-item">
+      <img src="./foto-escola-2.jpg" alt="Atividade escolar" loading="lazy" onerror="this.closest('figure').style.display='none'">
+      <figcaption>Vivências escolares</figcaption>
+    </figure>
+  </div>
+  <p>As fotos devem ser autorizadas pela escola.</p>
+</section>
 
-        <a class="tile" href="#cardapio">
-          <span class="emoji">🍎</span>
-          <h3>Cardápio escolar</h3>
-          <p>Consulte o cardápio.</p>
-        </a>
+<section id="sugestoes">
+  <div class="section-head">
+    <h2>Caixa de sugestões</h2><div class="accent-line"></div>
+    <p>Um espaço para ideias que possam melhorar a escola.</p>
+  </div>
+  <div class="card">
+    <p class="suggestion-note"><strong>Atenção:</strong> este formulário ainda não envia mensagens. O envio será ativado depois de configurar o armazenamento e as regras de segurança do Firebase.</p>
+    <form id="form-sugestao">
+      <label for="sugestao"><strong>Sua sugestão</strong></label>
+      <textarea id="sugestao" rows="4" maxlength="1000" placeholder="Escreva uma ideia respeitosa e construtiva..." required></textarea>
+      <button class="btn" type="button" disabled style="background:#e5e7eb;color:#596273;cursor:not-allowed">Envio ainda não ativado</button>
+    </form>
+  </div>
+</section>
+</main>
 
-        <a class="tile" href="#sugestoes">
-          <span class="emoji">💡</span>
-          <h3>Caixa de sugestões</h3>
-          <p>Envie ideias para avaliação.</p>
-        </a>
+<footer>
+  <p><strong>Mural Escolar Oficial</strong></p>
+  <p>Informação e organização para toda a comunidade escolar.</p>
+  <p>Consulte sempre os comunicados oficiais da escola.</p>
+</footer>
 
-      </div>
-    </section>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore, collection, getDocs, query, where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    <section id="comunicados">
-      <div class="section-head">
-        <h2>Comunicados oficiais</h2>
-        <div class="accent-line"></div>
-        <p>Os avisos publicados aparecem abaixo.</p>
-      </div>
+const firebaseConfig = {
+  apiKey: "AIzaSyBe70DeHBd2OawVVk4XQqVQgjQql3FZSc4xY",
+  authDomain: "mural-escolar-oficial.firebaseapp.com",
+  projectId: "mural-escolar-oficial",
+  storageBucket: "mural-escolar-oficial.firebasestorage.app",
+  messagingSenderId: "706068384737",
+  appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
+  measurementId: "G-5V2L9FCN0M"
+};
 
-      <div class="filters">
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const lista = document.getElementById("lista-avisos");
+const busca = document.getElementById("busca");
+const filtro = document.getElementById("filtro");
+let avisos = [];
 
-        <input
-          id="busca"
-          type="search"
-          placeholder="Pesquisar avisos..."
-          aria-label="Pesquisar avisos"
-        >
+function formatarData(valor) {
+  if (!valor) return "";
+  try {
+    const data = typeof valor.toDate === "function" ? valor.toDate() : new Date(valor);
+    return Number.isNaN(data.getTime()) ? "" : data.toLocaleDateString("pt-BR");
+  } catch {
+    return "";
+  }
+}
 
-        <select id="filtro" aria-label="Filtrar avisos">
-          <option value="todos">Todas as categorias</option>
-          <option value="geral">Geral</option>
-          <option value="eventos">Eventos</option>
-          <option value="provas">Provas</option>
-          <option value="cardapio">Cardápio</option>
-          <option value="horarios">Horários</option>
-          <option value="urgente">Urgentes</option>
-        </select>
+function renderizar() {
+  const termo = busca.value.trim().toLocaleLowerCase("pt-BR");
+  const categoria = filtro.value;
 
-      </div>
+  const filtrados = avisos.filter(aviso => {
+    const tipo = String(aviso.categoria || "geral").toLocaleLowerCase("pt-BR");
+    const texto = [aviso.titulo || "", aviso.descricao || "", tipo]
+      .join(" ").toLocaleLowerCase("pt-BR");
 
-      <div id="lista-avisos" class="notice-grid">
-        <p class="empty">Carregando comunicados...</p>
-      </div>
-    </section>
+    const correspondeCategoria = categoria === "todos" ||
+      (categoria === "urgente" ? aviso.urgente === true : tipo === categoria);
 
-    <section id="eventos">
-      <div class="section-head">
-        <h2>Calendário e informações escolares</h2>
-        <div class="accent-line"></div>
-        <p>Consulte as informações divulgadas pela escola.</p>
-      </div>
+    return texto.includes(termo) && correspondeCategoria;
+  });
 
-      <div class="cards">
+  lista.replaceChildren();
 
-        <article class="card">
-          <span class="emoji">📅</span>
-          <h3>Eventos escolares</h3>
-          <p>Confira avisos sobre reuniões e atividades.</p>
-        </article>
+  if (!filtrados.length) {
+    const vazio = document.createElement("p");
+    vazio.className = "empty";
+    vazio.textContent = "Nenhum comunicado encontrado com esses filtros.";
+    lista.append(vazio);
+    return;
+  }
 
-        <article class="card">
-          <span class="emoji">📚</span>
-          <h3>Provas e estudos</h3>
-          <p>Acompanhe as datas divulgadas pela direção.</p>
-        </article>
+  filtrados.forEach(aviso => {
+    const cartao = document.createElement("article");
+    cartao.className = "notice-card" + (aviso.urgente === true ? " urgent" : "");
 
-        <article class="card">
-          <span class="emoji">⏰</span>
-          <h3>Horários</h3>
-          <p>Consulte os avisos oficiais sobre horários.</p>
-        </article>
+    const etiqueta = document.createElement("span");
+    etiqueta.className = "category";
+    etiqueta.textContent = aviso.urgente === true
+      ? "URGENTE"
+      : String(aviso.categoria || "Geral").toUpperCase();
 
-      </div>
-    </section>
+    const titulo = document.createElement("h3");
+    titulo.textContent = String(aviso.titulo || "Comunicado escolar");
 
-    <section id="cardapio">
-      <div class="section-head">
-        <h2>Cardápio escolar</h2>
-        <div class="accent-line"></div>
-        <p>Imagem do cardápio disponibilizada pela escola.</p>
-      </div>
+    const descricao = document.createElement("p");
+    descricao.textContent = String(aviso.descricao || "");
 
-      <article class="card">
-        <a href="./cardapio.jpg" target="_blank" rel="noopener">
-          <img
-            class="menu-image"
-            src="./cardapio.jpg"
-            alt="Cardápio escolar"
-            loading="lazy"
-          >
-        </a>
-      </article>
-    </section>
+    cartao.append(etiqueta, titulo, descricao);
 
-    <section id="galeria">
-      <div class="section-head">
-        <h2>Galeria da escola</h2>
-        <div class="accent-line"></div>
-        <p>Um pouco do espaço e das atividades da nossa comunidade escolar.</p>
-      </div>
-
-      <div class="gallery-grid">
-
-        <figure class="gallery-item">
-          <img
-            src="./fachada-escola.jpg"
-            alt="Fachada da escola"
-            loading="lazy"
-            onerror="this.closest('figure').style.display='none'"
-          >
-          <figcaption>Conheça nossa escola</figcaption>
-        </figure>
-
-        <figure class="gallery-item">
-          <img
-            src="./foto-escola-1.jpg"
-            alt="Espaço da escola"
-            loading="lazy"
-            onerror="this.closest('figure').style.display='none'"
-          >
-          <figcaption>Nossos espaços</figcaption>
-        </figure>
-
-        <figure class="gallery-item">
-          <img
-            src="./foto-escola-2.jpg"
-            alt="Atividade escolar"
-            loading="lazy"
-            onerror="this.closest('figure').style.display='none'"
-          >
-          <figcaption>Vivências escolares</figcaption>
-        </figure>
-
-      </div>
-
-      <p class="gallery-help">
-        As fotos devem ser autorizadas pela escola.
-      </p>
-    </section>
-
-    <section id="sugestoes">
-      <div class="section-head">
-        <h2>Caixa de sugestões</h2>
-        <div class="accent-line"></div>
-        <p>Um espaço para ideias que possam melhorar a escola.</p>
-      </div>
-
-      <div class="card">
-
-        <p class="suggestion-note">
-          <strong>Atenção:</strong> este formulário ainda não envia
-          mensagens. O envio será ativado depois de configurar o
-          armazenamento e as regras de segurança do Firebase.
-        </p>
-
-        <form id="form-sugestao">
-
-          <label for="sugestao">
-            <strong>Sua sugestão</strong>
-          </label>
-
-          <textarea
-            id="sugestao"
-            rows="4"
-            maxlength="1000"
-            placeholder="Escreva uma ideia respeitosa e construtiva..."
-            required
-          ></textarea>
-
-          <button
-            class="btn"
-            type="button"
-            disabled
-            style="background:#e5e7eb;color:#596273;cursor:not-allowed"
-          >
-            Envio ainda não ativado
-          </button>
-
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p><strong>Mural Escolar Oficial</strong></p>
-    <p>Informação e organização para toda a comunidade escolar.</p>
-    <p>Consulte sempre os comunicados oficiais da escola.</p>
-  </footer>
-
-  <script type="module">
-
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-    import {
-      getFirestore,
-      collection,
-      getDocs,
-      query,
-      where
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBe70DeHBd2OawVVk4VQgjQql3FZSc4xY",
-      authDomain: "mural-escolar-oficial.firebaseapp.com",
-      projectId: "mural-escolar-oficial",
-      storageBucket: "mural-escolar-oficial.firebasestorage.app",
-      messagingSenderId: "706068384737",
-      appId: "1:706068384737:web:d5736bf4d89a3c1e09e0a0",
-      measurementId: "G-5V2L9FCN0M"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const lista = document.getElementById("lista-avisos");
-    const busca = document.getElementById("busca");
-    const filtro = document.getElementById("filtro");
-
-    let avisos = [];
-
-    function formatarData(valor) {
-      if (!valor) return "";
-
-      try {
-        const data = typeof valor.toDate === "function"
-          ? valor.toDate()
-          : new Date(valor);
-
-        return Number.isNaN(data.getTime())
-          ? ""
-          : data.toLocaleDateString("pt-BR");
-
-      } catch {
-        return "";
-      }
+    const data = formatarData(aviso.data || aviso.dataEvento || aviso.dataProva);
+    if (data) {
+      const dataEl = document.createElement("p");
+      dataEl.textContent = "Data: " + data;
+      cartao.append(dataEl);
     }
 
-    function renderizar() {
-
-      const termo = busca.value
-        .trim()
-        .toLocaleLowerCase("pt-BR");
-
-      const categoria = filtro.value;
-
-      const filtrados = avisos.filter(aviso => {
-
-        const tipo = String(
-          aviso.categoria || "geral"
-        ).toLocaleLowerCase("pt-BR");
-
-        const texto = [
-          aviso.titulo || "",
-          aviso.descricao || "",
-          tipo
-        ].join(" ").toLocaleLowerCase("pt-BR");
-
-        const correspondeCategoria =
-          categoria === "todos" ||
-          (categoria === "urgente"
-            ? aviso.urgente === true
-            : tipo === categoria);
-
-        return texto.includes(termo) && correspondeCategoria;
-
-      });
-
-      lista.replaceChildren();
-
-      if (filtrados.length === 0) {
-
-        const vazio = document.createElement("p");
-
-        vazio.className = "empty";
-
-        vazio.textContent =
-          "Nenhum comunicado encontrado com esses filtros.";
-
-        lista.append(vazio);
-
-        return;
-      }
-
-      filtrados.forEach(aviso => {
-
-        const cartao = document.createElement("article");
-
-        cartao.className =
-          "notice-card" +
-          (aviso.urgente === true ? " urgent" : "");
-
-        const etiqueta = document.createElement("span");
-
-        etiqueta.className = "category";
-
-        etiqueta.textContent = aviso.urgente === true
-          ? "URGENTE"
-          : String(aviso.categoria || "Geral").toUpperCase();
-
-        const titulo = document.createElement("h3");
-
-        titulo.textContent = String(
-          aviso.titulo || "Comunicado escolar"
-        );
-
-        const descricao = document.createElement("p");
-
-        descricao.textContent = String(aviso.descricao || "");
-
-        cartao.append(etiqueta, titulo, descricao);
-
-        const data = formatarData(
-          aviso.data || aviso.dataEvento || aviso.dataProva
-        );
-
-        if (data) {
-
-          const dataEl = document.createElement("p");
-
-          dataEl.textContent = "Data: " + data;
-
-          cartao.append(dataEl);
-        }
-
-        if (aviso.urgente === true) {
-
-          const alerta = document.createElement("strong");
-
-          alerta.textContent = "Aviso urgente";
-
-          cartao.append(alerta);
-        }
-
-        lista.append(cartao);
-
-      });
+    if (aviso.urgente === true) {
+      const alerta = document.createElement("strong");
+      alerta.textContent = "Aviso urgente";
+      cartao.append(alerta);
     }
+    lista.append(cartao);
+  });
+}
 
-    async function carregarAvisos() {
+async function carregarAvisos() {
+  try {
+    const q = query(collection(db, "avisos"), where("publicado", "==", true));
+    const resultado = await getDocs(q);
+    avisos = resultado.docs.map(documento => ({
+      id: documento.id,
+      ...documento.data()
+    }));
+    renderizar();
+  } catch (erro) {
+    console.error("Erro ao carregar comunicados:", erro);
+    lista.replaceChildren();
+    const mensagem = document.createElement("p");
+    mensagem.className = "error";
+    mensagem.textContent = "Não foi possível carregar os comunicados. Tente novamente mais tarde.";
+    lista.append(mensagem);
+  }
+}
 
-      try {
-
-        const q = query(
-          collection(db, "avisos"),
-          where("publicado", "==", true)
-        );
-
-        const resultado = await getDocs(q);
-
-        avisos = resultado.docs.map(documento => ({
-          id: documento.id,
-          ...documento.data()
-        }));
-
-        renderizar();
-
-      } catch (erro) {
-
-        console.error("Erro ao carregar comunicados:", erro);
-
-        lista.replaceChildren();
-
-        const mensagem = document.createElement("p");
-
-        mensagem.className = "error";
-
-        mensagem.textContent =
-          "Não foi possível carregar os comunicados. " +
-          "Tente novamente mais tarde.";
-
-        lista.append(mensagem);
-      }
-    }
-
-    busca.addEventListener("input", renderizar);
-    filtro.addEventListener("change", renderizar);
-
-    carregarAvisos();
-
-  </script>
-
+busca.addEventListener("input", renderizar);
+filtro.addEventListener("change", renderizar);
+carregarAvisos();
+</script>
 </body>
 </html>
