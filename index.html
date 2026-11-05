@@ -1,24 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#16734a">
+  <meta name="theme-color" content="#173b70">
   <meta name="description" content="Mural Escolar Oficial: comunicados, fotos, cardápio e calendário da comunidade escolar.">
   <title>Mural Escolar Oficial</title>
 
   <style>
     :root {
-      --verde: #16734a;
-      --rosa: #e83e8c;
-      --laranja: #f28c28;
-      --azul: #2878c8;
-      --marinho: #17365e;
-      --fundo: #f5f8f6;
+      --verde: #1f5fae;
+      --rosa: #4f8edc;
+      --laranja: #78a9e8;
+      --azul: #2d6fbd;
+      --marinho: #173b70;
+      --fundo: #f3f7fc;
       --texto: #243044;
       --cinza: #657184;
-      --borda: #e0e7e2;
+      --borda: #dce6f2;
     }
 
     * {
@@ -47,14 +46,14 @@
       top: 0;
       z-index: 10;
       background: white;
-      padding: 12px 5%;
+      padding: 13px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 18px;
       flex-wrap: wrap;
       box-shadow: 0 3px 18px #17365e12;
-      border-bottom: 4px solid var(--rosa);
+      border-bottom: 4px solid var(--azul);
     }
 
     .brand {
@@ -65,6 +64,7 @@
       font-weight: 800;
       font-size: 1.05rem;
       text-decoration: none;
+      letter-spacing: -.3px;
     }
 
     .brand img {
@@ -83,24 +83,32 @@
       text-decoration: none;
       color: var(--marinho);
       font-weight: bold;
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: background .2s, color .2s;
     }
 
     nav a:hover {
-      color: var(--rosa);
+      color: var(--marinho);
+      background: #edf4fd;
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       padding: 65px 6%;
       color: white;
       background: linear-gradient(
         120deg,
-        var(--marinho),
-        #245b75,
-        var(--verde)
+        #102b50,
+        #1c4f88,
+        #347fc2
       );
     }
 
     .hero-inner {
+      position: relative;
+      z-index: 1;
       max-width: 1200px;
       margin: auto;
       display: grid;
@@ -134,6 +142,7 @@
       object-fit: cover;
       border-radius: 20px;
       border: 4px solid #ffffff30;
+      box-shadow: 0 18px 45px #061a3340;
     }
 
     .btn {
@@ -145,6 +154,12 @@
       font-weight: bold;
       text-decoration: none;
       cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px #061a3325;
     }
 
     .btn-light {
@@ -176,6 +191,7 @@
 
     .section-head p {
       color: var(--cinza);
+      margin-bottom: 0;
     }
 
     .accent-line {
@@ -185,10 +201,8 @@
       border-radius: 10px;
       background: linear-gradient(
         90deg,
-        var(--verde),
-        var(--rosa),
-        var(--laranja),
-        var(--azul)
+        #173b70,
+        #4f8edc
       );
     }
 
@@ -206,7 +220,8 @@
       border: 1px solid var(--borda);
       border-radius: 17px;
       padding: 22px;
-      box-shadow: 0 8px 25px #17365e10;
+      box-shadow: 0 10px 30px #173b700d;
+      transition: transform .2s, box-shadow .2s;
     }
 
     .tile {
@@ -214,23 +229,25 @@
       color: var(--texto);
       text-decoration: none;
       border-top: 4px solid var(--verde);
-      transition: transform .2s;
     }
 
     .tile:nth-child(4n+2) {
-      border-top-color: var(--rosa);
+      border-top-color: #4f8edc;
     }
 
     .tile:nth-child(4n+3) {
-      border-top-color: var(--laranja);
+      border-top-color: #78a9e8;
     }
 
     .tile:nth-child(4n) {
-      border-top-color: var(--azul);
+      border-top-color: #2d6fbd;
     }
 
-    .tile:hover {
-      transform: translateY(-3px);
+    .tile:hover,
+    .card:hover,
+    .notice-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px #173b7018;
     }
 
     .emoji {
@@ -269,6 +286,13 @@
       font: inherit;
     }
 
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid #4f8edc35;
+      border-color: #2d6fbd;
+    }
+
     #busca {
       flex: 1;
       min-width: 220px;
@@ -286,6 +310,10 @@
       gap: 16px;
     }
 
+    .notice-card {
+      border-left: 4px solid #4f8edc;
+    }
+
     .category {
       display: inline-block;
       background: #eaf1ff;
@@ -300,6 +328,11 @@
       border: 2px solid #c7473d;
     }
 
+    .notice-card.urgent {
+      border-left-color: #c7473d;
+      background: #fffafa;
+    }
+
     .empty,
     .error {
       background: white;
@@ -310,7 +343,6 @@
       grid-column: 1 / -1;
     }
 
-    /* CARDÁPIO AMPLIADO */
     .menu-image {
       display: block;
       width: 100%;
@@ -323,9 +355,47 @@
 
     .suggestion-note {
       padding: 15px;
-      background: #eef7f1;
-      border-left: 4px solid var(--verde);
+      background: #edf4fd;
+      border-left: 4px solid var(--azul);
       border-radius: 8px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid var(--borda);
+      box-shadow: 0 10px 28px #173b700d;
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.035);
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--marinho);
+      font-weight: 700;
+    }
+
+    .gallery-help {
+      color: var(--cinza);
+      font-size: .92rem;
     }
 
     footer {
@@ -333,7 +403,7 @@
       color: white;
       text-align: center;
       padding: 28px 18px;
-      border-top: 5px solid var(--rosa);
+      border-top: 5px solid #4f8edc;
     }
 
     footer p {
@@ -356,11 +426,20 @@
       nav {
         gap: 10px;
       }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item img {
+        height: 210px;
+      }
     }
   </style>
 </head>
 
 <body>
+
   <header class="topbar">
     <a class="brand" href="#inicio">
       <img
@@ -376,6 +455,7 @@
       <a href="#comunicados">Avisos</a>
       <a href="#eventos">Eventos</a>
       <a href="#cardapio">Cardápio</a>
+      <a href="#galeria">Galeria</a>
       <a href="#sugestoes">Sugestões</a>
       <a href="admin.html">Direção</a>
     </nav>
@@ -383,13 +463,17 @@
 
   <section class="hero" id="inicio">
     <div class="hero-inner">
+
       <div>
         <span class="eyebrow">INFORMAÇÃO • ESCOLA • COMUNIDADE</span>
+
         <h1>Uma escola conectada com sua comunidade.</h1>
+
         <p>
           Acompanhe comunicados oficiais, eventos, cardápio e
           informações importantes em um só lugar.
         </p>
+
         <a class="btn btn-light" href="#comunicados">
           Consultar avisos
         </a>
@@ -403,10 +487,12 @@
           onerror="this.style.display='none'"
         >
       </div>
+
     </div>
   </section>
 
   <main>
+
     <section id="atalhos">
       <div class="section-head">
         <h2>Explore o mural</h2>
@@ -415,6 +501,7 @@
       </div>
 
       <div class="tiles">
+
         <a class="tile" href="#comunicados">
           <span class="emoji">📢</span>
           <h3>Comunicados</h3>
@@ -438,6 +525,7 @@
           <h3>Caixa de sugestões</h3>
           <p>Envie ideias para avaliação.</p>
         </a>
+
       </div>
     </section>
 
@@ -449,6 +537,7 @@
       </div>
 
       <div class="filters">
+
         <input
           id="busca"
           type="search"
@@ -465,6 +554,7 @@
           <option value="horarios">Horários</option>
           <option value="urgente">Urgentes</option>
         </select>
+
       </div>
 
       <div id="lista-avisos" class="notice-grid">
@@ -480,6 +570,7 @@
       </div>
 
       <div class="cards">
+
         <article class="card">
           <span class="emoji">📅</span>
           <h3>Eventos escolares</h3>
@@ -497,6 +588,7 @@
           <h3>Horários</h3>
           <p>Consulte os avisos oficiais sobre horários.</p>
         </article>
+
       </div>
     </section>
 
@@ -519,6 +611,52 @@
       </article>
     </section>
 
+    <section id="galeria">
+      <div class="section-head">
+        <h2>Galeria da escola</h2>
+        <div class="accent-line"></div>
+        <p>Um pouco do espaço e das atividades da nossa comunidade escolar.</p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <figure class="gallery-item">
+          <img
+            src="./fachada-escola.jpg"
+            alt="Fachada da escola"
+            loading="lazy"
+            onerror="this.closest('figure').style.display='none'"
+          >
+          <figcaption>Conheça nossa escola</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <img
+            src="./foto-escola-1.jpg"
+            alt="Espaço da escola"
+            loading="lazy"
+            onerror="this.closest('figure').style.display='none'"
+          >
+          <figcaption>Nossos espaços</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <img
+            src="./foto-escola-2.jpg"
+            alt="Atividade escolar"
+            loading="lazy"
+            onerror="this.closest('figure').style.display='none'"
+          >
+          <figcaption>Vivências escolares</figcaption>
+        </figure>
+
+      </div>
+
+      <p class="gallery-help">
+        As fotos devem ser autorizadas pela escola.
+      </p>
+    </section>
+
     <section id="sugestoes">
       <div class="section-head">
         <h2>Caixa de sugestões</h2>
@@ -527,6 +665,7 @@
       </div>
 
       <div class="card">
+
         <p class="suggestion-note">
           <strong>Atenção:</strong> este formulário ainda não envia
           mensagens. O envio será ativado depois de configurar o
@@ -534,7 +673,11 @@
         </p>
 
         <form id="form-sugestao">
-          <label for="sugestao"><strong>Sua sugestão</strong></label>
+
+          <label for="sugestao">
+            <strong>Sua sugestão</strong>
+          </label>
+
           <textarea
             id="sugestao"
             rows="4"
@@ -551,9 +694,11 @@
           >
             Envio ainda não ativado
           </button>
+
         </form>
       </div>
     </section>
+
   </main>
 
   <footer>
@@ -563,6 +708,7 @@
   </footer>
 
   <script type="module">
+
     import {
       initializeApp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -576,7 +722,7 @@
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "w3s8trwqH0W4ZJRyCSF9HTGRVG43",
+      apiKey: "AIzaSyBe70DeHBd2OawVVk4VQgjQql3FZSc4xY",
       authDomain: "mural-escolar-oficial.firebaseapp.com",
       projectId: "mural-escolar-oficial",
       storageBucket: "mural-escolar-oficial.firebasestorage.app",
@@ -587,6 +733,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+
     const lista = document.getElementById("lista-avisos");
     const busca = document.getElementById("busca");
     const filtro = document.getElementById("filtro");
@@ -604,12 +751,14 @@
         return Number.isNaN(data.getTime())
           ? ""
           : data.toLocaleDateString("pt-BR");
+
       } catch {
         return "";
       }
     }
 
     function renderizar() {
+
       const termo = busca.value
         .trim()
         .toLocaleLowerCase("pt-BR");
@@ -617,6 +766,7 @@
       const categoria = filtro.value;
 
       const filtrados = avisos.filter(aviso => {
+
         const tipo = String(
           aviso.categoria || "geral"
         ).toLocaleLowerCase("pt-BR");
@@ -634,20 +784,27 @@
             : tipo === categoria);
 
         return texto.includes(termo) && correspondeCategoria;
+
       });
 
       lista.replaceChildren();
 
       if (filtrados.length === 0) {
+
         const vazio = document.createElement("p");
+
         vazio.className = "empty";
+
         vazio.textContent =
           "Nenhum comunicado encontrado com esses filtros.";
+
         lista.append(vazio);
+
         return;
       }
 
       filtrados.forEach(aviso => {
+
         const cartao = document.createElement("article");
 
         cartao.className =
@@ -655,17 +812,21 @@
           (aviso.urgente === true ? " urgent" : "");
 
         const etiqueta = document.createElement("span");
+
         etiqueta.className = "category";
+
         etiqueta.textContent = aviso.urgente === true
           ? "URGENTE"
           : String(aviso.categoria || "Geral").toUpperCase();
 
         const titulo = document.createElement("h3");
+
         titulo.textContent = String(
           aviso.titulo || "Comunicado escolar"
         );
 
         const descricao = document.createElement("p");
+
         descricao.textContent = String(aviso.descricao || "");
 
         cartao.append(etiqueta, titulo, descricao);
@@ -675,23 +836,32 @@
         );
 
         if (data) {
+
           const dataEl = document.createElement("p");
+
           dataEl.textContent = "Data: " + data;
+
           cartao.append(dataEl);
         }
 
         if (aviso.urgente === true) {
+
           const alerta = document.createElement("strong");
+
           alerta.textContent = "Aviso urgente";
+
           cartao.append(alerta);
         }
 
         lista.append(cartao);
+
       });
     }
 
     async function carregarAvisos() {
+
       try {
+
         const q = query(
           collection(db, "avisos"),
           where("publicado", "==", true)
@@ -705,13 +875,17 @@
         }));
 
         renderizar();
+
       } catch (erro) {
+
         console.error("Erro ao carregar comunicados:", erro);
 
         lista.replaceChildren();
 
         const mensagem = document.createElement("p");
+
         mensagem.className = "error";
+
         mensagem.textContent =
           "Não foi possível carregar os comunicados. " +
           "Tente novamente mais tarde.";
@@ -724,6 +898,8 @@
     filtro.addEventListener("change", renderizar);
 
     carregarAvisos();
+
   </script>
+
 </body>
 </html>
